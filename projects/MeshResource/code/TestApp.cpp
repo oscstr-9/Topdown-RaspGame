@@ -6,7 +6,7 @@
 #include <cstring>
 #include "config.h"
 #include "TestApp.h"
-#include "render/MeshResource.h"
+#include "render/MESHRESOURCE.h"
 #include "render/TextureResource.h"
 #include "render/ShaderResource.h"
 #include "core/MatrixMath.h"
@@ -60,7 +60,7 @@ namespace Example
 			}
 			});
 		// Adding mouse functionality
-		window->SetMouseMoveFunction([this](float64 x, float64 y) {
+		window->SetMouseMoveFunction([this](double x, double y) {
 			rotMat = RotateMatrix(((height / 2) - y) * -speed, VectorMath3(1, 0, 0))*RotateMatrix(((width/2)-x)*-speed, VectorMath3(0,1,0));
 		});
 		

@@ -1,9 +1,9 @@
-#include "core/VectorMath.h";
-#include "core/MatrixMath.h";
-#include <iostream>;
+#include "core/VectorMath.h"
+#include "core/MatrixMath.h"
+#include <iostream>
 using namespace std;
 
-void main() {
+int main() {
 	VectorMath4 vectorA (7, 4, -1,0);
 	VectorMath4 vectorB(-5, 1, 3,0);
 	VectorMath4 vectorC (6, -3, 2,0);
@@ -43,4 +43,5 @@ void main() {
 	MatrixMath BD = MatrixMath(vectorA, vectorB, vectorC, vectorD);
 	BD.PrintMatrix();*/
 
+return 1;
 }

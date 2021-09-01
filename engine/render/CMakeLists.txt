@@ -2,31 +2,16 @@
 # render
 #--------------------------------------------------------------------------
 
-SET(files_render_display
-	window.h
-	window.cc
-	Camera.h
-	Camera.cpp
-	GraphicsNode.h
-	GraphicsNode.cpp
-	MeshResource.h
-	MeshResource.cpp
-	TextureResource.h
-	TextureResource.cpp
-	ShaderResource.h
-	ShaderResource.cpp
-	Lighting.cpp
-	Lighting.h
-	Vertex.h
-	stb_Image.h
-	FragShader.glsl
-	VertShader.glsl)
+FILE(GLOB Render_header *.h)
+FILE(GLOB Render_sources *.cc)
+FILE(GLOB Render_sources *.cpp)
 
 SOURCE_GROUP("display" FILES ${files_render_display})
 
 
 SET(files_render
-	${files_render_display}
+	${Render_header}
+	${Render_sources}
 	${files_render_pch})
 
 SET(files_pch ../config.h ../config.cc)

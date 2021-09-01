@@ -2128,7 +2128,7 @@ typedef struct VkBufferImageCopy {
 
 typedef union VkClearColorValue {
     float       float32[4];
-    int32_t     int32[4];
+    int32_t     int[4];
     uint32_t    uint32[4];
 } VkClearColorValue;
 

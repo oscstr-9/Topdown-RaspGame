@@ -1,6 +1,6 @@
 ﻿#pragma once
 #define _USE_MATH_DEFINES
-#include "VectorMath.h";
+#include "VectorMath.h"
 #include <math.h>
 
 class MatrixMath
@@ -319,13 +319,13 @@ inline MatrixMath MatrixMath::ProjectionMatrix(float FOV, float AspectRatio, flo
 }
 
 /// This function is used to print matrices.
-inline void MatrixMath::PrintMatrix() {
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			std::cout << std::left << std::setw(15) << matrix[j].coords[i];
-		}
-		std::cout << std::endl;
-	}
-}
+// inline void MatrixMath::PrintMatrix() {
+// 	for (int i = 0; i < 4; i++)
+// 	{
+// 		for (int j = 0; j < 4; j++)
+// 		{
+// 			std::cout << std::left << std::setw(15) << matrix[j].coords[i];
+// 		}
+// 		std::cout << std::endl;
+// 	}
+// }

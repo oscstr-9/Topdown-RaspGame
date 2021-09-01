@@ -16255,14 +16255,14 @@ typedef void (GLAPIENTRY * PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNVPROC) (GLuint
 
 #endif /* GL_NV_shader_atomic_float */
 
-/* ---------------------- GL_NV_shader_atomic_float64 ---------------------- */
+/* ---------------------- GL_NV_shader_atomic_double ---------------------- */
 
-#ifndef GL_NV_shader_atomic_float64
-#define GL_NV_shader_atomic_float64 1
+#ifndef GL_NV_shader_atomic_double
+#define GL_NV_shader_atomic_double 1
 
-#define GLEW_NV_shader_atomic_float64 GLEW_GET_VAR(__GLEW_NV_shader_atomic_float64)
+#define GLEW_NV_shader_atomic_double GLEW_GET_VAR(__GLEW_NV_shader_atomic_double)
 
-#endif /* GL_NV_shader_atomic_float64 */
+#endif /* GL_NV_shader_atomic_double */
 
 /* -------------------- GL_NV_shader_atomic_fp16_vector -------------------- */
 
@@ -23422,7 +23422,7 @@ GLEW_VAR_EXPORT GLboolean __GLEW_NV_sample_locations;
 GLEW_VAR_EXPORT GLboolean __GLEW_NV_sample_mask_override_coverage;
 GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_atomic_counters;
 GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_atomic_float;
-GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_atomic_float64;
+GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_atomic_double;
 GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_atomic_fp16_vector;
 GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_atomic_int64;
 GLEW_VAR_EXPORT GLboolean __GLEW_NV_shader_buffer_load;

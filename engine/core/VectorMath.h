@@ -1,6 +1,7 @@
 #pragma once
-#include <IOstream>;
-#include <IOmanip>;
+#include <math.h>
+#include <iostream>
+//#include <iomanip>
 
 struct VectorMath2
 {

@@ -1,5 +1,5 @@
-#include "config.h";
-#include "GraphicsNode.h";
+#include "config.h"
+#include "GraphicsNode.h"
 
 
 GraphicsNode::GraphicsNode(std::shared_ptr <MeshResource> meshIn, std::shared_ptr <TextureResource> textureIn, std::shared_ptr <ShaderResource> shaderIn, MatrixMath transformIn)

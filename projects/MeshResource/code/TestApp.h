@@ -7,7 +7,7 @@
 */
 //------------------------------------------------------------------------------
 #include "core/app.h"
-#include "render/MeshResource.h"
+#include "render/MESHRESOURCE.h"
 #include "render/ShaderResource.h"
 #include "render/window.h"
 #include "render/GraphicsNode.h"

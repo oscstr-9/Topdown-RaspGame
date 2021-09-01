@@ -13,7 +13,7 @@ public:
 	Lighting(VectorMath3 posIn, VectorMath3 colorIn, float intensityIn);
 	~Lighting();
 	void setIntensity(float intensityIn);
-	void Lighting::setPos(VectorMath3 posIn);
-	void Lighting::setIntensity(VectorMath3 colorIn);
+	void setPos(VectorMath3 posIn);
+	void setIntensity(VectorMath3 colorIn);
 	void bindLight(std::shared_ptr<ShaderResource> shader, VectorMath3 cameraPos);
 };

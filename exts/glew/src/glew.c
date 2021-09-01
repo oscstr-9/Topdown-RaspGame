@@ -3886,7 +3886,7 @@ GLboolean __GLEW_NV_sample_locations = GL_FALSE;
 GLboolean __GLEW_NV_sample_mask_override_coverage = GL_FALSE;
 GLboolean __GLEW_NV_shader_atomic_counters = GL_FALSE;
 GLboolean __GLEW_NV_shader_atomic_float = GL_FALSE;
-GLboolean __GLEW_NV_shader_atomic_float64 = GL_FALSE;
+GLboolean __GLEW_NV_shader_atomic_double = GL_FALSE;
 GLboolean __GLEW_NV_shader_atomic_fp16_vector = GL_FALSE;
 GLboolean __GLEW_NV_shader_atomic_int64 = GL_FALSE;
 GLboolean __GLEW_NV_shader_buffer_load = GL_FALSE;
@@ -5903,8 +5903,8 @@ static const char * _glewExtensionLookup[] = {
 #ifdef GL_NV_shader_atomic_float
   "GL_NV_shader_atomic_float",
 #endif
-#ifdef GL_NV_shader_atomic_float64
-  "GL_NV_shader_atomic_float64",
+#ifdef GL_NV_shader_atomic_double
+  "GL_NV_shader_atomic_double",
 #endif
 #ifdef GL_NV_shader_atomic_fp16_vector
   "GL_NV_shader_atomic_fp16_vector",
@@ -8313,8 +8313,8 @@ static GLboolean* _glewExtensionEnabled[] = {
 #ifdef GL_NV_shader_atomic_float
   &__GLEW_NV_shader_atomic_float,
 #endif
-#ifdef GL_NV_shader_atomic_float64
-  &__GLEW_NV_shader_atomic_float64,
+#ifdef GL_NV_shader_atomic_double
+  &__GLEW_NV_shader_atomic_double,
 #endif
 #ifdef GL_NV_shader_atomic_fp16_vector
   &__GLEW_NV_shader_atomic_fp16_vector,
@@ -25216,10 +25216,10 @@ GLboolean GLEWAPIENTRY glewIsSupported (const char* name)
           continue;
         }
 #endif
-#ifdef GL_NV_shader_atomic_float64
-        if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_atomic_float64", 21))
+#ifdef GL_NV_shader_atomic_double
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_atomic_double", 21))
         {
-          ret = GLEW_NV_shader_atomic_float64;
+          ret = GLEW_NV_shader_atomic_double;
           continue;
         }
 #endif

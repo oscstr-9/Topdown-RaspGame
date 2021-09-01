@@ -1,0 +1,2 @@
+/usr/bin/ar qc librender.a CMakeFiles/render.dir/Camera.cpp.o CMakeFiles/render.dir/GraphicsNode.cpp.o CMakeFiles/render.dir/Lighting.cpp.o CMakeFiles/render.dir/MeshResource.cpp.o CMakeFiles/render.dir/ShaderResource.cpp.o CMakeFiles/render.dir/TextureResource.cpp.o CMakeFiles/render.dir/window.cpp.o CMakeFiles/render.dir/__/config.cc.o
+/usr/bin/ranlib librender.a

@@ -8075,14 +8075,14 @@ static void _glewInfo_GL_NV_shader_atomic_float (void)
 
 #endif /* GL_NV_shader_atomic_float */
 
-#ifdef GL_NV_shader_atomic_float64
+#ifdef GL_NV_shader_atomic_double
 
-static void _glewInfo_GL_NV_shader_atomic_float64 (void)
+static void _glewInfo_GL_NV_shader_atomic_double (void)
 {
-  glewPrintExt("GL_NV_shader_atomic_float64", GLEW_NV_shader_atomic_float64, glewIsSupported("GL_NV_shader_atomic_float64"), glewGetExtension("GL_NV_shader_atomic_float64"));
+  glewPrintExt("GL_NV_shader_atomic_double", GLEW_NV_shader_atomic_double, glewIsSupported("GL_NV_shader_atomic_double"), glewGetExtension("GL_NV_shader_atomic_double"));
 }
 
-#endif /* GL_NV_shader_atomic_float64 */
+#endif /* GL_NV_shader_atomic_double */
 
 #ifdef GL_NV_shader_atomic_fp16_vector
 
@@ -14908,9 +14908,9 @@ static void glewInfo (void)
 #ifdef GL_NV_shader_atomic_float
   _glewInfo_GL_NV_shader_atomic_float();
 #endif /* GL_NV_shader_atomic_float */
-#ifdef GL_NV_shader_atomic_float64
-  _glewInfo_GL_NV_shader_atomic_float64();
-#endif /* GL_NV_shader_atomic_float64 */
+#ifdef GL_NV_shader_atomic_double
+  _glewInfo_GL_NV_shader_atomic_double();
+#endif /* GL_NV_shader_atomic_double */
 #ifdef GL_NV_shader_atomic_fp16_vector
   _glewInfo_GL_NV_shader_atomic_fp16_vector();
 #endif /* GL_NV_shader_atomic_fp16_vector */

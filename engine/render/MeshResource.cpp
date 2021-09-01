@@ -1,5 +1,5 @@
 #include "config.h"
-#include "MeshResource.h"
+#include "MESHRESOURCE.h"
 #include "TextureResource.h"
 #include <vector>
 #include <string.h>

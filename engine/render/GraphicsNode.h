@@ -1,4 +1,4 @@
-#include "MeshResource.h"
+#include "MESHRESOURCE.h"
 #include "TextureResource.h"
 #include "ShaderResource.h"
 #include <memory>
