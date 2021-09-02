@@ -7,7 +7,7 @@
 	(C) 2015-2020 See the LICENSE file.
 */
 #ifdef __WIN32__
-#include "win32/pch.h"
+//#include "win32/pch.h"
 #endif
 
 #include <stdint.h>

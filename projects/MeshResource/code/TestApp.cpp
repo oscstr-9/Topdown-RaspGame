@@ -73,7 +73,7 @@ namespace Example
 
 			// Find and load shaders
 			shaders = std::make_shared<ShaderResource>();
-			shaders->LoadShader("Engine/Render/VertShader.glsl","Engine/Render/FragShader.glsl");
+			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Find object textures
 			std::shared_ptr<TextureResource> testTexture = std::make_shared<TextureResource>("moon.png");

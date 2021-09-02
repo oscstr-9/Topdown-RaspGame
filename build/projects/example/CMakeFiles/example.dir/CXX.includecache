@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 ../engine/config.h
-win32/pch.h
-../engine/win32/pch.h
 stdint.h
 -
 atomic
