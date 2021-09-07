@@ -4,4 +4,4 @@ cd build/
 cmake ..
 make
 cd ..
-g++ main.cpp -o main
+g++ main.cpp -o main -lpthread
