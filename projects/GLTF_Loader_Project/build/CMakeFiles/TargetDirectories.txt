@@ -1,0 +1,3 @@
+/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/build/CMakeFiles/rebuild_cache.dir
+/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/build/CMakeFiles/edit_cache.dir
+/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/build/CMakeFiles/gltfLoader.dir

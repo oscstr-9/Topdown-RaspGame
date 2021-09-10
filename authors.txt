@@ -1,3 +1,4 @@
 Johannes Hirche (johannes@gscept.com)
 Gustav Sterbrant (gustav@gscept.com)
 Fredrik Lindahl (fredrik.lindahl@ltu.se)
+Oscar Östryd    (oscstr-9@ltu.student.se)

@@ -39,13 +39,15 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+  set(CMAKE_OBJDUMP "/bin/x86_64-linux-gnu-objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("/home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project/cmake_install.cmake")
   include("/home/ogge/Repos/S0017D/build/projects/Math library/cmake_install.cmake")
   include("/home/ogge/Repos/S0017D/build/projects/MeshResource/cmake_install.cmake")
+  include("/home/ogge/Repos/S0017D/build/projects/SystemPrintProject/cmake_install.cmake")
   include("/home/ogge/Repos/S0017D/build/projects/example/cmake_install.cmake")
 
 endif()

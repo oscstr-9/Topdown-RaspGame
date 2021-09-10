@@ -23,8 +23,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../exts/glfw/src/glfw3Config.cmake.in"
   "../exts/glfw/src/glfw_config.h.in"
   "../projects/CMakeLists.txt"
+  "../projects/GLTF_Loader_Project/CMakeLists.txt"
   "../projects/Math library/CMakeLists.txt"
   "../projects/MeshResource/CMakeLists.txt"
+  "../projects/SystemPrintProject/CMakeLists.txt"
   "../projects/example/CMakeLists.txt"
   "/usr/share/cmake-3.18/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
   "/usr/share/cmake-3.18/Modules/CMakeCCompiler.cmake.in"
@@ -157,8 +159,10 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "engine/core/CMakeFiles/CMakeDirectoryInformation.cmake"
   "engine/render/CMakeFiles/CMakeDirectoryInformation.cmake"
   "projects/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "projects/GLTF_Loader_Project/CMakeFiles/CMakeDirectoryInformation.cmake"
   "projects/Math library/CMakeFiles/CMakeDirectoryInformation.cmake"
   "projects/MeshResource/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "projects/SystemPrintProject/CMakeFiles/CMakeDirectoryInformation.cmake"
   "projects/example/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -170,7 +174,9 @@ set(CMAKE_DEPEND_INFO_FILES
   "exts/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "engine/core/CMakeFiles/core.dir/DependInfo.cmake"
   "engine/render/CMakeFiles/render.dir/DependInfo.cmake"
+  "projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/DependInfo.cmake"
   "projects/Math library/CMakeFiles/mathLib.dir/DependInfo.cmake"
   "projects/MeshResource/CMakeFiles/MeshRenderer.dir/DependInfo.cmake"
+  "projects/SystemPrintProject/CMakeFiles/app.dir/DependInfo.cmake"
   "projects/example/CMakeFiles/example.dir/DependInfo.cmake"
   )

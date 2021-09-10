@@ -198,6 +198,12 @@ intrin.h
 arm_neon.h
 -
 
+/home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp
+config.h
+/home/ogge/Repos/S0017D/projects/MeshResource/code/config.h
+TestApp.h
+/home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.h
+
 /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp
 stb_image.h
 -

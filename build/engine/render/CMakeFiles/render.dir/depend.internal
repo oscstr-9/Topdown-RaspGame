@@ -52,10 +52,9 @@ engine/render/CMakeFiles/render.dir/TextureResource.cpp.o
  ../engine/config.h
  ../exts/glew/include/GL/glew.h
  ../exts/glfw/include/GLFW/glfw3.h
- ../exts/nanovg/src/stb_image.h
  /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp
  /home/ogge/Repos/S0017D/engine/render/TextureResource.h
- /home/ogge/Repos/S0017D/engine/render/stb_Image.h
+ /home/ogge/Repos/S0017D/engine/render/stb_image.h
 engine/render/CMakeFiles/render.dir/__/config.cc.o
  /home/ogge/Repos/S0017D/engine/config.cc
  /home/ogge/Repos/S0017D/engine/config.h

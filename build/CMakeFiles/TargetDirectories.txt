@@ -22,12 +22,18 @@
 /home/ogge/Repos/S0017D/build/engine/render/CMakeFiles/render.dir
 /home/ogge/Repos/S0017D/build/projects/CMakeFiles/rebuild_cache.dir
 /home/ogge/Repos/S0017D/build/projects/CMakeFiles/edit_cache.dir
+/home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project/CMakeFiles/rebuild_cache.dir
+/home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project/CMakeFiles/edit_cache.dir
+/home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir
 /home/ogge/Repos/S0017D/build/projects/Math library/CMakeFiles/rebuild_cache.dir
 /home/ogge/Repos/S0017D/build/projects/Math library/CMakeFiles/edit_cache.dir
 /home/ogge/Repos/S0017D/build/projects/Math library/CMakeFiles/mathLib.dir
 /home/ogge/Repos/S0017D/build/projects/MeshResource/CMakeFiles/rebuild_cache.dir
 /home/ogge/Repos/S0017D/build/projects/MeshResource/CMakeFiles/edit_cache.dir
 /home/ogge/Repos/S0017D/build/projects/MeshResource/CMakeFiles/MeshRenderer.dir
+/home/ogge/Repos/S0017D/build/projects/SystemPrintProject/CMakeFiles/rebuild_cache.dir
+/home/ogge/Repos/S0017D/build/projects/SystemPrintProject/CMakeFiles/edit_cache.dir
+/home/ogge/Repos/S0017D/build/projects/SystemPrintProject/CMakeFiles/app.dir
 /home/ogge/Repos/S0017D/build/projects/example/CMakeFiles/rebuild_cache.dir
 /home/ogge/Repos/S0017D/build/projects/example/CMakeFiles/edit_cache.dir
 /home/ogge/Repos/S0017D/build/projects/example/CMakeFiles/example.dir

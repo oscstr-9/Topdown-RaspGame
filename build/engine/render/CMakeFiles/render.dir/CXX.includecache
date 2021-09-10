@@ -136,34 +136,6 @@ math.h
 nanovg.h
 ../exts/nanovg/src/nanovg.h
 
-../exts/nanovg/src/stb_image.h
-stb_image.h
-../exts/nanovg/src/stb_image.h
-stdio.h
--
-stdarg.h
--
-stddef.h
--
-stdlib.h
--
-string.h
--
-math.h
--
-stdio.h
--
-assert.h
--
-stdint.h
--
-emmintrin.h
--
-intrin.h
--
-arm_neon.h
--
-
 /home/ogge/Repos/S0017D/engine/config.cc
 config.h
 /home/ogge/Repos/S0017D/engine/config.h
@@ -283,8 +255,8 @@ render/Camera.h
 /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp
 config.h
 /home/ogge/Repos/S0017D/engine/render/config.h
-stb_Image.h
-/home/ogge/Repos/S0017D/engine/render/stb_Image.h
+stb_image.h
+/home/ogge/Repos/S0017D/engine/render/stb_image.h
 TextureResource.h
 /home/ogge/Repos/S0017D/engine/render/TextureResource.h
 
@@ -300,7 +272,7 @@ GLFW/glfw3.h
 core/VectorMath.h
 /home/ogge/Repos/S0017D/engine/render/core/VectorMath.h
 
-/home/ogge/Repos/S0017D/engine/render/stb_Image.h
+/home/ogge/Repos/S0017D/engine/render/stb_image.h
 stb_image.h
 /home/ogge/Repos/S0017D/engine/render/stb_image.h
 stdio.h

@@ -79,54 +79,54 @@ include exts/CMakeFiles/imgui.dir/flags.make
 exts/CMakeFiles/imgui.dir/imgui/imgui.cpp.o: exts/CMakeFiles/imgui.dir/flags.make
 exts/CMakeFiles/imgui.dir/imgui/imgui.cpp.o: ../exts/imgui/imgui.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object exts/CMakeFiles/imgui.dir/imgui/imgui.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/imgui.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/imgui.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp
 
 exts/CMakeFiles/imgui.dir/imgui/imgui.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/imgui.dir/imgui/imgui.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp > CMakeFiles/imgui.dir/imgui/imgui.cpp.i
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp > CMakeFiles/imgui.dir/imgui/imgui.cpp.i
 
 exts/CMakeFiles/imgui.dir/imgui/imgui.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/imgui/imgui.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp -o CMakeFiles/imgui.dir/imgui/imgui.cpp.s
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp -o CMakeFiles/imgui.dir/imgui/imgui.cpp.s
 
 exts/CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o: exts/CMakeFiles/imgui.dir/flags.make
 exts/CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o: ../exts/imgui/imgui_demo.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object exts/CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp
 
 exts/CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp > CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.i
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp > CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.i
 
 exts/CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp -o CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.s
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp -o CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.s
 
 exts/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o: exts/CMakeFiles/imgui.dir/flags.make
 exts/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o: ../exts/imgui/imgui_draw.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object exts/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp
 
 exts/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp > CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.i
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp > CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.i
 
 exts/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp -o CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.s
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp -o CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.s
 
 exts/CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o: exts/CMakeFiles/imgui.dir/flags.make
 exts/CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o: ../exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object exts/CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp
 
 exts/CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp > CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.i
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp > CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.i
 
 exts/CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp -o CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.s
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp -o CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.s
 
 # Object files for target imgui
 imgui_OBJECTS = \

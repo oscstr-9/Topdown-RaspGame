@@ -208,6 +208,19 @@ render/fast:
 .PHONY : render/fast
 
 #=============================================================================
+# Target rules for targets named gltfLoader
+
+# Build rule for target.
+gltfLoader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gltfLoader
+.PHONY : gltfLoader
+
+# fast build rule for target.
+gltfLoader/fast:
+	$(MAKE) $(MAKESILENT) -f projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build.make projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build
+.PHONY : gltfLoader/fast
+
+#=============================================================================
 # Target rules for targets named mathLib
 
 # Build rule for target.
@@ -234,6 +247,19 @@ MeshRenderer/fast:
 .PHONY : MeshRenderer/fast
 
 #=============================================================================
+# Target rules for targets named app
+
+# Build rule for target.
+app: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app
+.PHONY : app
+
+# fast build rule for target.
+app/fast:
+	$(MAKE) $(MAKESILENT) -f projects/SystemPrintProject/CMakeFiles/app.dir/build.make projects/SystemPrintProject/CMakeFiles/app.dir/build
+.PHONY : app/fast
+
+#=============================================================================
 # Target rules for targets named example
 
 # Build rule for target.
@@ -255,10 +281,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MeshRenderer"
+	@echo "... app"
 	@echo "... core"
 	@echo "... example"
 	@echo "... glew"
 	@echo "... glfw"
+	@echo "... gltfLoader"
 	@echo "... imgui"
 	@echo "... mathLib"
 	@echo "... nanovg"

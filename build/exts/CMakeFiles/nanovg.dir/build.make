@@ -79,15 +79,15 @@ include exts/CMakeFiles/nanovg.dir/flags.make
 exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.o: exts/CMakeFiles/nanovg.dir/flags.make
 exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.o: ../exts/nanovg/src/nanovg.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.o"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.o -c /home/ogge/Repos/S0017D/exts/nanovg/src/nanovg.c
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-gcc-10 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.o -c /home/ogge/Repos/S0017D/exts/nanovg/src/nanovg.c
 
 exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.i"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ogge/Repos/S0017D/exts/nanovg/src/nanovg.c > CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.i
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-gcc-10 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ogge/Repos/S0017D/exts/nanovg/src/nanovg.c > CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.i
 
 exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.s"
-	cd /home/ogge/Repos/S0017D/build/exts && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ogge/Repos/S0017D/exts/nanovg/src/nanovg.c -o CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.s
+	cd /home/ogge/Repos/S0017D/build/exts && /bin/x86_64-linux-gnu-gcc-10 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ogge/Repos/S0017D/exts/nanovg/src/nanovg.c -o CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.s
 
 # Object files for target nanovg
 nanovg_OBJECTS = \

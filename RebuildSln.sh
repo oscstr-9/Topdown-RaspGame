@@ -5,4 +5,5 @@ mkdir build
 cd build/
 cmake ..
 make
+g++ Main.cpp -o main
 cd ..

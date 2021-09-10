@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-10   -g -o CMakeFiles/gltfLoader.dir/code/Main.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-10   -g -o CMakeFiles/gltfLoader.dir/code/TestApp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp"
+}
+]

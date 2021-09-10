@@ -51,10 +51,9 @@ engine/render/CMakeFiles/render.dir/ShaderResource.cpp.o: ../engine/render/Shade
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/config.h
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../exts/glew/include/GL/glew.h
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
-engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../exts/nanovg/src/stb_image.h
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/render/TextureResource.cpp
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/render/TextureResource.h
-engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/render/stb_Image.h
+engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/render/stb_image.h
 
 engine/render/CMakeFiles/render.dir/__/config.cc.o: ../engine/config.cc
 engine/render/CMakeFiles/render.dir/__/config.cc.o: ../engine/config.h

@@ -1,6 +1,6 @@
 //#define STB_IMAGE_IMPLEMENTATION
 #include "config.h"
-#include "stb_Image.h"
+#include "stb_image.h"
 #include "TextureResource.h"
 
 

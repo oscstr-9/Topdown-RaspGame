@@ -1,0 +1,1 @@
+/bin/x86_64-linux-gnu-g++-10 -g -rdynamic CMakeFiles/gltfLoader.dir/code/Main.o CMakeFiles/gltfLoader.dir/code/TestApp.o -o gltfLoader  -lcore -lrender 
