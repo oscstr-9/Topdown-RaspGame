@@ -22,12 +22,10 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../exts/imgui/examples/opengl3_example"
   "../exts/glew/include"
   "../exts/glfw/include"
-  "../exts/nanovg/src"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/ogge/Repos/S0017D/build/exts/CMakeFiles/nanovg.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

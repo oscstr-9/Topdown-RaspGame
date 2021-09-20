@@ -154,7 +154,6 @@ engine/render/clean: engine/render/CMakeFiles/render.dir/clean
 
 # Recursive "all" directory target.
 exts/all: exts/CMakeFiles/imgui.dir/all
-exts/all: exts/CMakeFiles/nanovg.dir/all
 exts/all: exts/glew/all
 exts/all: exts/glfw/all
 
@@ -168,7 +167,6 @@ exts/preinstall: exts/glfw/preinstall
 
 # Recursive "clean" directory target.
 exts/clean: exts/CMakeFiles/imgui.dir/clean
-exts/clean: exts/CMakeFiles/nanovg.dir/clean
 exts/clean: exts/glew/clean
 exts/clean: exts/glfw/clean
 
@@ -352,7 +350,7 @@ projects/example/clean: projects/example/CMakeFiles/example.dir/clean
 # Target rules for target exts/CMakeFiles/imgui.dir
 
 # All Build rule for target.
-exts/CMakeFiles/imgui.dir/all: exts/CMakeFiles/nanovg.dir/all
+exts/CMakeFiles/imgui.dir/all:
 	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/imgui.dir/build.make exts/CMakeFiles/imgui.dir/depend
 	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/imgui.dir/build.make exts/CMakeFiles/imgui.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=33,34,35,36,37 "Built target imgui"
@@ -360,7 +358,7 @@ exts/CMakeFiles/imgui.dir/all: exts/CMakeFiles/nanovg.dir/all
 
 # Build rule for subdir invocation for target.
 exts/CMakeFiles/imgui.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exts/CMakeFiles/imgui.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : exts/CMakeFiles/imgui.dir/rule
@@ -374,33 +372,6 @@ imgui: exts/CMakeFiles/imgui.dir/rule
 exts/CMakeFiles/imgui.dir/clean:
 	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/imgui.dir/build.make exts/CMakeFiles/imgui.dir/clean
 .PHONY : exts/CMakeFiles/imgui.dir/clean
-
-#=============================================================================
-# Target rules for target exts/CMakeFiles/nanovg.dir
-
-# All Build rule for target.
-exts/CMakeFiles/nanovg.dir/all:
-	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/depend
-	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=40,41 "Built target nanovg"
-.PHONY : exts/CMakeFiles/nanovg.dir/all
-
-# Build rule for subdir invocation for target.
-exts/CMakeFiles/nanovg.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exts/CMakeFiles/nanovg.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
-.PHONY : exts/CMakeFiles/nanovg.dir/rule
-
-# Convenience name for target.
-nanovg: exts/CMakeFiles/nanovg.dir/rule
-
-.PHONY : nanovg
-
-# clean rule for target.
-exts/CMakeFiles/nanovg.dir/clean:
-	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/clean
-.PHONY : exts/CMakeFiles/nanovg.dir/clean
 
 #=============================================================================
 # Target rules for target exts/glew/CMakeFiles/glew.dir
@@ -468,7 +439,7 @@ engine/core/CMakeFiles/core.dir/all: engine/render/CMakeFiles/render.dir/all
 
 # Build rule for subdir invocation for target.
 engine/core/CMakeFiles/core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 37
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 36
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 engine/core/CMakeFiles/core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : engine/core/CMakeFiles/core.dir/rule
@@ -492,12 +463,12 @@ engine/render/CMakeFiles/render.dir/all: exts/glew/CMakeFiles/glew.dir/all
 engine/render/CMakeFiles/render.dir/all: exts/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f engine/render/CMakeFiles/render.dir/build.make engine/render/CMakeFiles/render.dir/depend
 	$(MAKE) $(MAKESILENT) -f engine/render/CMakeFiles/render.dir/build.make engine/render/CMakeFiles/render.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=42,43,44,45,46,47,48,49,50 "Built target render"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=40,41,42,43,44,45,46,47,48,49 "Built target render"
 .PHONY : engine/render/CMakeFiles/render.dir/all
 
 # Build rule for subdir invocation for target.
 engine/render/CMakeFiles/render.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 33
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 engine/render/CMakeFiles/render.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : engine/render/CMakeFiles/render.dir/rule
@@ -527,7 +498,7 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/all: engine/core/CMakeFil
 
 # Build rule for subdir invocation for target.
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 40
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 39
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/rule
@@ -557,7 +528,7 @@ projects/Math\ library/CMakeFiles/mathLib.dir/all: engine/core/CMakeFiles/core.d
 
 # Build rule for subdir invocation for target.
 projects/Math\ library/CMakeFiles/mathLib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 39
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 38
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 "projects/Math library/CMakeFiles/mathLib.dir/all"
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : projects/Math\ library/CMakeFiles/mathLib.dir/rule
@@ -587,7 +558,7 @@ projects/MeshResource/CMakeFiles/MeshRenderer.dir/all: engine/core/CMakeFiles/co
 
 # Build rule for subdir invocation for target.
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 40
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 39
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 projects/MeshResource/CMakeFiles/MeshRenderer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : projects/MeshResource/CMakeFiles/MeshRenderer.dir/rule
@@ -644,7 +615,7 @@ projects/example/CMakeFiles/example.dir/all: engine/core/CMakeFiles/core.dir/all
 
 # Build rule for subdir invocation for target.
 projects/example/CMakeFiles/example.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 40
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 39
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 projects/example/CMakeFiles/example.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ogge/Repos/S0017D/build/CMakeFiles 0
 .PHONY : projects/example/CMakeFiles/example.dir/rule

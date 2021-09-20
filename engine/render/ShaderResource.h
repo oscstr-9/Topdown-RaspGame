@@ -13,7 +13,7 @@ class ShaderResource
 public:
 	ShaderResource();
 	~ShaderResource();
-	void LocationAndColor(MatrixMath locMat, VectorMath4 colorVec, Camera camera);
+	void LocationAndColor(MatrixMath locMat, VectorMath4 colorVec, ScreenCamera camera);
 	GLuint LoadShader(const char* vertex_path, const char* fragment_path);
 	void BindShader();
 	void setVec3(VectorMath3 vec3, std::string uniform);

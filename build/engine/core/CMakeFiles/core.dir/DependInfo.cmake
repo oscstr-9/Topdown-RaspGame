@@ -21,7 +21,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../exts/glfw/include"
   "../exts/imgui"
   "../exts/imgui/examples/opengl3_example"
-  "../exts/nanovg/src"
   )
 
 # Targets to which this target links.
@@ -29,7 +28,6 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/ogge/Repos/S0017D/build/exts/glew/CMakeFiles/glew.dir/DependInfo.cmake"
   "/home/ogge/Repos/S0017D/build/engine/render/CMakeFiles/render.dir/DependInfo.cmake"
   "/home/ogge/Repos/S0017D/build/exts/CMakeFiles/imgui.dir/DependInfo.cmake"
-  "/home/ogge/Repos/S0017D/build/exts/CMakeFiles/nanovg.dir/DependInfo.cmake"
   "/home/ogge/Repos/S0017D/build/exts/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   )
 

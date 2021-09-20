@@ -2,7 +2,7 @@
 // exampleapp.cc
 // (C) 2015-2020 Individual contributors, see AUTHORS file
 //------------------------------------------------------------------------------
-#include <stb_image.h>
+//#include <stb_image.h>
 #include <cstring>
 #include "config.h"
 #include "TestApp.h"
@@ -103,7 +103,7 @@ namespace Example
 	void ExampleApp::Run()
 	{
 		// Create camera
-		Camera camera(90, width, height, 0.001, 100);
+		ScreenCamera camera(90, width, height, 0.001, 100);
 		camera.SetPosition(posVec);
 
 		Lighting light(VectorMath3(3, 0, 0), VectorMath3(1, 1, 1), 0.5);

@@ -10,11 +10,9 @@ projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../engine/ren
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../engine/render/MESHRESOURCE.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../engine/render/ShaderResource.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../engine/render/TextureResource.h
-projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../engine/render/Vertex.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../engine/render/window.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../exts/glew/include/GL/glew.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
-projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../exts/nanovg/src/nanovg.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../projects/MeshResource/code/Main.cpp
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../projects/MeshResource/code/TestApp.h
 
@@ -28,12 +26,9 @@ projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../engine/
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../engine/render/MESHRESOURCE.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../engine/render/ShaderResource.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../engine/render/TextureResource.h
-projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../engine/render/Vertex.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../engine/render/window.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../exts/glew/include/GL/glew.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
-projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../exts/nanovg/src/nanovg.h
-projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../exts/nanovg/src/stb_image.h
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../projects/MeshResource/code/TestApp.cpp
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../projects/MeshResource/code/TestApp.h
 

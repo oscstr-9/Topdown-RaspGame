@@ -1,2 +1,2 @@
-/bin/x86_64-linux-gnu-ar qc libglew.a CMakeFiles/glew.dir/src/glew.c.o
-/bin/x86_64-linux-gnu-ranlib libglew.a
+/usr/bin/ar qc libglew.a CMakeFiles/glew.dir/src/glew.c.o
+/usr/bin/ranlib libglew.a

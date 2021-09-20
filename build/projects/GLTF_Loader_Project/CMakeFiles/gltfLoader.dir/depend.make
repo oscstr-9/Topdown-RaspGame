@@ -10,11 +10,9 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engin
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/MESHRESOURCE.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/ShaderResource.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/TextureResource.h
-projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/Vertex.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/window.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../exts/glew/include/GL/glew.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
-projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../exts/nanovg/src/nanovg.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../projects/GLTF_Loader_Project/code/Main.cpp
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../projects/GLTF_Loader_Project/code/TestApp.h
 
@@ -28,12 +26,10 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../en
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../engine/render/MESHRESOURCE.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../engine/render/ShaderResource.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../engine/render/TextureResource.h
-projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../engine/render/Vertex.h
+projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../engine/render/gltfLoader.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../engine/render/window.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../exts/glew/include/GL/glew.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
-projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../exts/nanovg/src/nanovg.h
-projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../exts/nanovg/src/stb_image.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../projects/GLTF_Loader_Project/code/TestApp.cpp
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../projects/GLTF_Loader_Project/code/TestApp.h
 

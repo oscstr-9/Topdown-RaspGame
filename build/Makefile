@@ -143,19 +143,6 @@ imgui/fast:
 .PHONY : imgui/fast
 
 #=============================================================================
-# Target rules for targets named nanovg
-
-# Build rule for target.
-nanovg: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nanovg
-.PHONY : nanovg
-
-# fast build rule for target.
-nanovg/fast:
-	$(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/build
-.PHONY : nanovg/fast
-
-#=============================================================================
 # Target rules for targets named glew
 
 # Build rule for target.
@@ -289,7 +276,6 @@ help:
 	@echo "... gltfLoader"
 	@echo "... imgui"
 	@echo "... mathLib"
-	@echo "... nanovg"
 	@echo "... render"
 .PHONY : help
 

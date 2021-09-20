@@ -27,8 +27,6 @@ GL/glew.h
 -
 GLFW/glfw3.h
 -
-nanovg.h
--
 string
 -
 
@@ -87,8 +85,6 @@ GL/glext.h
 -
 GL/glu.h
 -
-
-../exts/nanovg/src/nanovg.h
 
 /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc
 config.h

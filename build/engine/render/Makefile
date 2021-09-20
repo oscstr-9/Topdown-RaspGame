@@ -333,6 +333,33 @@ __/config.cc.s:
 	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f engine/render/CMakeFiles/render.dir/build.make engine/render/CMakeFiles/render.dir/__/config.cc.s
 .PHONY : __/config.cc.s
 
+gltfLoader.o: gltfLoader.cpp.o
+
+.PHONY : gltfLoader.o
+
+# target to build an object file
+gltfLoader.cpp.o:
+	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f engine/render/CMakeFiles/render.dir/build.make engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o
+.PHONY : gltfLoader.cpp.o
+
+gltfLoader.i: gltfLoader.cpp.i
+
+.PHONY : gltfLoader.i
+
+# target to preprocess a source file
+gltfLoader.cpp.i:
+	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f engine/render/CMakeFiles/render.dir/build.make engine/render/CMakeFiles/render.dir/gltfLoader.cpp.i
+.PHONY : gltfLoader.cpp.i
+
+gltfLoader.s: gltfLoader.cpp.s
+
+.PHONY : gltfLoader.s
+
+# target to generate assembly for a file
+gltfLoader.cpp.s:
+	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f engine/render/CMakeFiles/render.dir/build.make engine/render/CMakeFiles/render.dir/gltfLoader.cpp.s
+.PHONY : gltfLoader.cpp.s
+
 window.o: window.cpp.o
 
 .PHONY : window.o
@@ -390,6 +417,9 @@ help:
 	@echo "... __/config.o"
 	@echo "... __/config.i"
 	@echo "... __/config.s"
+	@echo "... gltfLoader.o"
+	@echo "... gltfLoader.i"
+	@echo "... gltfLoader.s"
 	@echo "... window.o"
 	@echo "... window.i"
 	@echo "... window.s"

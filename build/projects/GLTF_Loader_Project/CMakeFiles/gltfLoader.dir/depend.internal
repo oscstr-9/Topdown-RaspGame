@@ -11,11 +11,9 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o
  ../engine/render/MESHRESOURCE.h
  ../engine/render/ShaderResource.h
  ../engine/render/TextureResource.h
- ../engine/render/Vertex.h
  ../engine/render/window.h
  ../exts/glew/include/GL/glew.h
  ../exts/glfw/include/GLFW/glfw3.h
- ../exts/nanovg/src/nanovg.h
  /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp
  /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o
@@ -29,11 +27,9 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o
  ../engine/render/MESHRESOURCE.h
  ../engine/render/ShaderResource.h
  ../engine/render/TextureResource.h
- ../engine/render/Vertex.h
+ ../engine/render/gltfLoader.h
  ../engine/render/window.h
  ../exts/glew/include/GL/glew.h
  ../exts/glfw/include/GLFW/glfw3.h
- ../exts/nanovg/src/nanovg.h
- ../exts/nanovg/src/stb_image.h
  /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp
  /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.h

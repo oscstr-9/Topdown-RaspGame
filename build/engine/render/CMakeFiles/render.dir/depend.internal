@@ -19,7 +19,6 @@ engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o
  /home/ogge/Repos/S0017D/engine/render/MESHRESOURCE.h
  /home/ogge/Repos/S0017D/engine/render/ShaderResource.h
  /home/ogge/Repos/S0017D/engine/render/TextureResource.h
- /home/ogge/Repos/S0017D/engine/render/Vertex.h
 engine/render/CMakeFiles/render.dir/Lighting.cpp.o
  ../engine/config.h
  ../engine/core/MatrixMath.h
@@ -58,6 +57,17 @@ engine/render/CMakeFiles/render.dir/TextureResource.cpp.o
 engine/render/CMakeFiles/render.dir/__/config.cc.o
  /home/ogge/Repos/S0017D/engine/config.cc
  /home/ogge/Repos/S0017D/engine/config.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o
+ ../engine/config.h
+ ../engine/core/VectorMath.h
+ ../engine/render/gltfLoader.h
+ ../engine/render/json.hpp
+ ../engine/render/stb_image.h
+ ../engine/render/stb_image_write.h
+ ../engine/render/tiny_gltf.h
+ ../exts/glew/include/GL/glew.h
+ ../exts/glfw/include/GLFW/glfw3.h
+ /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp
 engine/render/CMakeFiles/render.dir/window.cpp.o
  ../engine/config.h
  ../exts/glew/include/GL/glew.h
@@ -65,7 +75,5 @@ engine/render/CMakeFiles/render.dir/window.cpp.o
  ../exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.h
  ../exts/imgui/imconfig.h
  ../exts/imgui/imgui.h
- ../exts/nanovg/src/nanovg.h
- ../exts/nanovg/src/nanovg_gl.h
  /home/ogge/Repos/S0017D/engine/render/window.cpp
  /home/ogge/Repos/S0017D/engine/render/window.h

@@ -3,6 +3,11 @@
 #include "TextureResource.h"
 #include <vector>
 #include <string.h>
+#include "core/MatrixMath.h"
+#include "core/VectorMath.h"
+#include "Vertex.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 MeshResource::MeshResource(Vertex vertices[], unsigned int indices[], int numOfVertices, int numOfIndicesIn) {
 	numOfIndices = numOfIndicesIn;

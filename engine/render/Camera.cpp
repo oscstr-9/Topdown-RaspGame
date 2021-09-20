@@ -1,32 +1,32 @@
 #include "config.h"
 #include "Camera.h"
 
-Camera::Camera(float FOV, int width, int height, float near, float far)
+ScreenCamera::ScreenCamera(float FOV, int width, int height, float near, float far)
 {
 	pos = VectorMath3(0,0,0);
 	projectionMat = MatrixMath::ProjectionMatrix(FOV, (float)width / (float)height, near, far);
 }
 
-void Camera::SetRotation(VectorMath3 axisIn, float radIn) {
+void ScreenCamera::SetRotation(VectorMath3 axisIn, float radIn) {
 	rotMat = RotateMatrix(radIn, axisIn);
 }
 
-void Camera::SetPosition(VectorMath3 posIn) {
+void ScreenCamera::SetPosition(VectorMath3 posIn) {
 	pos = posIn;
 }
 
-void Camera::SetRotMat(MatrixMath rotMatIn) {
+void ScreenCamera::SetRotMat(MatrixMath rotMatIn) {
 	rotMat = rotMatIn;
 }
 
-MatrixMath Camera::GetProjViewMatrix() {
+MatrixMath ScreenCamera::GetProjViewMatrix() {
 	return  projectionMat * rotMat * MatrixMath::TranslationMatrix(pos);
 }
 
-VectorMath3 Camera::GetPosition() {
+VectorMath3 ScreenCamera::GetPosition() {
 	return pos;
 }
 
-Camera::~Camera()
+ScreenCamera::~ScreenCamera()
 {
 }

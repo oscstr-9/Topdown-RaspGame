@@ -7,7 +7,6 @@ projects/example/CMakeFiles/example.dir/code/exampleapp.cc.o
  ../engine/render/window.h
  ../exts/glew/include/GL/glew.h
  ../exts/glfw/include/GLFW/glfw3.h
- ../exts/nanovg/src/nanovg.h
  /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc
  /home/ogge/Repos/S0017D/projects/example/code/exampleapp.h
 projects/example/CMakeFiles/example.dir/code/main.cc.o
@@ -15,6 +14,5 @@ projects/example/CMakeFiles/example.dir/code/main.cc.o
  ../engine/render/window.h
  ../exts/glew/include/GL/glew.h
  ../exts/glfw/include/GLFW/glfw3.h
- ../exts/nanovg/src/nanovg.h
  /home/ogge/Repos/S0017D/projects/example/code/exampleapp.h
  /home/ogge/Repos/S0017D/projects/example/code/main.cc

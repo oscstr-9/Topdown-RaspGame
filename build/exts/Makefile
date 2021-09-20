@@ -144,21 +144,6 @@ imgui/fast:
 	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f exts/CMakeFiles/imgui.dir/build.make exts/CMakeFiles/imgui.dir/build
 .PHONY : imgui/fast
 
-# Convenience name for target.
-exts/CMakeFiles/nanovg.dir/rule:
-	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 exts/CMakeFiles/nanovg.dir/rule
-.PHONY : exts/CMakeFiles/nanovg.dir/rule
-
-# Convenience name for target.
-nanovg: exts/CMakeFiles/nanovg.dir/rule
-
-.PHONY : nanovg
-
-# fast build rule for target.
-nanovg/fast:
-	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/build
-.PHONY : nanovg/fast
-
 imgui/examples/opengl3_example/imgui_impl_glfw_gl3.o: imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o
 
 .PHONY : imgui/examples/opengl3_example/imgui_impl_glfw_gl3.o
@@ -267,33 +252,6 @@ imgui/imgui_draw.cpp.s:
 	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f exts/CMakeFiles/imgui.dir/build.make exts/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.s
 .PHONY : imgui/imgui_draw.cpp.s
 
-nanovg/src/nanovg.o: nanovg/src/nanovg.c.o
-
-.PHONY : nanovg/src/nanovg.o
-
-# target to build an object file
-nanovg/src/nanovg.c.o:
-	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.o
-.PHONY : nanovg/src/nanovg.c.o
-
-nanovg/src/nanovg.i: nanovg/src/nanovg.c.i
-
-.PHONY : nanovg/src/nanovg.i
-
-# target to preprocess a source file
-nanovg/src/nanovg.c.i:
-	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.i
-.PHONY : nanovg/src/nanovg.c.i
-
-nanovg/src/nanovg.s: nanovg/src/nanovg.c.s
-
-.PHONY : nanovg/src/nanovg.s
-
-# target to generate assembly for a file
-nanovg/src/nanovg.c.s:
-	cd /home/ogge/Repos/S0017D/build && $(MAKE) $(MAKESILENT) -f exts/CMakeFiles/nanovg.dir/build.make exts/CMakeFiles/nanovg.dir/nanovg/src/nanovg.c.s
-.PHONY : nanovg/src/nanovg.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -303,7 +261,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... imgui"
-	@echo "... nanovg"
 	@echo "... imgui/examples/opengl3_example/imgui_impl_glfw_gl3.o"
 	@echo "... imgui/examples/opengl3_example/imgui_impl_glfw_gl3.i"
 	@echo "... imgui/examples/opengl3_example/imgui_impl_glfw_gl3.s"
@@ -316,9 +273,6 @@ help:
 	@echo "... imgui/imgui_draw.o"
 	@echo "... imgui/imgui_draw.i"
 	@echo "... imgui/imgui_draw.s"
-	@echo "... nanovg/src/nanovg.o"
-	@echo "... nanovg/src/nanovg.i"
-	@echo "... nanovg/src/nanovg.s"
 .PHONY : help
 
 

@@ -3,7 +3,6 @@
 /home/ogge/Repos/S0017D/build/exts/CMakeFiles/rebuild_cache.dir
 /home/ogge/Repos/S0017D/build/exts/CMakeFiles/edit_cache.dir
 /home/ogge/Repos/S0017D/build/exts/CMakeFiles/imgui.dir
-/home/ogge/Repos/S0017D/build/exts/CMakeFiles/nanovg.dir
 /home/ogge/Repos/S0017D/build/exts/glew/CMakeFiles/rebuild_cache.dir
 /home/ogge/Repos/S0017D/build/exts/glew/CMakeFiles/edit_cache.dir
 /home/ogge/Repos/S0017D/build/exts/glew/CMakeFiles/glew.dir

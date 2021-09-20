@@ -169,7 +169,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "exts/CMakeFiles/imgui.dir/DependInfo.cmake"
-  "exts/CMakeFiles/nanovg.dir/DependInfo.cmake"
   "exts/glew/CMakeFiles/glew.dir/DependInfo.cmake"
   "exts/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "engine/core/CMakeFiles/core.dir/DependInfo.cmake"

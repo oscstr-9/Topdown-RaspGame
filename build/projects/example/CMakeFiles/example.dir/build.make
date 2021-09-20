@@ -79,28 +79,28 @@ include projects/example/CMakeFiles/example.dir/flags.make
 projects/example/CMakeFiles/example.dir/code/exampleapp.cc.o: projects/example/CMakeFiles/example.dir/flags.make
 projects/example/CMakeFiles/example.dir/code/exampleapp.cc.o: ../projects/example/code/exampleapp.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object projects/example/CMakeFiles/example.dir/code/exampleapp.cc.o"
-	cd /home/ogge/Repos/S0017D/build/projects/example && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/code/exampleapp.cc.o -c /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc
+	cd /home/ogge/Repos/S0017D/build/projects/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/code/exampleapp.cc.o -c /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc
 
 projects/example/CMakeFiles/example.dir/code/exampleapp.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/example.dir/code/exampleapp.cc.i"
-	cd /home/ogge/Repos/S0017D/build/projects/example && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc > CMakeFiles/example.dir/code/exampleapp.cc.i
+	cd /home/ogge/Repos/S0017D/build/projects/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc > CMakeFiles/example.dir/code/exampleapp.cc.i
 
 projects/example/CMakeFiles/example.dir/code/exampleapp.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/example.dir/code/exampleapp.cc.s"
-	cd /home/ogge/Repos/S0017D/build/projects/example && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc -o CMakeFiles/example.dir/code/exampleapp.cc.s
+	cd /home/ogge/Repos/S0017D/build/projects/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc -o CMakeFiles/example.dir/code/exampleapp.cc.s
 
 projects/example/CMakeFiles/example.dir/code/main.cc.o: projects/example/CMakeFiles/example.dir/flags.make
 projects/example/CMakeFiles/example.dir/code/main.cc.o: ../projects/example/code/main.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object projects/example/CMakeFiles/example.dir/code/main.cc.o"
-	cd /home/ogge/Repos/S0017D/build/projects/example && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/code/main.cc.o -c /home/ogge/Repos/S0017D/projects/example/code/main.cc
+	cd /home/ogge/Repos/S0017D/build/projects/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/code/main.cc.o -c /home/ogge/Repos/S0017D/projects/example/code/main.cc
 
 projects/example/CMakeFiles/example.dir/code/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/example.dir/code/main.cc.i"
-	cd /home/ogge/Repos/S0017D/build/projects/example && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/example/code/main.cc > CMakeFiles/example.dir/code/main.cc.i
+	cd /home/ogge/Repos/S0017D/build/projects/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/example/code/main.cc > CMakeFiles/example.dir/code/main.cc.i
 
 projects/example/CMakeFiles/example.dir/code/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/example.dir/code/main.cc.s"
-	cd /home/ogge/Repos/S0017D/build/projects/example && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/example/code/main.cc -o CMakeFiles/example.dir/code/main.cc.s
+	cd /home/ogge/Repos/S0017D/build/projects/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/example/code/main.cc -o CMakeFiles/example.dir/code/main.cc.s
 
 # Object files for target example
 example_OBJECTS = \
@@ -127,9 +127,7 @@ projects/example/example: /usr/lib/x86_64-linux-gnu/libXinerama.so
 projects/example/example: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
 projects/example/example: /usr/lib/x86_64-linux-gnu/libXcursor.so
 projects/example/example: exts/libimgui.a
-projects/example/example: exts/libnanovg.a
 projects/example/example: exts/libimgui.a
-projects/example/example: exts/libnanovg.a
 projects/example/example: projects/example/CMakeFiles/example.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable example"
 	cd /home/ogge/Repos/S0017D/build/projects/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/example.dir/link.txt --verbose=$(VERBOSE)

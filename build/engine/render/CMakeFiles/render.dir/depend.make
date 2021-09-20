@@ -18,7 +18,6 @@ engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: ../engine/render/Graphic
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: ../engine/render/MESHRESOURCE.h
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: ../engine/render/ShaderResource.h
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: ../engine/render/TextureResource.h
-engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: ../engine/render/Vertex.h
 
 engine/render/CMakeFiles/render.dir/Lighting.cpp.o: ../engine/config.h
 engine/render/CMakeFiles/render.dir/Lighting.cpp.o: ../engine/core/MatrixMath.h
@@ -58,14 +57,23 @@ engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/render/stb_
 engine/render/CMakeFiles/render.dir/__/config.cc.o: ../engine/config.cc
 engine/render/CMakeFiles/render.dir/__/config.cc.o: ../engine/config.h
 
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/config.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/core/VectorMath.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/gltfLoader.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/json.hpp
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/stb_image.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/stb_image_write.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/tiny_gltf.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../exts/glew/include/GL/glew.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
+engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/gltfLoader.cpp
+
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../engine/config.h
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/glew/include/GL/glew.h
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/glfw/include/GLFW/glfw3.h
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.h
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/imgui/imconfig.h
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/imgui/imgui.h
-engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/nanovg/src/nanovg.h
-engine/render/CMakeFiles/render.dir/window.cpp.o: ../exts/nanovg/src/nanovg_gl.h
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../engine/render/window.cpp
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../engine/render/window.h
 

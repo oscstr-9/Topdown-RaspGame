@@ -9,7 +9,7 @@
 #include <functional>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <nanovg.h>
+//#include <nanovg.h>
 #include <string>
 
 namespace Display
@@ -58,7 +58,7 @@ public:
 	/// set optional UI render function
 	void SetUiRender(const std::function<void()>& func);
 	/// set optional nanovg render function
-	void SetNanoVGRender(const std::function<void(NVGcontext *)> & func);
+	//void SetNanoVGRender(const std::function<void(NVGcontext *)> & func);
 
 private:
 
@@ -93,14 +93,14 @@ private:
 	/// function for ui rendering callback
 	std::function<void()> uiFunc;
 	/// function for nanovg rendering callback
-	std::function<void(NVGcontext *)> nanoFunc;
+	//std::function<void(NVGcontext *)> nanoFunc;
 
 
 	int width;
 	int height;
 	std::string title;
 	GLFWwindow* window;
-	NVGcontext * vg;
+	//NVGcontext * vg;
 };
 
 //------------------------------------------------------------------------------
@@ -207,9 +207,9 @@ Window::SetUiRender(const std::function<void()>& func)
 //------------------------------------------------------------------------------
 /**
 */
-inline void
-Window::SetNanoVGRender(const std::function<void(NVGcontext *)> & func)
-{
-	this->nanoFunc = func;
-}
+//inline void
+//Window::SetNanoVGRender(const std::function<void(NVGcontext *)> & func)
+//{
+//	this->nanoFunc = func;
+//}
 } // namespace Display

@@ -79,15 +79,15 @@ include projects/Math\ library/CMakeFiles/mathLib.dir/flags.make
 projects/Math\ library/CMakeFiles/mathLib.dir/code/Main.cpp.o: projects/Math\ library/CMakeFiles/mathLib.dir/flags.make
 projects/Math\ library/CMakeFiles/mathLib.dir/code/Main.cpp.o: ../projects/Math\ library/code/Main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object projects/Math library/CMakeFiles/mathLib.dir/code/Main.cpp.o"
-	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mathLib.dir/code/Main.cpp.o -c "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp"
+	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mathLib.dir/code/Main.cpp.o -c "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp"
 
 projects/Math\ library/CMakeFiles/mathLib.dir/code/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mathLib.dir/code/Main.cpp.i"
-	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp" > CMakeFiles/mathLib.dir/code/Main.cpp.i
+	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp" > CMakeFiles/mathLib.dir/code/Main.cpp.i
 
 projects/Math\ library/CMakeFiles/mathLib.dir/code/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mathLib.dir/code/Main.cpp.s"
-	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp" -o CMakeFiles/mathLib.dir/code/Main.cpp.s
+	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp" -o CMakeFiles/mathLib.dir/code/Main.cpp.s
 
 # Object files for target mathLib
 mathLib_OBJECTS = \
@@ -112,9 +112,7 @@ projects/Math\ library/mathLib: /usr/lib/x86_64-linux-gnu/libXinerama.so
 projects/Math\ library/mathLib: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
 projects/Math\ library/mathLib: /usr/lib/x86_64-linux-gnu/libXcursor.so
 projects/Math\ library/mathLib: exts/libimgui.a
-projects/Math\ library/mathLib: exts/libnanovg.a
 projects/Math\ library/mathLib: exts/libimgui.a
-projects/Math\ library/mathLib: exts/libnanovg.a
 projects/Math\ library/mathLib: projects/Math\ library/CMakeFiles/mathLib.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mathLib"
 	cd "/home/ogge/Repos/S0017D/build/projects/Math library" && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mathLib.dir/link.txt --verbose=$(VERBOSE)

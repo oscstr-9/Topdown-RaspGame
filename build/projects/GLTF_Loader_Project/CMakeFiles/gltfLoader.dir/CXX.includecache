@@ -59,19 +59,7 @@ memory
 -
 
 ../engine/render/MESHRESOURCE.h
-core/MatrixMath.h
-../engine/render/core/MatrixMath.h
-core/VectorMath.h
-../engine/render/core/VectorMath.h
-Vertex.h
-../engine/render/Vertex.h
-stdio.h
--
-stdlib.h
--
 GL/glew.h
--
-GLFW/glfw3.h
 -
 memory
 -
@@ -96,9 +84,9 @@ GL/glew.h
 GLFW/glfw3.h
 -
 
-../engine/render/Vertex.h
-core/VectorMath.h
-../engine/render/core/VectorMath.h
+../engine/render/gltfLoader.h
+string
+../engine/render/string
 
 ../engine/render/window.h
 functional
@@ -106,8 +94,6 @@ functional
 GL/glew.h
 -
 GLFW/glfw3.h
--
-nanovg.h
 -
 string
 -
@@ -168,45 +154,7 @@ GL/glext.h
 GL/glu.h
 -
 
-../exts/nanovg/src/nanovg.h
-
-../exts/nanovg/src/stb_image.h
-stb_image.h
-../exts/nanovg/src/stb_image.h
-stdio.h
--
-stdarg.h
--
-stddef.h
--
-stdlib.h
--
-string.h
--
-math.h
--
-stdio.h
--
-assert.h
--
-stdint.h
--
-emmintrin.h
--
-intrin.h
--
-arm_neon.h
--
-
-/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp
-config.h
-/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/config.h
-TestApp.h
-/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.h
-
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp
-stb_image.h
--
 cstring
 -
 config.h
@@ -225,6 +173,8 @@ render/Camera.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/Camera.h
 render/Lighting.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/Lighting.h
+render/gltfLoader.h
+/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/gltfLoader.h
 
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.h
 core/app.h
