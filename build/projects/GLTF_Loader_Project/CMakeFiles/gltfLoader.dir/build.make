@@ -79,28 +79,28 @@ include projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/flags.make
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/flags.make
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../projects/GLTF_Loader_Project/code/Main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gltfLoader.dir/code/Main.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp > CMakeFiles/gltfLoader.dir/code/Main.cpp.i
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp > CMakeFiles/gltfLoader.dir/code/Main.cpp.i
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gltfLoader.dir/code/Main.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp -o CMakeFiles/gltfLoader.dir/code/Main.cpp.s
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp -o CMakeFiles/gltfLoader.dir/code/Main.cpp.s
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/flags.make
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../projects/GLTF_Loader_Project/code/TestApp.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp > CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp > CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s
 
 # Object files for target gltfLoader
 gltfLoader_OBJECTS = \
