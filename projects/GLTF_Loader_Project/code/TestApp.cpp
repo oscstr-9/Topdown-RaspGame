@@ -61,7 +61,7 @@ namespace Example
 			}
 			});
 		// Adding mouse functionality
-		window->SetMouseMoveFunction([this](double x, double y) {
+			window->SetMouseMoveFunction([this](double x, double y) {
 			rotMat = RotateMatrix(((height / 2) - y) * -speed, VectorMath3(1, 0, 0))*RotateMatrix(((width/2)-x)*-speed, VectorMath3(0,1,0));
 		});
 		
@@ -77,25 +77,25 @@ namespace Example
 			shaders->LoadShader("engine/render/VertGLTFShader.glsl","engine/render/FragGLTFShader.glsl");
 
 			// Find object textures
-			// // std::shared_ptr<TextureResource> testTexture = std::make_shared<TextureResource>("moon.png");
-			// // std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("monkehTexture.png");
+			 std::shared_ptr<TextureResource> testTexture = std::make_shared<TextureResource>("moon.png");
+			// std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("monkehTexture.png");
 
 			// Load object textures
-			// // testTexture->LoadFromFile();
-			// // objTexture->LoadFromFile();
+			testTexture->LoadFromFile();
+			//objTexture->LoadFromFile();
 
 			// Object meshes
-			// // std::shared_ptr<MeshResource> sphereMesh = MeshResource::LoadObj("moon2");
-			// // std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
-			//loadGLTF("scene");
+			 std::shared_ptr<MeshResource> sphereMesh = MeshResource::LoadObj("moon2");
+			// std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
 
 			// Object transforms
-			// // MatrixMath sphereTransform = Identity();
-			// // MatrixMath objTransform = Identity() * ScalarMatrix(VectorMath3(0.5, 0.5, 0.5));
+			 MatrixMath sphereTransform = Identity();
+			// MatrixMath objTransform = Identity() * ScalarMatrix(VectorMath3(0.5, 0.5, 0.5));
 
 			// Object graphicnodes
-			// // sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
-			// // objObject = new GraphicsNode(objMesh, objTexture, shaders, objTransform);
+			 sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
+			// objObject = new GraphicsNode(objMesh, objTexture, shaders, objTransform);
+			
 
 			return true;
 		}
@@ -126,7 +126,7 @@ namespace Example
 
 			lP+=0.01;
 			light.setPos(VectorMath3(cos(lP)*8, 0, -sin(lP)*8));
-			// // sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(cos(lP)*8, 0, -sin(lP)*8)) * RotateMatrix(lP, VectorMath3(0, 1, 0)) * RotateMatrix(M_PI/2, VectorMath3(0,0,1)) *  ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
+			sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(cos(lP)*8, 0, -sin(lP)*8)) * RotateMatrix(lP, VectorMath3(0, 1, 0)) * RotateMatrix(M_PI/2, VectorMath3(0,0,1)) *  ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
 
 			camera.SetRotMat(rotMat);
 			camera.SetPosition(posVec);
@@ -134,12 +134,15 @@ namespace Example
 
 			shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
 
-			// // this->objObject->Draw();
-			// // this->sphere->Draw();
-			// // sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(-sin(lP) * 8, 0, cos(lP) * 8)) * RotateMatrix(-lP-(M_PI/2), VectorMath3(0, 1, 0)) * RotateMatrix(M_PI / 2, VectorMath3(0, 0, 1)) * ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
+			// this->objObject->Draw();
+			 this->sphere->Draw();
+			 sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(-sin(lP) * 8, 0, cos(lP) * 8)) * RotateMatrix(-lP-(M_PI/2), VectorMath3(0, 1, 0)) * RotateMatrix(M_PI / 2, VectorMath3(0, 0, 1)) * ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
+			
+			shaders->setMat4(Identity(), "posMatrix");
+			loadGLTF("scene");
 
-			// // this->sphere->Draw();
-			// // this->window->SwapBuffers();
+			 this->sphere->Draw();
+			this->window->SwapBuffers();
 		}
 	}
 }

@@ -6,5 +6,5 @@ CXX_DEFINES = -DGLEW_STATIC
 
 CXX_INCLUDES = 
 
-CXX_FLAGS =  -std=c++11
+CXX_FLAGS =  -std=c++11 -g
 

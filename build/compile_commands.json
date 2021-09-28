@@ -1,0 +1,197 @@
+[
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include  -std=c++11 -g -o CMakeFiles/imgui.dir/imgui/imgui.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui.cpp",
+  "file": "/home/ogge/Repos/S0017D/exts/imgui/imgui.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include  -std=c++11 -g -o CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp",
+  "file": "/home/ogge/Repos/S0017D/exts/imgui/imgui_demo.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include  -std=c++11 -g -o CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp",
+  "file": "/home/ogge/Repos/S0017D/exts/imgui/imgui_draw.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include  -std=c++11 -g -o CMakeFiles/imgui.dir/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp.o -c /home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp",
+  "file": "/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glew",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/exts/glew/include -g -o CMakeFiles/glew.dir/src/glew.c.o -c /home/ogge/Repos/S0017D/exts/glew/src/glew.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glew/src/glew.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/context.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/context.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/context.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/init.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/init.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/init.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/input.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/input.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/input.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/monitor.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/monitor.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/monitor.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/vulkan.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/vulkan.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/vulkan.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/window.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/window.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/window.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/x11_init.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/x11_init.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/x11_init.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/x11_monitor.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/x11_monitor.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/x11_monitor.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/x11_window.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/x11_window.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/x11_window.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/xkb_unicode.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/xkb_unicode.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/xkb_unicode.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/linux_joystick.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/linux_joystick.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/linux_joystick.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/posix_time.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/posix_time.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/posix_time.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/posix_tls.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/posix_tls.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/posix_tls.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/glx_context.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/glx_context.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/glx_context.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/exts/glfw/src",
+  "command": "/bin/x86_64-linux-gnu-gcc-10 -DGLEW_STATIC -D_GLFW_USE_CONFIG_H -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src -g -fPIC -Wall -o CMakeFiles/glfw.dir/egl_context.c.o -c /home/ogge/Repos/S0017D/exts/glfw/src/egl_context.c",
+  "file": "/home/ogge/Repos/S0017D/exts/glfw/src/egl_context.c"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/core",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/core.dir/app.cc.o -c /home/ogge/Repos/S0017D/engine/core/app.cc",
+  "file": "/home/ogge/Repos/S0017D/engine/core/app.cc"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/core",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/core.dir/__/config.cc.o -c /home/ogge/Repos/S0017D/engine/config.cc",
+  "file": "/home/ogge/Repos/S0017D/engine/config.cc"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/Camera.cpp.o -c /home/ogge/Repos/S0017D/engine/render/Camera.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/Camera.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/GraphicsNode.cpp.o -c /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/Lighting.cpp.o -c /home/ogge/Repos/S0017D/engine/render/Lighting.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/Lighting.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/MeshResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/MeshResource.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/ShaderResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/TextureResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/TextureResource.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/gltfLoader.cpp.o -c /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/window.cpp.o -c /home/ogge/Repos/S0017D/engine/render/window.cpp",
+  "file": "/home/ogge/Repos/S0017D/engine/render/window.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/engine/render",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/render.dir/__/config.cc.o -c /home/ogge/Repos/S0017D/engine/config.cc",
+  "file": "/home/ogge/Repos/S0017D/engine/config.cc"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/gltfLoader.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/Math library",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/mathLib.dir/code/Main.cpp.o -c \"/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp\"",
+  "file": "/home/ogge/Repos/S0017D/projects/Math library/code/Main.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/MeshResource",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/MeshRenderer.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/MeshResource",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/SystemPrintProject",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC   -std=c++11 -g -o CMakeFiles/app.dir/main.cpp.o -c /home/ogge/Repos/S0017D/projects/SystemPrintProject/main.cpp",
+  "file": "/home/ogge/Repos/S0017D/projects/SystemPrintProject/main.cpp"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/example",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/example.dir/code/exampleapp.cc.o -c /home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc",
+  "file": "/home/ogge/Repos/S0017D/projects/example/code/exampleapp.cc"
+},
+{
+  "directory": "/home/ogge/Repos/S0017D/build/projects/example",
+  "command": "/bin/x86_64-linux-gnu-g++-10 -DGLEW_STATIC -I/home/ogge/Repos/S0017D/engine -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example  -std=c++11 -g -o CMakeFiles/example.dir/code/main.cc.o -c /home/ogge/Repos/S0017D/projects/example/code/main.cc",
+  "file": "/home/ogge/Repos/S0017D/projects/example/code/main.cc"
+}
+]
