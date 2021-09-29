@@ -79,15 +79,15 @@ include exts/glew/CMakeFiles/glew.dir/flags.make
 exts/glew/CMakeFiles/glew.dir/src/glew.c.o: exts/glew/CMakeFiles/glew.dir/flags.make
 exts/glew/CMakeFiles/glew.dir/src/glew.c.o: ../exts/glew/src/glew.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object exts/glew/CMakeFiles/glew.dir/src/glew.c.o"
-	cd /home/ogge/Repos/S0017D/build/exts/glew && /bin/x86_64-linux-gnu-gcc-10 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glew.dir/src/glew.c.o -c /home/ogge/Repos/S0017D/exts/glew/src/glew.c
+	cd /home/ogge/Repos/S0017D/build/exts/glew && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glew.dir/src/glew.c.o -c /home/ogge/Repos/S0017D/exts/glew/src/glew.c
 
 exts/glew/CMakeFiles/glew.dir/src/glew.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glew.dir/src/glew.c.i"
-	cd /home/ogge/Repos/S0017D/build/exts/glew && /bin/x86_64-linux-gnu-gcc-10 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ogge/Repos/S0017D/exts/glew/src/glew.c > CMakeFiles/glew.dir/src/glew.c.i
+	cd /home/ogge/Repos/S0017D/build/exts/glew && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ogge/Repos/S0017D/exts/glew/src/glew.c > CMakeFiles/glew.dir/src/glew.c.i
 
 exts/glew/CMakeFiles/glew.dir/src/glew.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glew.dir/src/glew.c.s"
-	cd /home/ogge/Repos/S0017D/build/exts/glew && /bin/x86_64-linux-gnu-gcc-10 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ogge/Repos/S0017D/exts/glew/src/glew.c -o CMakeFiles/glew.dir/src/glew.c.s
+	cd /home/ogge/Repos/S0017D/build/exts/glew && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ogge/Repos/S0017D/exts/glew/src/glew.c -o CMakeFiles/glew.dir/src/glew.c.s
 
 # Object files for target glew
 glew_OBJECTS = \

@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "../../../bin/gltfLoader"
-  "../../../bin/gltfLoader.pdb"
   "CMakeFiles/gltfLoader.dir/code/Main.cpp.o"
   "CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o"
+  "gltfLoader"
+  "gltfLoader.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

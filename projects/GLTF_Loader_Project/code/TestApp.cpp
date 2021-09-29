@@ -82,7 +82,8 @@ namespace Example
 
 			// Load object textures
 			testTexture->LoadFromFile();
-			//objTexture->LoadFromFile();
+			//objTexture->LoadFromFile();			
+			LoadGLTF("scene", gltfModel);
 
 			// Object meshes
 			 std::shared_ptr<MeshResource> sphereMesh = MeshResource::LoadObj("moon2");
@@ -139,9 +140,9 @@ namespace Example
 			 sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(-sin(lP) * 8, 0, cos(lP) * 8)) * RotateMatrix(-lP-(M_PI/2), VectorMath3(0, 1, 0)) * RotateMatrix(M_PI / 2, VectorMath3(0, 0, 1)) * ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
 			
 			shaders->setMat4(Identity(), "posMatrix");
-			loadGLTF("scene");
+			RenderGLTF(gltfModel);
 
-			 this->sphere->Draw();
+			this->sphere->Draw();
 			this->window->SwapBuffers();
 		}
 	}

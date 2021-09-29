@@ -79,119 +79,119 @@ include engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/Camera.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/Camera.cpp.o: ../engine/render/Camera.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object engine/render/CMakeFiles/render.dir/Camera.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/Camera.cpp.o -c /home/ogge/Repos/S0017D/engine/render/Camera.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/Camera.cpp.o -c /home/ogge/Repos/S0017D/engine/render/Camera.cpp
 
 engine/render/CMakeFiles/render.dir/Camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/Camera.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/Camera.cpp > CMakeFiles/render.dir/Camera.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/Camera.cpp > CMakeFiles/render.dir/Camera.cpp.i
 
 engine/render/CMakeFiles/render.dir/Camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/Camera.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/Camera.cpp -o CMakeFiles/render.dir/Camera.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/Camera.cpp -o CMakeFiles/render.dir/Camera.cpp.s
 
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o: ../engine/render/GraphicsNode.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/GraphicsNode.cpp.o -c /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/GraphicsNode.cpp.o -c /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp
 
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/GraphicsNode.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp > CMakeFiles/render.dir/GraphicsNode.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp > CMakeFiles/render.dir/GraphicsNode.cpp.i
 
 engine/render/CMakeFiles/render.dir/GraphicsNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/GraphicsNode.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp -o CMakeFiles/render.dir/GraphicsNode.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/GraphicsNode.cpp -o CMakeFiles/render.dir/GraphicsNode.cpp.s
 
 engine/render/CMakeFiles/render.dir/Lighting.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/Lighting.cpp.o: ../engine/render/Lighting.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object engine/render/CMakeFiles/render.dir/Lighting.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/Lighting.cpp.o -c /home/ogge/Repos/S0017D/engine/render/Lighting.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/Lighting.cpp.o -c /home/ogge/Repos/S0017D/engine/render/Lighting.cpp
 
 engine/render/CMakeFiles/render.dir/Lighting.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/Lighting.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/Lighting.cpp > CMakeFiles/render.dir/Lighting.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/Lighting.cpp > CMakeFiles/render.dir/Lighting.cpp.i
 
 engine/render/CMakeFiles/render.dir/Lighting.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/Lighting.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/Lighting.cpp -o CMakeFiles/render.dir/Lighting.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/Lighting.cpp -o CMakeFiles/render.dir/Lighting.cpp.s
 
 engine/render/CMakeFiles/render.dir/MeshResource.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/MeshResource.cpp.o: ../engine/render/MeshResource.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object engine/render/CMakeFiles/render.dir/MeshResource.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/MeshResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/MeshResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp
 
 engine/render/CMakeFiles/render.dir/MeshResource.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/MeshResource.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp > CMakeFiles/render.dir/MeshResource.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp > CMakeFiles/render.dir/MeshResource.cpp.i
 
 engine/render/CMakeFiles/render.dir/MeshResource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/MeshResource.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp -o CMakeFiles/render.dir/MeshResource.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/MeshResource.cpp -o CMakeFiles/render.dir/MeshResource.cpp.s
 
 engine/render/CMakeFiles/render.dir/ShaderResource.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/ShaderResource.cpp.o: ../engine/render/ShaderResource.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object engine/render/CMakeFiles/render.dir/ShaderResource.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/ShaderResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/ShaderResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp
 
 engine/render/CMakeFiles/render.dir/ShaderResource.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/ShaderResource.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp > CMakeFiles/render.dir/ShaderResource.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp > CMakeFiles/render.dir/ShaderResource.cpp.i
 
 engine/render/CMakeFiles/render.dir/ShaderResource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/ShaderResource.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp -o CMakeFiles/render.dir/ShaderResource.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/ShaderResource.cpp -o CMakeFiles/render.dir/ShaderResource.cpp.s
 
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.o: ../engine/render/TextureResource.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object engine/render/CMakeFiles/render.dir/TextureResource.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/TextureResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/TextureResource.cpp.o -c /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp
 
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/TextureResource.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp > CMakeFiles/render.dir/TextureResource.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp > CMakeFiles/render.dir/TextureResource.cpp.i
 
 engine/render/CMakeFiles/render.dir/TextureResource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/TextureResource.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp -o CMakeFiles/render.dir/TextureResource.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/TextureResource.cpp -o CMakeFiles/render.dir/TextureResource.cpp.s
 
 engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o: ../engine/render/gltfLoader.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object engine/render/CMakeFiles/render.dir/gltfLoader.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/gltfLoader.cpp.o -c /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/gltfLoader.cpp.o -c /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp
 
 engine/render/CMakeFiles/render.dir/gltfLoader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/gltfLoader.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp > CMakeFiles/render.dir/gltfLoader.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp > CMakeFiles/render.dir/gltfLoader.cpp.i
 
 engine/render/CMakeFiles/render.dir/gltfLoader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/gltfLoader.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp -o CMakeFiles/render.dir/gltfLoader.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/gltfLoader.cpp -o CMakeFiles/render.dir/gltfLoader.cpp.s
 
 engine/render/CMakeFiles/render.dir/window.cpp.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/window.cpp.o: ../engine/render/window.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object engine/render/CMakeFiles/render.dir/window.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/window.cpp.o -c /home/ogge/Repos/S0017D/engine/render/window.cpp
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/window.cpp.o -c /home/ogge/Repos/S0017D/engine/render/window.cpp
 
 engine/render/CMakeFiles/render.dir/window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/window.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/window.cpp > CMakeFiles/render.dir/window.cpp.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/render/window.cpp > CMakeFiles/render.dir/window.cpp.i
 
 engine/render/CMakeFiles/render.dir/window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/window.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/window.cpp -o CMakeFiles/render.dir/window.cpp.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/render/window.cpp -o CMakeFiles/render.dir/window.cpp.s
 
 engine/render/CMakeFiles/render.dir/__/config.cc.o: engine/render/CMakeFiles/render.dir/flags.make
 engine/render/CMakeFiles/render.dir/__/config.cc.o: ../engine/config.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object engine/render/CMakeFiles/render.dir/__/config.cc.o"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/__/config.cc.o -c /home/ogge/Repos/S0017D/engine/config.cc
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/render.dir/__/config.cc.o -c /home/ogge/Repos/S0017D/engine/config.cc
 
 engine/render/CMakeFiles/render.dir/__/config.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/render.dir/__/config.cc.i"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/config.cc > CMakeFiles/render.dir/__/config.cc.i
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/config.cc > CMakeFiles/render.dir/__/config.cc.i
 
 engine/render/CMakeFiles/render.dir/__/config.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/render.dir/__/config.cc.s"
-	cd /home/ogge/Repos/S0017D/build/engine/render && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/config.cc -o CMakeFiles/render.dir/__/config.cc.s
+	cd /home/ogge/Repos/S0017D/build/engine/render && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/config.cc -o CMakeFiles/render.dir/__/config.cc.s
 
 # Object files for target render
 render_OBJECTS = \

@@ -79,28 +79,28 @@ include projects/MeshResource/CMakeFiles/MeshRenderer.dir/flags.make
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: projects/MeshResource/CMakeFiles/MeshRenderer.dir/flags.make
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o: ../projects/MeshResource/code/Main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MeshRenderer.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp
+	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MeshRenderer.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp
 
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MeshRenderer.dir/code/Main.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp > CMakeFiles/MeshRenderer.dir/code/Main.cpp.i
+	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp > CMakeFiles/MeshRenderer.dir/code/Main.cpp.i
 
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MeshRenderer.dir/code/Main.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp -o CMakeFiles/MeshRenderer.dir/code/Main.cpp.s
+	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/MeshResource/code/Main.cpp -o CMakeFiles/MeshRenderer.dir/code/Main.cpp.s
 
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: projects/MeshResource/CMakeFiles/MeshRenderer.dir/flags.make
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o: ../projects/MeshResource/code/TestApp.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp
+	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp
 
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp > CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.i
+	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp > CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.i
 
 projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp -o CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.s
+	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/MeshResource/code/TestApp.cpp -o CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.s
 
 # Object files for target MeshRenderer
 MeshRenderer_OBJECTS = \
@@ -110,30 +110,30 @@ MeshRenderer_OBJECTS = \
 # External object files for target MeshRenderer
 MeshRenderer_EXTERNAL_OBJECTS =
 
-../bin/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o
-../bin/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o
-../bin/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/build.make
-../bin/MeshRenderer: engine/core/libcore.a
-../bin/MeshRenderer: engine/render/librender.a
-../bin/MeshRenderer: engine/core/libcore.a
-../bin/MeshRenderer: engine/render/librender.a
-../bin/MeshRenderer: exts/glew/libglew.a
-../bin/MeshRenderer: exts/glfw/src/libglfw3.a
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/librt.so
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/libm.so
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/libX11.so
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXrandr.so
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXinerama.so
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
-../bin/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXcursor.so
-../bin/MeshRenderer: exts/libimgui.a
-../bin/MeshRenderer: exts/libimgui.a
-../bin/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../../../bin/MeshRenderer"
+projects/MeshResource/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/Main.cpp.o
+projects/MeshResource/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o
+projects/MeshResource/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/build.make
+projects/MeshResource/MeshRenderer: engine/core/libcore.a
+projects/MeshResource/MeshRenderer: engine/render/librender.a
+projects/MeshResource/MeshRenderer: engine/core/libcore.a
+projects/MeshResource/MeshRenderer: engine/render/librender.a
+projects/MeshResource/MeshRenderer: exts/glew/libglew.a
+projects/MeshResource/MeshRenderer: exts/glfw/src/libglfw3.a
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/librt.so
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/libm.so
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/libX11.so
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXrandr.so
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXinerama.so
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
+projects/MeshResource/MeshRenderer: /usr/lib/x86_64-linux-gnu/libXcursor.so
+projects/MeshResource/MeshRenderer: exts/libimgui.a
+projects/MeshResource/MeshRenderer: exts/libimgui.a
+projects/MeshResource/MeshRenderer: projects/MeshResource/CMakeFiles/MeshRenderer.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable MeshRenderer"
 	cd /home/ogge/Repos/S0017D/build/projects/MeshResource && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MeshRenderer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-projects/MeshResource/CMakeFiles/MeshRenderer.dir/build: ../bin/MeshRenderer
+projects/MeshResource/CMakeFiles/MeshRenderer.dir/build: projects/MeshResource/MeshRenderer
 
 .PHONY : projects/MeshResource/CMakeFiles/MeshRenderer.dir/build
 

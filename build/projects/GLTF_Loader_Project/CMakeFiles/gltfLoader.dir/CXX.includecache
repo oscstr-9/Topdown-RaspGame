@@ -86,7 +86,9 @@ GLFW/glfw3.h
 
 ../engine/render/gltfLoader.h
 string
-../engine/render/string
+-
+vector
+-
 
 ../engine/render/window.h
 functional
@@ -187,6 +189,8 @@ render/window.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/window.h
 render/GraphicsNode.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/GraphicsNode.h
+vector
+-
 memory
 -
 

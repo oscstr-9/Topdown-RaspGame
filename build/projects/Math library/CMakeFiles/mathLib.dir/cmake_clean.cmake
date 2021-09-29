@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "../../../bin/mathLib"
-  "../../../bin/mathLib.pdb"
   "CMakeFiles/mathLib.dir/code/Main.cpp.o"
+  "mathLib"
+  "mathLib.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

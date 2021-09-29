@@ -79,28 +79,28 @@ include engine/core/CMakeFiles/core.dir/flags.make
 engine/core/CMakeFiles/core.dir/app.cc.o: engine/core/CMakeFiles/core.dir/flags.make
 engine/core/CMakeFiles/core.dir/app.cc.o: ../engine/core/app.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object engine/core/CMakeFiles/core.dir/app.cc.o"
-	cd /home/ogge/Repos/S0017D/build/engine/core && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/app.cc.o -c /home/ogge/Repos/S0017D/engine/core/app.cc
+	cd /home/ogge/Repos/S0017D/build/engine/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/app.cc.o -c /home/ogge/Repos/S0017D/engine/core/app.cc
 
 engine/core/CMakeFiles/core.dir/app.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core.dir/app.cc.i"
-	cd /home/ogge/Repos/S0017D/build/engine/core && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/core/app.cc > CMakeFiles/core.dir/app.cc.i
+	cd /home/ogge/Repos/S0017D/build/engine/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/core/app.cc > CMakeFiles/core.dir/app.cc.i
 
 engine/core/CMakeFiles/core.dir/app.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/app.cc.s"
-	cd /home/ogge/Repos/S0017D/build/engine/core && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/core/app.cc -o CMakeFiles/core.dir/app.cc.s
+	cd /home/ogge/Repos/S0017D/build/engine/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/core/app.cc -o CMakeFiles/core.dir/app.cc.s
 
 engine/core/CMakeFiles/core.dir/__/config.cc.o: engine/core/CMakeFiles/core.dir/flags.make
 engine/core/CMakeFiles/core.dir/__/config.cc.o: ../engine/config.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object engine/core/CMakeFiles/core.dir/__/config.cc.o"
-	cd /home/ogge/Repos/S0017D/build/engine/core && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/__/config.cc.o -c /home/ogge/Repos/S0017D/engine/config.cc
+	cd /home/ogge/Repos/S0017D/build/engine/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/__/config.cc.o -c /home/ogge/Repos/S0017D/engine/config.cc
 
 engine/core/CMakeFiles/core.dir/__/config.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core.dir/__/config.cc.i"
-	cd /home/ogge/Repos/S0017D/build/engine/core && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/config.cc > CMakeFiles/core.dir/__/config.cc.i
+	cd /home/ogge/Repos/S0017D/build/engine/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/engine/config.cc > CMakeFiles/core.dir/__/config.cc.i
 
 engine/core/CMakeFiles/core.dir/__/config.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/__/config.cc.s"
-	cd /home/ogge/Repos/S0017D/build/engine/core && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/config.cc -o CMakeFiles/core.dir/__/config.cc.s
+	cd /home/ogge/Repos/S0017D/build/engine/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/engine/config.cc -o CMakeFiles/core.dir/__/config.cc.s
 
 # Object files for target core
 core_OBJECTS = \

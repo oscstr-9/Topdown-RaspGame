@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "../../../bin/MeshRenderer"
-  "../../../bin/MeshRenderer.pdb"
   "CMakeFiles/MeshRenderer.dir/code/Main.cpp.o"
   "CMakeFiles/MeshRenderer.dir/code/TestApp.cpp.o"
+  "MeshRenderer"
+  "MeshRenderer.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

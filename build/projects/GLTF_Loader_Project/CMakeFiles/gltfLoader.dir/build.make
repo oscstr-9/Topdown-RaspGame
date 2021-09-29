@@ -79,28 +79,28 @@ include projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/flags.make
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/flags.make
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../projects/GLTF_Loader_Project/code/Main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/Main.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gltfLoader.dir/code/Main.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp > CMakeFiles/gltfLoader.dir/code/Main.cpp.i
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp > CMakeFiles/gltfLoader.dir/code/Main.cpp.i
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gltfLoader.dir/code/Main.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp -o CMakeFiles/gltfLoader.dir/code/Main.cpp.s
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/Main.cpp -o CMakeFiles/gltfLoader.dir/code/Main.cpp.s
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/flags.make
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o: ../projects/GLTF_Loader_Project/code/TestApp.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o -c /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp > CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp > CMakeFiles/gltfLoader.dir/code/TestApp.cpp.i
 
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s"
-	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /bin/x86_64-linux-gnu-g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s
+	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.cpp -o CMakeFiles/gltfLoader.dir/code/TestApp.cpp.s
 
 # Object files for target gltfLoader
 gltfLoader_OBJECTS = \
@@ -110,30 +110,30 @@ gltfLoader_OBJECTS = \
 # External object files for target gltfLoader
 gltfLoader_EXTERNAL_OBJECTS =
 
-../bin/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o
-../bin/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o
-../bin/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build.make
-../bin/gltfLoader: engine/core/libcore.a
-../bin/gltfLoader: engine/render/librender.a
-../bin/gltfLoader: engine/core/libcore.a
-../bin/gltfLoader: engine/render/librender.a
-../bin/gltfLoader: exts/glew/libglew.a
-../bin/gltfLoader: exts/glfw/src/libglfw3.a
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/librt.so
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/libm.so
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/libX11.so
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/libXrandr.so
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/libXinerama.so
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
-../bin/gltfLoader: /usr/lib/x86_64-linux-gnu/libXcursor.so
-../bin/gltfLoader: exts/libimgui.a
-../bin/gltfLoader: exts/libimgui.a
-../bin/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../../../bin/gltfLoader"
+projects/GLTF_Loader_Project/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o
+projects/GLTF_Loader_Project/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/TestApp.cpp.o
+projects/GLTF_Loader_Project/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build.make
+projects/GLTF_Loader_Project/gltfLoader: engine/core/libcore.a
+projects/GLTF_Loader_Project/gltfLoader: engine/render/librender.a
+projects/GLTF_Loader_Project/gltfLoader: engine/core/libcore.a
+projects/GLTF_Loader_Project/gltfLoader: engine/render/librender.a
+projects/GLTF_Loader_Project/gltfLoader: exts/glew/libglew.a
+projects/GLTF_Loader_Project/gltfLoader: exts/glfw/src/libglfw3.a
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/librt.so
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/libm.so
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/libX11.so
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/libXrandr.so
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/libXinerama.so
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
+projects/GLTF_Loader_Project/gltfLoader: /usr/lib/x86_64-linux-gnu/libXcursor.so
+projects/GLTF_Loader_Project/gltfLoader: exts/libimgui.a
+projects/GLTF_Loader_Project/gltfLoader: exts/libimgui.a
+projects/GLTF_Loader_Project/gltfLoader: projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ogge/Repos/S0017D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable gltfLoader"
 	cd /home/ogge/Repos/S0017D/build/projects/GLTF_Loader_Project && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gltfLoader.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build: ../bin/gltfLoader
+projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build: projects/GLTF_Loader_Project/gltfLoader
 
 .PHONY : projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/build
 
