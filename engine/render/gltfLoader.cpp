@@ -20,10 +20,24 @@ void LoadGLTF(std::string fileName, std::vector<int>& info){
     std::string err;
     std::string warn;
     bool ret = loader.LoadASCIIFromFile(&model, &err, &warn, "textures/GLTFs/" + fileName + ".gltf");
+    if (!ret)
+    {
+        std::cout << "GLTF File could not be loaded." << std::endl;
+        return;
+    }
+    
+    int numOfPrimitives = model.meshes[0].primitives.size();
+    info.push_back(numOfPrimitives);
 
-    Accessor normalAccessor = model.accessors[model.meshes[0].primitives[0].attributes["NORMAL"]];
-    Accessor posAccessor    = model.accessors[model.meshes[0].primitives[0].attributes["POSITION"]];
-    Accessor texAccessor    = model.accessors[model.meshes[0].primitives[0].attributes["TEXCOORD_0"]];
+            std::cout << numOfPrimitives << std::endl;
+
+    for (int i = 0; i < numOfPrimitives; i++)
+    {
+                std::cout << i << std::endl;
+
+    Accessor normalAccessor = model.accessors[model.meshes[0].primitives[i].attributes["NORMAL"]];
+    Accessor posAccessor    = model.accessors[model.meshes[0].primitives[i].attributes["POSITION"]];
+    Accessor texAccessor    = model.accessors[model.meshes[0].primitives[i].attributes["TEXCOORD_0"]];
 
     // Normals
     int normalByteLength = model.bufferViews[normalAccessor.bufferView].byteLength;
@@ -46,10 +60,10 @@ void LoadGLTF(std::string fileName, std::vector<int>& info){
     int texBuffer     = model.bufferViews[texAccessor.bufferView].buffer;
 
     // Indices
-    int indicesByteLength = model.bufferViews[model.accessors[model.meshes[0].primitives[0].indices].bufferView].byteLength;
-    int indicesByteOffset = model.bufferViews[model.accessors[model.meshes[0].primitives[0].indices].bufferView].byteOffset;
-    int indicesByteBuffer = model.bufferViews[model.accessors[model.meshes[0].primitives[0].indices].bufferView].buffer;
-    Accessor indices      = model.accessors[model.meshes[0].primitives[0].indices];
+    int indicesByteLength = model.bufferViews[model.accessors[model.meshes[0].primitives[i].indices].bufferView].byteLength;
+    int indicesByteOffset = model.bufferViews[model.accessors[model.meshes[0].primitives[i].indices].bufferView].byteOffset;
+    int indicesByteBuffer = model.bufferViews[model.accessors[model.meshes[0].primitives[i].indices].bufferView].buffer;
+    Accessor indices      = model.accessors[model.meshes[0].primitives[i].indices];
     int indexCount        = indices.count;
 
     // Buffers
@@ -77,20 +91,28 @@ void LoadGLTF(std::string fileName, std::vector<int>& info){
     info.push_back(texByteLength);
     info.push_back(normalByteStride);
     info.push_back(indexCount);
+    info.push_back(gpuBuffer);
+    info.push_back(indexBuffer);   
+    }
 }
 
 void RenderGLTF(std::vector<int>& info){
+    glBindBuffer(GL_ARRAY_BUFFER, info[6]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, info[7]);
+
      // Render
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(2);
     glEnableVertexAttribArray(3);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, info[0], NULL);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, info[2], (GLvoid*)info[1]);
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, info[4], (GLvoid*)(info[3]+info[1]));
-
     
-    glDrawElements(GL_TRIANGLES, info[5], GL_UNSIGNED_INT, 0);
+    for (int i = 0; i < info[0]; i++)
+    {
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, info[i*8+1], NULL);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, info[i*8+2], (GLvoid*)info[i*8+1]);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, info[i*8+4], (GLvoid*)(info[i*8+3]+info[i*8+1]));
+    
+    glDrawElements(GL_TRIANGLES, info[i*8+5], GL_UNSIGNED_INT, 0);
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

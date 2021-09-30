@@ -139,7 +139,7 @@ namespace Example
 			 this->sphere->Draw();
 			 sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(-sin(lP) * 8, 0, cos(lP) * 8)) * RotateMatrix(-lP-(M_PI/2), VectorMath3(0, 1, 0)) * RotateMatrix(M_PI / 2, VectorMath3(0, 0, 1)) * ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
 			
-			shaders->setMat4(Identity(), "posMatrix");
+			shaders->setMat4(Identity() * RotateMatrix(M_PI, VectorMath3(1, 0, 0)) * ScalarMatrix(VectorMath3(0.05, 0.05, 0.05)), "posMatrix");
 			RenderGLTF(gltfModel);
 
 			this->sphere->Draw();
