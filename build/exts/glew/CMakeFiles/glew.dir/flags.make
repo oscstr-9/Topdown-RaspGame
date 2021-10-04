@@ -6,5 +6,5 @@ C_DEFINES = -DGLEW_STATIC
 
 C_INCLUDES = -I/home/ogge/Repos/S0017D/exts/glew/include
 
-C_FLAGS = 
+C_FLAGS = -g
 

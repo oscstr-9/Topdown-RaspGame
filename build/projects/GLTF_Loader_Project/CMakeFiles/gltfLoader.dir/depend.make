@@ -10,6 +10,7 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engin
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/MESHRESOURCE.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/ShaderResource.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/TextureResource.h
+projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/gltfLoader.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../engine/render/window.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../exts/glew/include/GL/glew.h
 projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o: ../exts/glfw/include/GLFW/glfw3.h

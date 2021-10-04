@@ -11,6 +11,7 @@ projects/GLTF_Loader_Project/CMakeFiles/gltfLoader.dir/code/Main.cpp.o
  ../engine/render/MESHRESOURCE.h
  ../engine/render/ShaderResource.h
  ../engine/render/TextureResource.h
+ ../engine/render/gltfLoader.h
  ../engine/render/window.h
  ../exts/glew/include/GL/glew.h
  ../exts/glfw/include/GLFW/glfw3.h

@@ -11,6 +11,7 @@
 #include "render/ShaderResource.h"
 #include "render/window.h"
 #include "render/GraphicsNode.h"
+#include "render/gltfLoader.h"
 #include <vector>
 #include <memory>
 
@@ -48,6 +49,6 @@ private:
 	Display::Window* window;
 	GraphicsNode* sphere;
 	GraphicsNode* objObject;
-	std::vector<int> gltfModel;
+	std::vector<gltfInfo> gltfModel;
 };
 } // namespace Example

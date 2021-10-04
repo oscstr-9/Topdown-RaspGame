@@ -6,5 +6,5 @@ C_DEFINES = -DGLEW_STATIC -D_GLFW_USE_CONFIG_H
 
 C_INCLUDES = -I/home/ogge/Repos/S0017D/exts/glfw/include -I/home/ogge/Repos/S0017D/exts/glfw/src -I/home/ogge/Repos/S0017D/build/exts/glfw/src
 
-C_FLAGS = -fPIC -Wall
+C_FLAGS = -g -fPIC -Wall
 

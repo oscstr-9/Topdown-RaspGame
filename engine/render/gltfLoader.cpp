@@ -1,7 +1,5 @@
 #include "config.h"
 #include "render/gltfLoader.h"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include "core/VectorMath.h"
 #define TINYGLTF_IMPLEMENTATION
 //#define STB_IMAGE_IMPLEMENTATION
@@ -12,7 +10,7 @@
 
 using namespace tinygltf;
 
-void LoadGLTF(std::string fileName, std::vector<int>& info){
+void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
 
     Model model;
     TinyGLTF loader;
@@ -26,94 +24,108 @@ void LoadGLTF(std::string fileName, std::vector<int>& info){
         return;
     }
     
-    int numOfPrimitives = model.meshes[0].primitives.size();
-    info.push_back(numOfPrimitives);
+    int numOfMeshes = model.meshes.size();
 
-            std::cout << numOfPrimitives << std::endl;
-
-    for (int i = 0; i < numOfPrimitives; i++)
+    for (int i = 0; i < numOfMeshes; i++)
     {
-                std::cout << i << std::endl;
+        int numOfPrimitives = model.meshes[i].primitives.size();
 
-    Accessor normalAccessor = model.accessors[model.meshes[0].primitives[i].attributes["NORMAL"]];
-    Accessor posAccessor    = model.accessors[model.meshes[0].primitives[i].attributes["POSITION"]];
-    Accessor texAccessor    = model.accessors[model.meshes[0].primitives[i].attributes["TEXCOORD_0"]];
+        for (int j = 0; j < numOfPrimitives; j++)
+        {
+            
+            // Buffers
+            GLuint gpuBuffer;
+            GLuint indexBuffer;
 
-    // Normals
-    int normalByteLength = model.bufferViews[normalAccessor.bufferView].byteLength;
-    int normalByteOffset = model.bufferViews[normalAccessor.bufferView].byteOffset;
-    int normalByteStride = model.bufferViews[normalAccessor.bufferView].byteStride;
-    int normalBuffer     = model.bufferViews[normalAccessor.bufferView].buffer;
+            // Bind and prepare buffers
+            glGenBuffers(1, &gpuBuffer);    
+            glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
 
+            glGenBuffers(1, &indexBuffer);    
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
-    // Positions
-    int posByteLength = model.bufferViews[posAccessor.bufferView].byteLength;
-    int posByteOffset = model.bufferViews[posAccessor.bufferView].byteOffset;
-    int posByteStride = model.bufferViews[posAccessor.bufferView].byteStride;
-    int posBuffer     = model.bufferViews[posAccessor.bufferView].buffer;
+            // Accessors
+            Accessor normalAccessor = model.accessors[model.meshes[i].primitives[j].attributes["NORMAL"]];
+            Accessor posAccessor    = model.accessors[model.meshes[i].primitives[j].attributes["POSITION"]];
+            Accessor texAccessor    = model.accessors[model.meshes[i].primitives[j].attributes["TEXCOORD_0"]];
 
+            // Normals
+            int normalByteLength = model.bufferViews[normalAccessor.bufferView].byteLength;
+            int normalByteOffset = model.bufferViews[normalAccessor.bufferView].byteOffset;
+            int normalByteStride = model.bufferViews[normalAccessor.bufferView].byteStride;
+            int normalBuffer     = model.bufferViews[normalAccessor.bufferView].buffer;
 
-    // Texture coords
-    int texByteLength = model.bufferViews[texAccessor.bufferView].byteLength;
-    int texByteOffset = model.bufferViews[texAccessor.bufferView].byteOffset;
-    int texByteStride = model.bufferViews[texAccessor.bufferView].byteStride;
-    int texBuffer     = model.bufferViews[texAccessor.bufferView].buffer;
-
-    // Indices
-    int indicesByteLength = model.bufferViews[model.accessors[model.meshes[0].primitives[i].indices].bufferView].byteLength;
-    int indicesByteOffset = model.bufferViews[model.accessors[model.meshes[0].primitives[i].indices].bufferView].byteOffset;
-    int indicesByteBuffer = model.bufferViews[model.accessors[model.meshes[0].primitives[i].indices].bufferView].buffer;
-    Accessor indices      = model.accessors[model.meshes[0].primitives[i].indices];
-    int indexCount        = indices.count;
-
-    // Buffers
-    GLuint gpuBuffer;
-    GLuint indexBuffer;
-
-    // Bind and prepare
-    glGenBuffers(1, &gpuBuffer);    
-    glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
-
-    glGenBuffers(1, &indexBuffer);    
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-
-	glBufferData(GL_ARRAY_BUFFER, posByteLength+normalByteLength+texByteLength, NULL, GL_STATIC_DRAW);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, posByteLength, (void*)(model.buffers[posBuffer].data.data()+posByteOffset));
-	glBufferSubData(GL_ARRAY_BUFFER, posByteLength, texByteLength, (void*)(model.buffers[texBuffer].data.data()+texByteOffset));
-	glBufferSubData(GL_ARRAY_BUFFER, texByteLength, normalByteLength, (void*)(model.buffers[normalBuffer].data.data()+normalByteOffset));
-
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesByteLength, (void*)(model.buffers[indicesByteBuffer].data.data()+indicesByteOffset), GL_STATIC_DRAW);
+            // Positions
+            int posByteLength = model.bufferViews[posAccessor.bufferView].byteLength;
+            int posByteOffset = model.bufferViews[posAccessor.bufferView].byteOffset;
+            int posByteStride = model.bufferViews[posAccessor.bufferView].byteStride;
+            int posBuffer     = model.bufferViews[posAccessor.bufferView].buffer;
 
 
-    info.push_back(posByteStride);
-    info.push_back(posByteLength);
-    info.push_back(texByteStride);
-    info.push_back(texByteLength);
-    info.push_back(normalByteStride);
-    info.push_back(indexCount);
-    info.push_back(gpuBuffer);
-    info.push_back(indexBuffer);   
-    }
-}
+            // Texture coords
+            int texByteLength = model.bufferViews[texAccessor.bufferView].byteLength;
+            int texByteOffset = model.bufferViews[texAccessor.bufferView].byteOffset;
+            int texByteStride = model.bufferViews[texAccessor.bufferView].byteStride;
+            int texBuffer     = model.bufferViews[texAccessor.bufferView].buffer;
 
-void RenderGLTF(std::vector<int>& info){
-    glBindBuffer(GL_ARRAY_BUFFER, info[6]);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, info[7]);
+            // Indices
+            int indicesByteLength = model.bufferViews[model.accessors[model.meshes[i].primitives[j].indices].bufferView].byteLength;
+            int indicesByteOffset = model.bufferViews[model.accessors[model.meshes[i].primitives[j].indices].bufferView].byteOffset;
+            int indicesByteBuffer = model.bufferViews[model.accessors[model.meshes[i].primitives[j].indices].bufferView].buffer;
+            Accessor indices      = model.accessors[model.meshes[i].primitives[j].indices];
+            int indexCount        = indices.count;
 
-     // Render
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(2);
-    glEnableVertexAttribArray(3);
+
+	        glBufferData(GL_ARRAY_BUFFER, posByteLength+normalByteLength+texByteLength, NULL, GL_STATIC_DRAW);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, posByteLength, (void*)(model.buffers[posBuffer].data.data()+posByteOffset));
+	        glBufferSubData(GL_ARRAY_BUFFER, posByteLength, texByteLength, (void*)(model.buffers[texBuffer].data.data()+texByteOffset));
+	        glBufferSubData(GL_ARRAY_BUFFER, texByteLength, normalByteLength, (void*)(model.buffers[normalBuffer].data.data()+normalByteOffset));
+
+	        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesByteLength, (void*)(model.buffers[indicesByteBuffer].data.data()+indicesByteOffset), GL_STATIC_DRAW);
+
+
+            info.push_back(gltfInfo{
+                           gpuBuffer, 
+                           indexBuffer,
+                           numOfMeshes,
+                           numOfPrimitives, 
+                           model.accessors[model.meshes[i].primitives[j].indices].componentType,
+                           posByteStride,
+                           posByteLength,
+                           texByteStride,
+                           texByteLength,
+                           normalByteStride,
+                           indexCount});
+            
+        }
+    }    
+} 
+
+void RenderGLTF(std::vector<gltfInfo>& info){
     
-    for (int i = 0; i < info[0]; i++)
+
+    // Itterates through all meshes and all primitives in each mesh to render the model
+    for (int i = 0; i < info[0].numOfMeshes; i++)
     {
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, info[i*8+1], NULL);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, info[i*8+2], (GLvoid*)info[i*8+1]);
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, info[i*8+4], (GLvoid*)(info[i*8+3]+info[i*8+1]));
-    
-    glDrawElements(GL_TRIANGLES, info[i*8+5], GL_UNSIGNED_INT, 0);
+        for (int j = 0; j < info[i+j].numOfPrimitives; j++)
+        {
+            glBindBuffer(GL_ARRAY_BUFFER, info[i+j].gpuBuffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, info[i+j].indexBuffer);
+
+            // Render
+            glEnableVertexAttribArray(0);
+            glEnableVertexAttribArray(2);
+            glEnableVertexAttribArray(3);
+            
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, info[i+j].posByteStride, NULL);
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, info[i+j].texByteLength, (GLvoid*)info[i+j].posByteLength);
+            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, info[i+j].normalByteStride, (GLvoid*)(info[i+j].posByteLength+info[i+j].texByteLength));
+            
+            glDrawElements(GL_TRIANGLES, info[i+j].indexCount, info[i+j].componentType, 0);
+
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        }
     }
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

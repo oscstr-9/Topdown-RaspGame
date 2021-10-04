@@ -89,6 +89,10 @@ string
 -
 vector
 -
+GL/glew.h
+-
+GLFW/glfw3.h
+-
 
 ../engine/render/window.h
 functional
@@ -175,8 +179,6 @@ render/Camera.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/Camera.h
 render/Lighting.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/Lighting.h
-render/gltfLoader.h
-/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/gltfLoader.h
 
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/TestApp.h
 core/app.h
@@ -189,6 +191,8 @@ render/window.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/window.h
 render/GraphicsNode.h
 /home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/GraphicsNode.h
+render/gltfLoader.h
+/home/ogge/Repos/S0017D/projects/GLTF_Loader_Project/code/render/gltfLoader.h
 vector
 -
 memory

@@ -6,5 +6,5 @@ CXX_DEFINES = -DGLEW_STATIC
 
 CXX_INCLUDES = -I/home/ogge/Repos/S0017D/exts/imgui -I/home/ogge/Repos/S0017D/exts/imgui/examples/opengl3_example -I/home/ogge/Repos/S0017D/exts/glew/include -I/home/ogge/Repos/S0017D/exts/glfw/include
 
-CXX_FLAGS =  -std=c++11
+CXX_FLAGS =  -std=c++11 -g
 

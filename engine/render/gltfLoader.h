@@ -1,5 +1,22 @@
 #pragma once
 #include <string>
 #include <vector>
-void LoadGLTF(std::string fileName, std::vector<int>& info);
-void RenderGLTF(std::vector<int>& info);
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+struct gltfInfo{
+    GLuint gpuBuffer;
+    GLuint indexBuffer;
+    int numOfMeshes;
+    int numOfPrimitives;
+    int componentType;
+    int posByteStride;
+    int posByteLength;
+    int texByteStride;
+    int texByteLength;
+    int normalByteStride;
+    int indexCount;
+};
+
+void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info);
+void RenderGLTF(std::vector<gltfInfo>& info);

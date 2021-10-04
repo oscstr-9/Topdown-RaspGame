@@ -27,6 +27,10 @@ string
 -
 vector
 -
+GL/glew.h
+-
+GLFW/glfw3.h
+-
 
 ../engine/render/json.hpp
 algorithm
@@ -487,10 +491,6 @@ config.h
 /home/ogge/Repos/S0017D/engine/render/config.h
 render/gltfLoader.h
 /home/ogge/Repos/S0017D/engine/render/render/gltfLoader.h
-GL/glew.h
--
-GLFW/glfw3.h
--
 core/VectorMath.h
 /home/ogge/Repos/S0017D/engine/render/core/VectorMath.h
 render/tiny_gltf.h
