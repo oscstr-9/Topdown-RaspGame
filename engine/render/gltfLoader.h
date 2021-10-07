@@ -7,8 +7,6 @@
 struct gltfInfo{
     GLuint gpuBuffer;
     GLuint indexBuffer;
-    int numOfMeshes;
-    int numOfPrimitives;
     int componentType;
     int posByteStride;
     int posByteLength;

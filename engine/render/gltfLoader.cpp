@@ -69,26 +69,27 @@ void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
             int texBuffer     = model.bufferViews[texAccessor.bufferView].buffer;
 
             // Indices
-            int indicesByteLength = model.bufferViews[model.accessors[model.meshes[i].primitives[j].indices].bufferView].byteLength;
-            int indicesByteOffset = model.bufferViews[model.accessors[model.meshes[i].primitives[j].indices].bufferView].byteOffset;
-            int indicesByteBuffer = model.bufferViews[model.accessors[model.meshes[i].primitives[j].indices].bufferView].buffer;
             Accessor indices      = model.accessors[model.meshes[i].primitives[j].indices];
+            int indicesByteLength = model.bufferViews[indices.bufferView].byteLength;
+            int indicesByteOffset = model.bufferViews[indices.bufferView].byteOffset;
+            int indicesByteBuffer = model.bufferViews[indices.bufferView].buffer;
             int indexCount        = indices.count;
+
+            // Texture
+            int textureImage = model.bufferViews[model.images[0].bufferView].buffer;
 
 
 	        glBufferData(GL_ARRAY_BUFFER, posByteLength+normalByteLength+texByteLength, NULL, GL_STATIC_DRAW);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, posByteLength, (void*)(model.buffers[posBuffer].data.data()+posByteOffset));
-	        glBufferSubData(GL_ARRAY_BUFFER, posByteLength, texByteLength, (void*)(model.buffers[texBuffer].data.data()+texByteOffset));
-	        glBufferSubData(GL_ARRAY_BUFFER, texByteLength, normalByteLength, (void*)(model.buffers[normalBuffer].data.data()+normalByteOffset));
+            glBufferSubData(GL_ARRAY_BUFFER, 0, posByteLength, (void*)(model.buffers[posBuffer].data.data()+posByteOffset+posAccessor.byteOffset));
+	        glBufferSubData(GL_ARRAY_BUFFER, posByteLength, texByteLength, (void*)(model.buffers[texBuffer].data.data()+texByteOffset+texAccessor.byteOffset));
+	        glBufferSubData(GL_ARRAY_BUFFER, posByteLength+texByteLength, normalByteLength, (void*)(model.buffers[normalBuffer].data.data()+normalByteOffset+normalAccessor.byteOffset));
 
-	        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesByteLength, (void*)(model.buffers[indicesByteBuffer].data.data()+indicesByteOffset), GL_STATIC_DRAW);
+	        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesByteLength, (void*)(model.buffers[indicesByteBuffer].data.data()+indicesByteOffset+indices.byteOffset), GL_STATIC_DRAW);
 
 
             info.push_back(gltfInfo{
                            gpuBuffer, 
                            indexBuffer,
-                           numOfMeshes,
-                           numOfPrimitives, 
                            model.accessors[model.meshes[i].primitives[j].indices].componentType,
                            posByteStride,
                            posByteLength,
@@ -98,34 +99,31 @@ void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
                            indexCount});
             
         }
-    }    
+    }
 } 
 
 void RenderGLTF(std::vector<gltfInfo>& info){
     
 
     // Itterates through all meshes and all primitives in each mesh to render the model
-    for (int i = 0; i < info[0].numOfMeshes; i++)
+    for(int i =0; i < info.size(); i++)
     {
-        for (int j = 0; j < info[i+j].numOfPrimitives; j++)
-        {
-            glBindBuffer(GL_ARRAY_BUFFER, info[i+j].gpuBuffer);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, info[i+j].indexBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, info[i].gpuBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, info[i].indexBuffer);
 
-            // Render
-            glEnableVertexAttribArray(0);
-            glEnableVertexAttribArray(2);
-            glEnableVertexAttribArray(3);
-            
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, info[i+j].posByteStride, NULL);
-            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, info[i+j].texByteLength, (GLvoid*)info[i+j].posByteLength);
-            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, info[i+j].normalByteStride, (GLvoid*)(info[i+j].posByteLength+info[i+j].texByteLength));
-            
-            glDrawElements(GL_TRIANGLES, info[i+j].indexCount, info[i+j].componentType, 0);
+        // Render
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(2);
+        glEnableVertexAttribArray(3);
+        
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, info[i].posByteStride, NULL);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, info[i].texByteStride, (GLvoid*)info[i].posByteLength);
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, info[i].normalByteStride, (GLvoid*)(info[i].posByteLength+info[i].texByteLength));
+        
+        glDrawElements(GL_TRIANGLES, info[i].indexCount, info[i].componentType, 0);
 
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        }
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
 }

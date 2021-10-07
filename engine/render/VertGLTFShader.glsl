@@ -17,7 +17,7 @@ uniform sampler2D textureArray;
 void main()
 {
 	gl_Position = projectionViewMatrix*posMatrix*vec4(pos, 1);
-	Colors = colorVector*vec4(1,1,1,1);
+	Colors = colorVector*color;
 	texturesOut = texturesIn;
 
 	fragPos = (posMatrix*vec4(pos,1)).xyz;

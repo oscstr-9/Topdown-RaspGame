@@ -27,5 +27,5 @@ void main()
 	float spec = pow(max(dot(norm, halfwayDir), 0.0), 64);
 	vec3 specular = lightColor * spec;  
 
-	Color =  vec4(0.5,0,1,1); //* texture(textureArray, texturesOut)*(vec4(0.3) + Colors*0.7) * vec4(ambient + diffuse + specular, 1.0);
+	Color = texture(textureArray, texturesOut) *(vec4(0.3) + Colors*0.7) * vec4(ambient + diffuse + specular, 1.0);
 };
