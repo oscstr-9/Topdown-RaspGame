@@ -76,9 +76,17 @@ void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
             int indexCount        = indices.count;
 
             // Texture
-            int textureImage = model.bufferViews[model.images[0].bufferView].buffer;
+            Image texImg = model.images[model.materials[0].pbrMetallicRoughness.baseColorTexture.index];
+            int height;
+            int width;
+            int comp;
+            unsigned char* img = stbi_load_from_memory(model.buffers[model.bufferViews[texImg.bufferView].buffer].data.data(), texByteLength, &height, &width, &comp, texImg.component);
+            
+            // Bind texture to gpu with syntax below, example in textureResource. add texture gluint to GLTFinfo struct for easy access in render function.
 
 
+            glGenTextures(1, &info.texture);
+            glBindTexture(GL_TEXTURE_2D, info.texture);
 	        glBufferData(GL_ARRAY_BUFFER, posByteLength+normalByteLength+texByteLength, NULL, GL_STATIC_DRAW);
             glBufferSubData(GL_ARRAY_BUFFER, 0, posByteLength, (void*)(model.buffers[posBuffer].data.data()+posByteOffset+posAccessor.byteOffset));
 	        glBufferSubData(GL_ARRAY_BUFFER, posByteLength, texByteLength, (void*)(model.buffers[texBuffer].data.data()+texByteOffset+texAccessor.byteOffset));

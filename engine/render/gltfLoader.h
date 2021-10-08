@@ -4,9 +4,11 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+
 struct gltfInfo{
     GLuint gpuBuffer;
     GLuint indexBuffer;
+    GLuint texture;
     int componentType;
     int posByteStride;
     int posByteLength;
