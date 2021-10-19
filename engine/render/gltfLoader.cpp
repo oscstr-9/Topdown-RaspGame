@@ -36,6 +36,7 @@ void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
             // Buffers
             GLuint gpuBuffer;
             GLuint indexBuffer;
+            GLuint texture;
 
             // Bind and prepare buffers
             glGenBuffers(1, &gpuBuffer);    
@@ -85,8 +86,8 @@ void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
             // Bind texture to gpu with syntax below, example in textureResource. add texture gluint to GLTFinfo struct for easy access in render function.
 
 
-            glGenTextures(1, &info.texture);
-            glBindTexture(GL_TEXTURE_2D, info.texture);
+            glGenTextures(1, &texture);
+            glBindTexture(GL_TEXTURE_2D, texture);
 	        glBufferData(GL_ARRAY_BUFFER, posByteLength+normalByteLength+texByteLength, NULL, GL_STATIC_DRAW);
             glBufferSubData(GL_ARRAY_BUFFER, 0, posByteLength, (void*)(model.buffers[posBuffer].data.data()+posByteOffset+posAccessor.byteOffset));
 	        glBufferSubData(GL_ARRAY_BUFFER, posByteLength, texByteLength, (void*)(model.buffers[texBuffer].data.data()+texByteOffset+texAccessor.byteOffset));
@@ -98,6 +99,7 @@ void LoadGLTF(std::string fileName, std::vector<gltfInfo>& info){
             info.push_back(gltfInfo{
                            gpuBuffer, 
                            indexBuffer,
+                           texture,
                            model.accessors[model.meshes[i].primitives[j].indices].componentType,
                            posByteStride,
                            posByteLength,

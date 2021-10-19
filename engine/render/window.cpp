@@ -217,7 +217,7 @@ Window::Open()
 	{
 		GLenum res = glewInit();
 		assert(res == GLEW_OK);
-		if (!(GLEW_VERSION_4_0))
+		if (!(GLEW_VERSION_2_1))
 		{
 			printf("[WARNING]: OpenGL 4.0+ is not supported on this hardware!\n");
 			glfwDestroyWindow(this->window);
