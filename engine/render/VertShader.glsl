@@ -7,10 +7,10 @@ layout(location=1) in vec4 color;
 layout(location=2) in vec2 texturesIn;
 layout(location=3) in vec3 normalIn;
 
-out vec4 Colors;
-out vec2 texturesOut;
-out vec3 fragPos;
-out vec3 normalOut;
+layout(location=0) out vec4 Colors;
+layout(location=1) out vec2 texturesOut;
+layout(location=2) out vec3 fragPos;
+layout(location=3) out vec3 normalOut;
 
 uniform mat4 posMatrix;
 uniform mat4 projectionViewMatrix;
