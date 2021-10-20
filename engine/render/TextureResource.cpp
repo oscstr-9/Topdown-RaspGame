@@ -6,7 +6,7 @@
 
 TextureResource::TextureResource(std::string fileIn)
 {
-	file = fileIn;
+	file =  "textures/" + fileIn;
 }
 
 void TextureResource::bindTexture(){
