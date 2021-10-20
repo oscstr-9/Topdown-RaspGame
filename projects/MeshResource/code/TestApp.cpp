@@ -73,7 +73,7 @@ namespace Example
 
 			// Find and load shaders
 			shaders = std::make_shared<ShaderResource>();
-			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
+			shaders->LoadShader("VertShader.glsl","FragShader.glsl");
 
 			// Find object textures
 			std::shared_ptr<TextureResource> testTexture = std::make_shared<TextureResource>("moon.png");
@@ -94,6 +94,9 @@ namespace Example
 			// Object graphicnodes
 			sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
 			objObject = new GraphicsNode(objMesh, objTexture, shaders, objTransform);
+
+			tilegrid = new Tilegrid(3, 3);
+			tilegrid->createGraphics(shaders);
 
 			return true;
 		}
@@ -137,6 +140,9 @@ namespace Example
 			sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(-sin(lP) * 8, 0, cos(lP) * 8)) * RotateMatrix(-lP-(M_PI/2), VectorMath3(0, 1, 0)) * RotateMatrix(M_PI / 2, VectorMath3(0, 0, 1)) * ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
 
 			this->sphere->Draw();
+
+			tilegrid->draw();
+
 			this->window->SwapBuffers();
 		}
 	}

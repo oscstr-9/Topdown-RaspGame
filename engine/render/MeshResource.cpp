@@ -103,7 +103,7 @@ std::shared_ptr<MeshResource> MeshResource::Cube(float size) {
 
 std::shared_ptr<MeshResource> MeshResource::LoadObj(std::string fileName)
 {
-	FILE* myfile = fopen(("textures/OBJs/" + fileName + ".obj").c_str(), "r");
+	FILE* myfile = fopen((fileName + ".obj").c_str(), "r");
 	std::vector<VectorMath3> vC; // Vertex Coords
 	std::vector<VectorMath2> vT; // Vertex Textures
 	std::vector<VectorMath3> vN; // Vertex normals

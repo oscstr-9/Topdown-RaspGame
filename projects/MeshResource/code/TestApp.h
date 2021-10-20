@@ -13,6 +13,8 @@
 #include "render/GraphicsNode.h"
 #include <memory>
 
+#include "Tilegrid.h"
+
 namespace Example
 {
 class ExampleApp : public Core::App
@@ -47,5 +49,7 @@ private:
 	Display::Window* window;
 	GraphicsNode* sphere;
 	GraphicsNode* objObject;
+
+	Tilegrid* tilegrid;
 };
 } // namespace Example
