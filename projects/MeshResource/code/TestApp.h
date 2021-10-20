@@ -24,28 +24,35 @@ public:
 	~ExampleApp();
 	/// open app
 	bool Open();
+	void ControllerInputs();
 	/// run app
 	void Run();
 private:
 	//screen size
 	int width, height;
 
+	double x;
+	double y;
+
 	float size = 1;
 	float speed = 0.003;
+	float deadZone = 0.2;
 
-	bool up = false;
-	bool down = false;
-	bool left = false;
-	bool right = false;
-	bool forward = false;
-	bool backward = false;
+	float up = false;
+	float down = false;
+	float left = false;
+	float right = false;
+	float forward = false;
+	float backward = false;
 
 	MatrixMath rotMat = Identity();
 	MatrixMath posMat = Identity();
+	MatrixMath characterPosMat = Identity();
 	VectorMath3 posVec = VectorMath3(0, 0, -5);
 	std::shared_ptr<ShaderResource> shaders;
 	Display::Window* window;
 	GraphicsNode* sphere;
 	GraphicsNode* objObject;
+	GraphicsNode* cube;
 };
 } // namespace Example
