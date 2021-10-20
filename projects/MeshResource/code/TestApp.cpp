@@ -61,7 +61,7 @@ namespace Example
 			});
 		// Adding mouse functionality
 		window->SetMouseMoveFunction([this](double x, double y) {
-			rotMat = RotateMatrix(((height / 2) - y) * -speed, VectorMath3(1, 0, 0))*RotateMatrix(((width/2)-x)*-speed, VectorMath3(0,1,0));
+			//rotMat = RotateMatrix(((height / 2) - y) * -speed, VectorMath3(1, 0, 0))*RotateMatrix(((width/2)-x)*-speed, VectorMath3(0,1,0));
 		});
 		
 		if (this->window->Open())
@@ -89,7 +89,7 @@ namespace Example
 
 			// Object transforms
 			MatrixMath sphereTransform = Identity();
-			MatrixMath objTransform = Identity() * ScalarMatrix(VectorMath3(0.5, 0.5, 0.5));
+			MatrixMath objTransform = characterPosMat * ScalarMatrix(VectorMath3(0.5, 0.5, 0.5));
 
 			// Object graphicnodes
 			sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
@@ -97,10 +97,69 @@ namespace Example
 
 			tilegrid = new Tilegrid(3, 3);
 			tilegrid->createGraphics(shaders);
+			
+			std::shared_ptr<MeshResource> cubeMesh = MeshResource::Cube(50);
+			cube = new GraphicsNode(cubeMesh, testTexture, shaders, objTransform);
 
 			return true;
 		}
 		return false;
+	}
+
+	void ExampleApp::ControllerInputs(){
+		// Controller Inputs
+		GLFWgamepadstate state;
+		if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state)){
+			if(state.buttons[GLFW_GAMEPAD_BUTTON_A]){
+				std::cout << "A" << std::endl;
+				up = true;
+			}
+			else{
+				up = false;
+			}
+			if(state.buttons[GLFW_GAMEPAD_BUTTON_B]){
+				std::cout << "B" << std::endl;
+				down = true;
+			}
+			else{
+				down = false;
+			}
+			if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
+				std::cout << "Trigger" << std::endl;
+
+			}
+			if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
+				std::cout << "Back" << std::endl;
+			}
+			if (state.buttons[GLFW_GAMEPAD_BUTTON_START]){
+				this->window->Close();
+			}
+		}
+		if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > deadZone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -deadZone){
+			backward = state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
+		}
+		else{
+			backward = 0;
+		}
+
+		if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] > deadZone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -deadZone){
+			right = state.axes[GLFW_GAMEPAD_AXIS_LEFT_X];
+		}
+		else{
+			right = 0;
+		}
+		if (state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] > deadZone || state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] < -deadZone){
+			y = state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y];
+		}
+		else{
+			y = 0;
+		}
+		if (state.axes[GLFW_GAMEPAD_AXIS_RIGHT_X] > deadZone || state.axes[GLFW_GAMEPAD_AXIS_RIGHT_X] < -deadZone){
+			x = state.axes[GLFW_GAMEPAD_AXIS_RIGHT_X];
+		}
+		else{
+			x = 0;
+		}
 	}
 
 	void ExampleApp::Run()
@@ -123,6 +182,7 @@ namespace Example
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
 
+			ControllerInputs();
 			posVec = posVec + (VectorMath3((left - right), (down - up), (forward - backward)).NormalizeNew() * 0.08);
 
 			lP+=0.01;
@@ -134,6 +194,10 @@ namespace Example
 			light.bindLight(shaders, camera.GetPosition());
 
 			shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
+			
+			characterPosMat = characterPosMat * MatrixMath::TranslationMatrix(VectorMath3(x/4, -y/4, 0));
+			objObject->setTransform(characterPosMat);
+
 
 			this->objObject->Draw();
 			this->sphere->Draw();
@@ -143,6 +207,7 @@ namespace Example
 
 			tilegrid->draw();
 
+			this->cube->Draw();
 			this->window->SwapBuffers();
 		}
 	}
