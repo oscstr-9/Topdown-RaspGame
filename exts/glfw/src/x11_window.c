@@ -2788,6 +2788,8 @@ void _glfwPollEventsX11(void)
         XEvent event;
         XNextEvent(_glfw.x11.display, &event);
         processEvent(&event);
+        if(_glfw.x11.display == NULL)
+            return;
     }
 
     window = _glfw.x11.disabledCursorWindow;

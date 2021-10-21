@@ -95,7 +95,7 @@ namespace Example
 			sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
 			objObject = new GraphicsNode(objMesh, objTexture, shaders, objTransform);
 
-			tilegrid = new Tilegrid(3, 3);
+			tilegrid = new Tilegrid(7, 7, -8, 1);
 			tilegrid->createGraphics(shaders);
 			
 			std::shared_ptr<MeshResource> cubeMesh = MeshResource::Cube(50);
@@ -205,7 +205,7 @@ namespace Example
 
 			this->sphere->Draw();
 
-			tilegrid->draw();
+			tilegrid->Draw();
 
 			this->cube->Draw();
 			this->window->SwapBuffers();

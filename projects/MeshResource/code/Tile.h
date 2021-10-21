@@ -24,7 +24,6 @@ public:
     Pos pos;
 
     Tile();
-    Tile(float size, Type type);
 
     ~Tile();
 };

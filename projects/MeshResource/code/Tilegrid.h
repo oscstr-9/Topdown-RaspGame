@@ -5,22 +5,24 @@
 
 class Tilegrid {
 public:
-    int width, height;
+    int numOfX, numOfY;
+    float sizeX, sizeY;
     std::vector<std::vector<Tile>> tiles;
+    // Placement of {x, y} in grid:
+    // {0, 2} {1, 2} {2, 2}
+    // {0, 1} {1, 1} {2, 1}
+    // {0, 0} {0, 1} {2, 0}
     GraphicsNode groundTile;
-    GraphicsNode wallTile;
     std::vector<GraphicsNode> wallTiles;
-    float offset = 2;
-    int zPlacement = 0;
+    float zPlacement;
 
-    Tilegrid();
-    Tilegrid(int width, int height);
+    Tilegrid(int numOfX, int numOfY, float zPlacement, float tileSize);
 
-    void createGrid();
+    void createGrid(float tileSize);
     void createGraphics(std::shared_ptr<ShaderResource> shaders);
-    // void placeTiles();
+    void placeWalls();
 
-    void draw();
+    void Draw();
 
     ~Tilegrid();
 };
