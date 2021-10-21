@@ -95,8 +95,8 @@ namespace Example
 			sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
 			objObject = new GraphicsNode(objMesh, objTexture, shaders, objTransform);
 
-			tilegrid = new Tilegrid(7, 7, -8, 1);
-			tilegrid->createGraphics(shaders);
+			tilegrid = new Tilegrid(4, 4, -8, 1);
+			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			
 			std::shared_ptr<MeshResource> cubeMesh = MeshResource::Cube(50);
 			cube = new GraphicsNode(cubeMesh, testTexture, shaders, objTransform);

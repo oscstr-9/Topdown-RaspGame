@@ -19,7 +19,8 @@ public:
     Tilegrid(int numOfX, int numOfY, float zPlacement, float tileSize);
 
     void createGrid(float tileSize);
-    void createGraphics(std::shared_ptr<ShaderResource> shaders);
+    void createGraphics(std::shared_ptr<ShaderResource> shaders, bool showBorders);
+    void createBorderGraphics(std::shared_ptr<ShaderResource> shaders);
     void placeWalls();
 
     void Draw();
