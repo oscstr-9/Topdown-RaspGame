@@ -14,6 +14,8 @@
 #include <memory>
 
 #include "Tilegrid.h"
+#include "CollisionHandler.h"
+#include "TestObject.h"
 
 namespace Example
 {
@@ -57,6 +59,7 @@ private:
 	GraphicsNode* objObject;
 
 	Tilegrid* tilegrid;
+	CollisionHandler* collisionHandler;
 	GraphicsNode* cube;
 };
 } // namespace Example

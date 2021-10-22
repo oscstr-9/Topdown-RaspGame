@@ -97,6 +97,7 @@ namespace Example
 
 			tilegrid = new Tilegrid(4, 4, -8, 1);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
+			collisionHandler = new CollisionHandler();
 			
 			std::shared_ptr<MeshResource> cubeMesh = MeshResource::Cube(50);
 			cube = new GraphicsNode(cubeMesh, testTexture, shaders, objTransform);
@@ -198,6 +199,7 @@ namespace Example
 			characterPosMat = characterPosMat * MatrixMath::TranslationMatrix(VectorMath3(x/4, -y/4, 0));
 			objObject->setTransform(characterPosMat);
 
+			collisionHandler->handleCollisions();
 
 			this->objObject->Draw();
 			this->sphere->Draw();
