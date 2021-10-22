@@ -78,7 +78,7 @@ namespace Example
 			player.setupPlayer(shaders);
 
 			// Create grid
-			tilegrid = new Tilegrid(20, 20, -8, 0.2);
+			tilegrid = new Tilegrid(40, 40, -8, 0.2);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 
 			return true;
@@ -103,8 +103,10 @@ namespace Example
 		float startTime = glfwGetTime();
 		while (this->window->IsOpen())
 		{
-			float deltaTime = startTime - glfwGetTime();
+			float deltaTime = glfwGetTime() - startTime;
 			startTime = glfwGetTime();
+
+			std::cout << 1/deltaTime << std::endl;
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
