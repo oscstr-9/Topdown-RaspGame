@@ -80,6 +80,7 @@ namespace Example
 			// Create grid
 			tilegrid = new Tilegrid(40, 40, -8, 0.2);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
+			collisionHandler = new CollisionHandler();
 
 			return true;
 		}
@@ -126,6 +127,8 @@ namespace Example
 			light.bindLight(shaders, camera.GetPosition());
 			// Set projection-view-matrix
 			shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
+
+			collisionHandler->handleCollisions();
 
 			// Draw to screen
 			player.DrawPlayer();

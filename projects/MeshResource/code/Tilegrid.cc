@@ -40,6 +40,7 @@ void Tilegrid::createGrid(float tileSize)
             }
 
             tiles[y].push_back(tile);
+            tileInPos.insert(std::make_pair(tile.pos, &tile));
         }
     }
     // -------- Add walls around grid --------
@@ -60,6 +61,7 @@ void Tilegrid::createGrid(float tileSize)
                 tile.pos.y = y;
                 tile.type = Type::WALL;
                 tiles[tiles.size() - 1].push_back(tile);
+                tileInPos.insert(std::make_pair(tile.pos, &tile));
             }
         }
         // side borders
@@ -71,17 +73,69 @@ void Tilegrid::createGrid(float tileSize)
             tile.pos.y = y;
             tile.type = Type::WALL;
             tiles[tiles.size() - 1].push_back(tile);
+            tileInPos.insert(std::make_pair(tile.pos, &tile));
 
             tile.size = tileSize;
             tile.pos.x = numOfX;
             tiles[tiles.size() - 1].push_back(tile);
+            tileInPos.insert(std::make_pair(tile.pos, &tile));
         }
     }
     // -------- Grid size --------
     sizeX = numOfX * tiles[0][0].size;
     sizeY = numOfY * tiles[0][0].size;
+    // -------- Add walls to the groundTiles --------
+    for(int y = 0; y < tiles.size(); y++)
+    {
+        for(int x = 0; x < tiles[0].size(); x++)
+        {
+            if(tiles[y][x].type == Type::WALL)
+            {
+                addWallToNeighbors(tiles[y][x]);
+            }
+        }
+    }
 }
 
+void Tilegrid::addWallToNeighbors(Tile wall)
+{
+    Pos upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
+    upLeftPos.x = wall.pos.x - 1;
+    upLeftPos.y = wall.pos.y + 1;
+    upPos.x = wall.pos.x;
+    upPos.y = wall.pos.y + 1;
+    upRightPos.x = wall.pos.x + 1;
+    upRightPos.y = wall.pos.y + 1;
+    leftPos.x = wall.pos.x - 1;
+    leftPos.y = wall.pos.y;
+    rightPos.x = wall.pos.x + 1;
+    rightPos.y = wall.pos.y;
+    downLeftPos.x = wall.pos.x - 1;
+    downLeftPos.y = wall.pos.y - 1;
+    downPos.x = wall.pos.x;
+    downPos.y = wall.pos.y - 1;
+    downRightPos.x = wall.pos.x + 1;
+    downRightPos.y = wall.pos.y - 1;
+
+    // check if pos is on a tile before adding
+    if(upLeftPos.x != -2 && upLeftPos.y != numOfY + 1)
+        tileInPos.at(upLeftPos)->neighborWalls.push_back(wall);
+    if(upPos.y != numOfY + 1)
+        tileInPos.at(upPos)->neighborWalls.push_back(wall);
+    if(upRightPos.x != numOfX + 1 && upRightPos.y != numOfY + 1)
+        tileInPos.at(upRightPos)->neighborWalls.push_back(wall);
+    if(leftPos.x != -2)
+        tileInPos.at(leftPos)->neighborWalls.push_back(wall);
+    if(rightPos.x != numOfX + 1)
+        tileInPos.at(rightPos)->neighborWalls.push_back(wall);
+    if(downLeftPos.x != -2 && downLeftPos.y != -2)
+        tileInPos.at(downLeftPos)->neighborWalls.push_back(wall);
+    if(downPos.y != -2)
+        tileInPos.at(downPos)->neighborWalls.push_back(wall);
+    if(downRightPos.x != numOfX + 1 && downRightPos.y != -2)
+        tileInPos.at(downRightPos)->neighborWalls.push_back(wall);
+
+}
 
 // setup everything so only draw needs to be called during runtime
 // assumes the square and wall are the same size; from -1 to 1 in the obj file

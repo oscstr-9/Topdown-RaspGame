@@ -15,6 +15,8 @@
 
 #include "Player.h"
 #include "Tilegrid.h"
+#include "CollisionHandler.h"
+#include "TestObject.h"
 
 namespace Example
 {
@@ -49,5 +51,7 @@ private:
 	Player player;
 
 	Tilegrid* tilegrid;
+
+	CollisionHandler* collisionHandler;
 };
 } // namespace Example
