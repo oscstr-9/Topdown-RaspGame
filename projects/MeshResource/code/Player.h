@@ -17,7 +17,7 @@ public:
     void DrawPlayer();
 private:
     MatrixMath positionMatrix = Identity();
-    float rotation = 0;
+    MatrixMath rotationMatrix = Identity();
 
     GraphicsNode* playerObject;
 
@@ -25,6 +25,9 @@ private:
     float deadzone = 0.2;
 
     float movementSpeed = 1;
+    float rotAngle = 0;
+    float posX = 0;
+    float posY = 0;
 
     // Controller input values
     float x = 0;
