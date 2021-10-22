@@ -47,5 +47,6 @@ private:
 	Display::Window* window;
 	GraphicsNode* sphere;
 	GraphicsNode* objObject;
+	std::shared_ptr<MeshResource> cube;
 };
 } // namespace Example

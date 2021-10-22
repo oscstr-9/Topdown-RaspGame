@@ -61,11 +61,13 @@ namespace Example
 			});
 		// Adding mouse functionality
 		window->SetMouseMoveFunction([this](double x, double y) {
-			rotMat = RotateMatrix(((height / 2) - y) * -speed, VectorMath3(1, 0, 0))*RotateMatrix(((width/2)-x)*-speed, VectorMath3(0,1,0));
+			rotMat = RotateMatrix(((height / 2) - y) * -speed, VectorMath3(1, 0, 0));//*RotateMatrix(((width/2)-x)*-speed, VectorMath3(0,1,0));
 		});
 		
 		if (this->window->Open())
 		{
+			//rotMat = 1;//RotateMatrix((M_PI/2), VectorMath3(1, 0, 0));
+
 			window->GetSize(width, height);
 
 			// set clear color (Background color)
@@ -90,6 +92,8 @@ namespace Example
 			// Object transforms
 			MatrixMath sphereTransform = Identity();
 			MatrixMath objTransform = Identity() * ScalarMatrix(VectorMath3(0.5, 0.5, 0.5));
+
+			cube = MeshResource::Cube(50);
 
 			// Object graphicnodes
 			sphere = new GraphicsNode(sphereMesh, testTexture, shaders, sphereTransform);
@@ -122,6 +126,7 @@ namespace Example
 
 			posVec = posVec + (VectorMath3((left - right), (down - up), (forward - backward)).NormalizeNew() * 0.08);
 
+
 			lP+=0.01;
 			light.setPos(VectorMath3(cos(lP)*8, 0, -sin(lP)*8));
 			sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(cos(lP)*8, 0, -sin(lP)*8)) * RotateMatrix(lP, VectorMath3(0, 1, 0)) * RotateMatrix(M_PI/2, VectorMath3(0,0,1)) *  ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
@@ -137,6 +142,8 @@ namespace Example
 			sphere->setTransform(MatrixMath::TranslationMatrix(VectorMath3(-sin(lP) * 8, 0, cos(lP) * 8)) * RotateMatrix(-lP-(M_PI/2), VectorMath3(0, 1, 0)) * RotateMatrix(M_PI / 2, VectorMath3(0, 0, 1)) * ScalarMatrix(VectorMath3(0.005, 0.005, 0.005)));
 
 			this->sphere->Draw();
+
+			this->cube->Render();
 			this->window->SwapBuffers();
 		}
 	}
