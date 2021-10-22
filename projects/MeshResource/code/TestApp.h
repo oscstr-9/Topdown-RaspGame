@@ -7,12 +7,13 @@
 */
 //------------------------------------------------------------------------------
 #include "core/app.h"
-#include "render/MESHRESOURCE.h"
+// #include "render/MESHRESOURCE.h"
+// #include "render/GraphicsNode.h"
 #include "render/ShaderResource.h"
 #include "render/window.h"
-#include "render/GraphicsNode.h"
 #include <memory>
 
+#include "Player.h"
 #include "Tilegrid.h"
 
 namespace Example
@@ -33,30 +34,20 @@ private:
 	//screen size
 	int width, height;
 
-	double x;
-	double y;
-
+	bool quit = false;
 	float size = 1;
 	float speed = 0.003;
-	float deadZone = 0.2;
 
-	float up = false;
-	float down = false;
-	float left = false;
-	float right = false;
-	float forward = false;
-	float backward = false;
-
-	MatrixMath rotMat = Identity();
+	MatrixMath camRotMat = MatrixMath::TranslationMatrix(VectorMath3(0, 3, -2)) * RotateMatrix(M_PI/5, VectorMath3(-1, 0, 0));
 	MatrixMath posMat = Identity();
 	MatrixMath characterPosMat = Identity();
-	VectorMath3 posVec = VectorMath3(0, 0, -5);
+	VectorMath3 cameraPos = VectorMath3(0, 0, 0);
 	std::shared_ptr<ShaderResource> shaders;
+	// GraphicsNode* objObject;
 	Display::Window* window;
-	GraphicsNode* sphere;
-	GraphicsNode* objObject;
+
+	Player player;
 
 	Tilegrid* tilegrid;
-	GraphicsNode* cube;
 };
 } // namespace Example
