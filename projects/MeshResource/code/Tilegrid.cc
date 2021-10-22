@@ -30,7 +30,7 @@ void Tilegrid::createGrid(float tileSize)
             srand(time(0) + increment++);
             random = rand()%10;
             // lower number means less chance of becoming ground
-            if(random < 7)
+            if(random < 8)
             {
                 tile.type = Type::GROUND;
             }
@@ -40,7 +40,7 @@ void Tilegrid::createGrid(float tileSize)
             }
 
             tiles[y].push_back(tile);
-            tileInPos.insert(std::make_pair(tile.pos, &tile));
+            tileInPos.insert(std::make_pair(tile.pos, tile));
         }
     }
     // -------- Add walls around grid --------
@@ -61,7 +61,7 @@ void Tilegrid::createGrid(float tileSize)
                 tile.pos.y = y;
                 tile.type = Type::WALL;
                 tiles[tiles.size() - 1].push_back(tile);
-                tileInPos.insert(std::make_pair(tile.pos, &tile));
+                tileInPos.insert(std::make_pair(tile.pos, tile));
             }
         }
         // side borders
@@ -73,25 +73,29 @@ void Tilegrid::createGrid(float tileSize)
             tile.pos.y = y;
             tile.type = Type::WALL;
             tiles[tiles.size() - 1].push_back(tile);
-            tileInPos.insert(std::make_pair(tile.pos, &tile));
+            tileInPos.insert(std::make_pair(tile.pos, tile));
 
             tile.size = tileSize;
             tile.pos.x = numOfX;
             tiles[tiles.size() - 1].push_back(tile);
-            tileInPos.insert(std::make_pair(tile.pos, &tile));
+            tileInPos.insert(std::make_pair(tile.pos, tile));
         }
     }
     // -------- Grid size --------
     sizeX = numOfX * tiles[0][0].size;
     sizeY = numOfY * tiles[0][0].size;
-    // -------- Add walls to the groundTiles --------
+    // -------- Add neighbors to the tiles --------
     for(int y = 0; y < tiles.size(); y++)
     {
-        for(int x = 0; x < tiles[0].size(); x++)
+        for(int x = 0; x < tiles[y].size(); x++)
         {
             if(tiles[y][x].type == Type::WALL)
             {
                 addWallToNeighbors(tiles[y][x]);
+            }
+            else
+            {
+                addGroundToNeighbors(tiles[y][x]);
             }
         }
     }
@@ -119,21 +123,60 @@ void Tilegrid::addWallToNeighbors(Tile wall)
 
     // check if pos is on a tile before adding
     if(upLeftPos.x != -2 && upLeftPos.y != numOfY + 1)
-        tileInPos.at(upLeftPos)->neighborWalls.push_back(wall);
+        tileInPos.at(upLeftPos).neighborWalls.push_back(wall);
     if(upPos.y != numOfY + 1)
-        tileInPos.at(upPos)->neighborWalls.push_back(wall);
+        tileInPos.at(upPos).neighborWalls.push_back(wall);
     if(upRightPos.x != numOfX + 1 && upRightPos.y != numOfY + 1)
-        tileInPos.at(upRightPos)->neighborWalls.push_back(wall);
+        tileInPos.at(upRightPos).neighborWalls.push_back(wall);
     if(leftPos.x != -2)
-        tileInPos.at(leftPos)->neighborWalls.push_back(wall);
+        tileInPos.at(leftPos).neighborWalls.push_back(wall);
     if(rightPos.x != numOfX + 1)
-        tileInPos.at(rightPos)->neighborWalls.push_back(wall);
+        tileInPos.at(rightPos).neighborWalls.push_back(wall);
     if(downLeftPos.x != -2 && downLeftPos.y != -2)
-        tileInPos.at(downLeftPos)->neighborWalls.push_back(wall);
+        tileInPos.at(downLeftPos).neighborWalls.push_back(wall);
     if(downPos.y != -2)
-        tileInPos.at(downPos)->neighborWalls.push_back(wall);
+        tileInPos.at(downPos).neighborWalls.push_back(wall);
     if(downRightPos.x != numOfX + 1 && downRightPos.y != -2)
-        tileInPos.at(downRightPos)->neighborWalls.push_back(wall);
+        tileInPos.at(downRightPos).neighborWalls.push_back(wall);
+
+}
+void Tilegrid::addGroundToNeighbors(Tile ground)
+{
+    Pos upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
+    upLeftPos.x = ground.pos.x - 1;
+    upLeftPos.y = ground.pos.y + 1;
+    upPos.x = ground.pos.x;
+    upPos.y = ground.pos.y + 1;
+    upRightPos.x = ground.pos.x + 1;
+    upRightPos.y = ground.pos.y + 1;
+    leftPos.x = ground.pos.x - 1;
+    leftPos.y = ground.pos.y;
+    rightPos.x = ground.pos.x + 1;
+    rightPos.y = ground.pos.y;
+    downLeftPos.x = ground.pos.x - 1;
+    downLeftPos.y = ground.pos.y - 1;
+    downPos.x = ground.pos.x;
+    downPos.y = ground.pos.y - 1;
+    downRightPos.x = ground.pos.x + 1;
+    downRightPos.y = ground.pos.y - 1;
+
+    // check if pos is on a tile before adding
+    if(upLeftPos.x != -2 && upLeftPos.y != numOfY + 1)
+        tileInPos.at(upLeftPos).neighborGround.push_back(ground);
+    if(upPos.y != numOfY + 1)
+        tileInPos.at(upPos).neighborGround.push_back(ground);
+    if(upRightPos.x != numOfX + 1 && upRightPos.y != numOfY + 1)
+        tileInPos.at(upRightPos).neighborGround.push_back(ground);
+    if(leftPos.x != -2)
+        tileInPos.at(leftPos).neighborGround.push_back(ground);
+    if(rightPos.x != numOfX + 1)
+        tileInPos.at(rightPos).neighborGround.push_back(ground);
+    if(downLeftPos.x != -2 && downLeftPos.y != -2)
+        tileInPos.at(downLeftPos).neighborGround.push_back(ground);
+    if(downPos.y != -2)
+        tileInPos.at(downPos).neighborGround.push_back(ground);
+    if(downRightPos.x != numOfX + 1 && downRightPos.y != -2)
+        tileInPos.at(downRightPos).neighborGround.push_back(ground);
 
 }
 

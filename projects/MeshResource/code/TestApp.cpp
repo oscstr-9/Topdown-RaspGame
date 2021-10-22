@@ -21,6 +21,86 @@ namespace Example
 	ExampleApp::~ExampleApp()
 	{/*so cool*/}
 
+	void ExampleApp::spawnTestObject()
+	{
+		TestObject testObject;
+		testObject.pos.x = 0;
+		testObject.pos.y = 0;
+		testObject.size = 0.2;
+		testObject.ID = 1;
+		testObjects.push_back(testObject);
+
+		// gör detta för varje objekt, varje frame
+		tilegrid->tileInPos.at(testObject.pos).testObjects.push_back(&testObject);
+		collisionHandler->tilesToUpdate.push_back(&tilegrid->tileInPos.at(testObject.pos));
+		
+		
+	}
+	void ExampleApp::moveTestObjects()
+	{
+		// move it upwards every frame
+		int x = testObjects[0].pos.x;
+		int y = testObjects[0].pos.y;
+		Pos previousPos;
+		previousPos.x = x;
+		previousPos.y = y;
+		testObjects[0].pos.y += 0.05;
+
+		// check if its pos is inside the tile for previous pos
+		Tile* previousTile = &tilegrid->tileInPos.at(previousPos);
+		// TODO: är denna collision test som spökar
+		if(collisionHandler->pointInsideTile(testObjects[0].pos, previousTile->pos, previousTile->size))
+		{
+			// object is still inside its previous tile, no need to move it to another tile
+		}
+		else
+		{
+			// -------- Find neighbor tile to move to and move it --------
+			bool hasFoundnewTile = false;
+			for(int i = 0; i < previousTile->neighborGround.size(); i++)
+			{
+				Tile* groundTile = &previousTile->neighborGround[i];
+				if(collisionHandler->AABBCollision(testObjects[0].pos, 0, groundTile->pos, groundTile->size))
+				{
+					// object is inside this tile
+					hasFoundnewTile = true;
+					// remove from previous tile
+					// find testObject in tile to erase
+					for(int j = 0; j < previousTile->testObjects.size(); j++)
+					{
+						if(testObjects[0].ID = previousTile->testObjects[j]->ID)
+						{
+							// found. erase from this vector
+							previousTile->testObjects.erase(previousTile->testObjects.begin() + j);
+						}
+					}
+					// move to this one and end search
+					groundTile->testObjects.push_back(&testObjects[0]);
+					bool isRegistered = false;
+					for(int j = 0; j < collisionHandler->tilesToUpdate.size(); j++)
+					{
+						if(collisionHandler->tilesToUpdate[j]->pos == groundTile->pos)
+						{
+							// is the same, don't need to register this tile in the collisionHandler
+							isRegistered = true;
+							continue;
+						}
+					}
+					if(!isRegistered)
+					{
+						collisionHandler->tilesToUpdate.push_back(groundTile);
+						std::cout << "TestObject has moves" << std::endl;
+					}
+				}
+			}
+			// next tile is a wall, keep this object in this tile
+			if(!hasFoundnewTile)
+			{
+				testObjects[0].pos.y -= 0.05;
+			}
+		}
+	}
+
 	bool ExampleApp::Open()
 	{
 		App::Open();
@@ -81,6 +161,7 @@ namespace Example
 			tilegrid = new Tilegrid(20, 20, -8, 0.2);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
+			spawnTestObject();
 
 			return true;
 		}
@@ -126,6 +207,7 @@ namespace Example
 			// Set projection-view-matrix
 			shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
 
+			moveTestObjects();
 			collisionHandler->handleCollisions();
 
 			// Draw to screen
