@@ -1,3 +1,5 @@
+#pragma once
+
 #include "MESHRESOURCE.h"
 #include "TextureResource.h"
 #include "ShaderResource.h"
@@ -12,6 +14,7 @@ class GraphicsNode
     MatrixMath transform;
 
 public:
+    GraphicsNode();
 	GraphicsNode(std::shared_ptr <MeshResource> meshIn, std::shared_ptr <TextureResource> textureIn, std::shared_ptr <ShaderResource> shaderIn, MatrixMath transformIn);
 	~GraphicsNode();
 
