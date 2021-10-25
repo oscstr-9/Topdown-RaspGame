@@ -30,8 +30,7 @@ public:
 	/// open app
 	bool Open();
 	void ControllerInputs();
-	void spawnTestObject();
-	void moveTestObjects();
+	void spawnTestObject(int id);
 	/// run app
 	void Run();
 private:
@@ -54,6 +53,6 @@ private:
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;
-	std::vector<TestObject> testObjects;
+	std::vector<TestObject*> testObjects;
 };
 } // namespace Example
