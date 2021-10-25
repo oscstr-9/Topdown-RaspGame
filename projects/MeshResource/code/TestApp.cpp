@@ -118,7 +118,7 @@ namespace Example
 			// case GLFW_KEY_LEFT:
 			// 	left = action;
 			// 	break;
-			// case GLFW_KEY_S:
+			// case GLFW_KEY_S:square
 			// case GLFW_KEY_DOWN:
 			// 	backward = action;
 			// 	break;
@@ -184,6 +184,8 @@ namespace Example
 
 		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");
 
+		enemy.SetupEnemy(shaders);
+
 		float startTime = glfwGetTime();
 		while (this->window->IsOpen())
 		{
@@ -216,6 +218,7 @@ namespace Example
 
 			// Draw to screen
 			player.DrawPlayer();
+			enemy.DrawEnemy();
 			tilegrid->Draw();
 
 			this->window->SwapBuffers();

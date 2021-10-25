@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "Player.h"
+#include "Enemy.h"
 #include "Tilegrid.h"
 #include "CollisionHandler.h"
 #include "TestObject.h"
@@ -51,6 +52,8 @@ private:
 	Display::Window* window;
 
 	Player player;
+	Enemy enemy;
+
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;

@@ -30,7 +30,7 @@ void Tilegrid::createGrid(float tileSize)
             srand(time(0) + increment++);
             random = rand()%10;
             // lower number means less chance of becoming ground
-            if(random < 8)
+            if(random < 9)
             {
                 tile.type = Type::GROUND;
             }
