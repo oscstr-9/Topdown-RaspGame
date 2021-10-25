@@ -4,6 +4,10 @@ struct Pos
 {
     float x, y;
 
+    void operator=(const Pos pos) {
+        x = pos.x;
+        y = pos.y;
+    }
     bool operator==(const Pos& pos) const {
         if(pos.x == x && pos.y == y)
             return true;
@@ -25,5 +29,6 @@ class TestObject {
 public:
     int ID;
     Pos pos;
+    Pos previousPos;
     float size;
 };
