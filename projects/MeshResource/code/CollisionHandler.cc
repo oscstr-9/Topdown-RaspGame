@@ -37,10 +37,10 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
 }
 bool CollisionHandler::AABBCollision(Pos pos1, float size1, Pos pos2, float size2)
 {
-    pos2.x = pos2.x * size2;
-    pos2.y = pos2.y * size2;
-    if(pos1.x + size1 > pos2.x && pos2.x + size2 > pos1.x &&
-       pos1.y + size1 > pos2.y && pos2.y + size2 > pos1.y)
+    //pos2.posVar = 2 * size2;
+    
+    if(pos1.posVar.x + size1 > pos2.posVar.x && pos2.posVar.x + size2 > pos1.posVar.x &&
+       pos1.posVar.y + size1 > pos2.posVar.y && pos2.posVar.y + size2 > pos1.posVar.y)
     {
         return true;
     }
@@ -50,16 +50,17 @@ bool CollisionHandler::AABBCollision(Pos pos1, float size1, Pos pos2, float size
 bool CollisionHandler::pointInsideTile(Pos pointPos, Pos tilePos, float tileSize)
 {
     // add all points necessary before doing the math/comparisons
-    tilePos.x = tilePos.x * tileSize;
-    tilePos.y = tilePos.y * tileSize;
+    tilePos.posVar = tilePos.posVar * tileSize;
+    // tilePos.x = tilePos.x * tileSize;
+    // tilePos.y = tilePos.y * tileSize;
     float bottomLeftX, bottomLeftY, topRightX, topRightY;
-    bottomLeftX = tilePos.x - tileSize/2;
-    bottomLeftY = tilePos.y - tileSize/2;
-    topRightX = tilePos.x + tileSize/2;
-    topRightY = tilePos.y + tileSize/2;
+    bottomLeftX = tilePos.posVar.x - tileSize/2;
+    bottomLeftY = tilePos.posVar.y - tileSize/2;
+    topRightX = tilePos.posVar.x + tileSize/2;
+    topRightY = tilePos.posVar.y + tileSize/2;
 
-    if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
-        pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
+    if(pointPos.posVar.x >= bottomLeftX && pointPos.posVar.x <= topRightX && 
+        pointPos.posVar.y >= bottomLeftY && pointPos.posVar.y <= topRightY)
     {
         // point is inside tile
         return true;

@@ -2,6 +2,7 @@
 #include "core/VectorMath.h"
 #include "core/MatrixMath.h"
 #include "render/GraphicsNode.h"
+#include "GameObject.h"
 #include <memory>
 
 #include "GameObject.h"
@@ -14,7 +15,7 @@ public:
     ~Player();
     void setupPlayer(std::shared_ptr<ShaderResource> shaders);
     bool ControllerInputs(float deltaTime, VectorMath3 &cameraPos);
-    MatrixMath GetPos();
+    VectorMath2 GetPos();
     void setRenderPos();
     void DrawPlayer();
 private:
@@ -24,7 +25,7 @@ private:
     GraphicsNode* playerObject;
 
     // Joystick deadzone
-    float deadzone = 0.2;
+    float deadzone = 0.04;
 
     float movementSpeed = 1;
     float rotAngle = 0;

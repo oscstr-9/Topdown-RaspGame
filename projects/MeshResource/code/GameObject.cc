@@ -6,6 +6,10 @@ Pos::Pos()
 
 Pos::Pos(float x, float y)
 {
-    this->x = x;
-    this->y = y;
+    VectorMath2 posIn = VectorMath2(x,y);
+    this->posVar = posIn;
+}
+
+Pos::Pos(VectorMath2 posIn){
+    this->posVar = posIn;
 }

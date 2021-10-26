@@ -43,8 +43,8 @@ namespace Example
 		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
 		float posY = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
 		// add on tilePos
-		posX += tilePos.x * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
-		posY += tilePos.y * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		posX += tilePos.posVar.x * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		posY += tilePos.posVar.y * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
 
 		return Pos(posX, posY);
 	}
@@ -106,7 +106,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(40, 40, -8, 0.2);
+			tilegrid = new Tilegrid(100, 100, -8, 0.4);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
@@ -134,7 +134,7 @@ namespace Example
 
 		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");
 
-		enemy.SetupEnemy(shaders);
+		Enemy enemy = Enemy(shaders, VectorMath2(0,0));
 
 		float startTime = glfwGetTime();
 		while (this->window->IsOpen())
@@ -142,7 +142,7 @@ namespace Example
 			float deltaTime = glfwGetTime() - startTime;
 			startTime = glfwGetTime();
 
-			std::cout << 1/deltaTime << std::endl;
+			//std::cout << 1/deltaTime << std::endl;
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
@@ -166,6 +166,7 @@ namespace Example
 			// After all input and GameObject updates are done, handle collision
 			collisionHandler->handleCollisions(tilegrid);
 
+			enemy.MoveToPoint(player.GetPos(), deltaTime);
 			// Draw to screen
 			player.DrawPlayer();
 			enemy.DrawEnemy();

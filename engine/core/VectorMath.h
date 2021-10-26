@@ -21,6 +21,9 @@ struct VectorMath2
 	VectorMath2 operator+(VectorMath2 vectorA);
 	VectorMath2 operator-(VectorMath2 vectorA);
 	VectorMath2 operator*(float multiplier);
+	bool operator== (VectorMath2 vectorA);
+	bool operator< (VectorMath2 vectorA);
+	bool operator> (VectorMath2 vectorA);
 	float Length();
 	void Normalize();
 	VectorMath2 NormalizeNew();
@@ -80,6 +83,33 @@ inline VectorMath2 VectorMath2::operator*(float multiplier) {
 		temp[i] = coords[i] * multiplier;
 	}
 	return temp;
+}
+
+inline bool VectorMath2::operator==(const VectorMath2 vectorA) {
+        if(vectorA.x == x && vectorA.y == y)
+            return true;
+
+        return false;
+}
+
+inline bool VectorMath2::operator<(const VectorMath2 vectorA) {
+        if(x < vectorA.x) return true;
+        if(x > vectorA.x) return false;
+        //x == coord.x
+        if(y < vectorA.y) return true;
+        if(y > vectorA.y) return false;
+
+        return false;
+}
+
+inline bool VectorMath2::operator>(const VectorMath2 vectorA) {
+        if(x > vectorA.x) return true;
+        if(x < vectorA.x) return false;
+        //x == coord.x
+        if(y > vectorA.y) return true;
+        if(y < vectorA.y) return false;
+
+        return false;
 }
 
 // calculates and returns the length of a vector
@@ -144,6 +174,7 @@ struct VectorMath3
 	};
 
 	VectorMath3(float xIn, float yIn, float zIn);
+	VectorMath3(VectorMath2, float zIn);
 	VectorMath3();
 	float& operator[](int index);
 	float operator[](int index)const;
@@ -163,6 +194,12 @@ inline VectorMath3::VectorMath3(float xIn, float yIn, float zIn)
 {
 	x = xIn;
 	y = yIn;
+	z = zIn;
+}
+
+inline VectorMath3::VectorMath3(VectorMath2 xyIn, float zIn){
+	x = xyIn.x;
+	y = xyIn.y;
 	z = zIn;
 }
 

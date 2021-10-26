@@ -43,17 +43,15 @@ private:
 	float speed = 0.003;
 	int spawnID = 1;
 
-	MatrixMath camRotMat = MatrixMath::TranslationMatrix(VectorMath3(0, 3, -2)) * RotateMatrix(M_PI/5, VectorMath3(-1, 0, 0));
+	MatrixMath camRotMat = RotateMatrix(M_PI/4, VectorMath3(-1, 0, 0));
+	VectorMath3 cameraPos = VectorMath3(0, 4, 2);
 	MatrixMath posMat = Identity();
 	MatrixMath characterPosMat = Identity();
-	VectorMath3 cameraPos = VectorMath3(0, 3, 0);
 	std::shared_ptr<ShaderResource> shaders;
 	// GraphicsNode* objObject;
 	Display::Window* window;
 
 	Player player;
-	Enemy enemy;
-
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;

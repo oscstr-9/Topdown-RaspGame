@@ -23,8 +23,8 @@ void Tilegrid::createGrid(float tileSize)
             // create new tile to add to this row of tiles
             Tile tile;
             tile.size = tileSize;
-            tile.pos.x = x;
-            tile.pos.y = y;
+            tile.pos.posVar.x = x;
+            tile.pos.posVar.y = y;
 
             // make the tile ground or wall
             srand(time(0) + increment++);
@@ -57,8 +57,8 @@ void Tilegrid::createGrid(float tileSize)
                 // create new tile to add to this row of tiles
                 Tile tile;
                 tile.size = tileSize;
-                tile.pos.x = x;
-                tile.pos.y = y;
+                tile.pos.posVar.x = x;
+                tile.pos.posVar.y = y;
                 tile.type = Type::WALL;
                 tiles[tiles.size() - 1].push_back(tile);
                 tileInPos.insert(std::make_pair(tile.pos, tile));
@@ -69,22 +69,22 @@ void Tilegrid::createGrid(float tileSize)
         {
             Tile tile;
             tile.size = tileSize;
-            tile.pos.x = -1;
-            tile.pos.y = y;
+            tile.pos.posVar.x = -1;
+            tile.pos.posVar.y = y;
             tile.type = Type::WALL;
             tiles[tiles.size() - 1].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
 
             tile.size = tileSize;
-            tile.pos.x = numOfX;
+            tile.pos.posVar.x = numOfX;
             tiles[tiles.size() - 1].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
         }
     }
     // -------- Grid size --------
     Pos pos;
-    pos.x = 0;
-    pos.y = 0;
+    pos.posVar.x = 0;
+    pos.posVar.y = 0;
     sizeX = numOfX * tileInPos.at(pos).size;
     sizeY = numOfY * tileInPos.at(pos).size;
     // -------- Add neighbors to the tiles --------
@@ -92,8 +92,8 @@ void Tilegrid::createGrid(float tileSize)
     {
         for(int x = 0; x < numOfX; x++)
         {
-            pos.y = y;
-            pos.x = x;
+            pos.posVar.y = y;
+            pos.posVar.x = x;
             if(tileInPos.at(pos).type == Type::WALL)
             {
                 addWallToNeighbors(tiles[y][x]);
@@ -109,78 +109,78 @@ void Tilegrid::createGrid(float tileSize)
 void Tilegrid::addWallToNeighbors(Tile wall)
 {
     Pos upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
-    upLeftPos.x = wall.pos.x - 1;
-    upLeftPos.y = wall.pos.y + 1;
-    upPos.x = wall.pos.x;
-    upPos.y = wall.pos.y + 1;
-    upRightPos.x = wall.pos.x + 1;
-    upRightPos.y = wall.pos.y + 1;
-    leftPos.x = wall.pos.x - 1;
-    leftPos.y = wall.pos.y;
-    rightPos.x = wall.pos.x + 1;
-    rightPos.y = wall.pos.y;
-    downLeftPos.x = wall.pos.x - 1;
-    downLeftPos.y = wall.pos.y - 1;
-    downPos.x = wall.pos.x;
-    downPos.y = wall.pos.y - 1;
-    downRightPos.x = wall.pos.x + 1;
-    downRightPos.y = wall.pos.y - 1;
+    upLeftPos.posVar.x = wall.pos.posVar.x - 1;
+    upLeftPos.posVar.y = wall.pos.posVar.y + 1;
+    upPos.posVar.x = wall.pos.posVar.x;
+    upPos.posVar.y = wall.pos.posVar.y + 1;
+    upRightPos.posVar.x = wall.pos.posVar.x + 1;
+    upRightPos.posVar.y = wall.pos.posVar.y + 1;
+    leftPos.posVar.x = wall.pos.posVar.x - 1;
+    leftPos.posVar.y = wall.pos.posVar.y;
+    rightPos.posVar.x = wall.pos.posVar.x + 1;
+    rightPos.posVar.y = wall.pos.posVar.y;
+    downLeftPos.posVar.x = wall.pos.posVar.x - 1;
+    downLeftPos.posVar.y = wall.pos.posVar.y - 1;
+    downPos.posVar.x = wall.pos.posVar.x;
+    downPos.posVar.y = wall.pos.posVar.y - 1;
+    downRightPos.posVar.x = wall.pos.posVar.x + 1;
+    downRightPos.posVar.y = wall.pos.posVar.y - 1;
 
     // check if pos is on a tile before adding
-    if(upLeftPos.x != -2 && upLeftPos.y != numOfY + 1)
+    if(upLeftPos.posVar.x != -2 && upLeftPos.posVar.y != numOfY + 1)
         tileInPos.at(upLeftPos).neighborWalls.push_back(wall);
-    if(upPos.y != numOfY + 1)
+    if(upPos.posVar.y != numOfY + 1)
         tileInPos.at(upPos).neighborWalls.push_back(wall);
-    if(upRightPos.x != numOfX + 1 && upRightPos.y != numOfY + 1)
+    if(upRightPos.posVar.x != numOfX + 1 && upRightPos.posVar.y != numOfY + 1)
         tileInPos.at(upRightPos).neighborWalls.push_back(wall);
-    if(leftPos.x != -2)
+    if(leftPos.posVar.x != -2)
         tileInPos.at(leftPos).neighborWalls.push_back(wall);
-    if(rightPos.x != numOfX + 1)
+    if(rightPos.posVar.x != numOfX + 1)
         tileInPos.at(rightPos).neighborWalls.push_back(wall);
-    if(downLeftPos.x != -2 && downLeftPos.y != -2)
+    if(downLeftPos.posVar.x != -2 && downLeftPos.posVar.y != -2)
         tileInPos.at(downLeftPos).neighborWalls.push_back(wall);
-    if(downPos.y != -2)
+    if(downPos.posVar.y != -2)
         tileInPos.at(downPos).neighborWalls.push_back(wall);
-    if(downRightPos.x != numOfX + 1 && downRightPos.y != -2)
+    if(downRightPos.posVar.x != numOfX + 1 && downRightPos.posVar.y != -2)
         tileInPos.at(downRightPos).neighborWalls.push_back(wall);
 
 }
 void Tilegrid::addGroundToNeighbors(Tile ground)
 {
     Pos upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
-    upLeftPos.x = ground.pos.x - 1;
-    upLeftPos.y = ground.pos.y + 1;
-    upPos.x = ground.pos.x;
-    upPos.y = ground.pos.y + 1;
-    upRightPos.x = ground.pos.x + 1;
-    upRightPos.y = ground.pos.y + 1;
-    leftPos.x = ground.pos.x - 1;
-    leftPos.y = ground.pos.y;
-    rightPos.x = ground.pos.x + 1;
-    rightPos.y = ground.pos.y;
-    downLeftPos.x = ground.pos.x - 1;
-    downLeftPos.y = ground.pos.y - 1;
-    downPos.x = ground.pos.x;
-    downPos.y = ground.pos.y - 1;
-    downRightPos.x = ground.pos.x + 1;
-    downRightPos.y = ground.pos.y - 1;
+    upLeftPos.posVar.x = ground.pos.posVar.x - 1;
+    upLeftPos.posVar.y = ground.pos.posVar.y + 1;
+    upPos.posVar.x = ground.pos.posVar.x;
+    upPos.posVar.y = ground.pos.posVar.y + 1;
+    upRightPos.posVar.x = ground.pos.posVar.x + 1;
+    upRightPos.posVar.y = ground.pos.posVar.y + 1;
+    leftPos.posVar.x = ground.pos.posVar.x - 1;
+    leftPos.posVar.y = ground.pos.posVar.y;
+    rightPos.posVar.x = ground.pos.posVar.x + 1;
+    rightPos.posVar.y = ground.pos.posVar.y;
+    downLeftPos.posVar.x = ground.pos.posVar.x - 1;
+    downLeftPos.posVar.y = ground.pos.posVar.y - 1;
+    downPos.posVar.x = ground.pos.posVar.x;
+    downPos.posVar.y = ground.pos.posVar.y - 1;
+    downRightPos.posVar.x = ground.pos.posVar.x + 1;
+    downRightPos.posVar.y = ground.pos.posVar.y - 1;
 
     // check if pos is on a tile before adding
-    if(upLeftPos.x != -2 && upLeftPos.y != numOfY + 1)
+    if(upLeftPos.posVar.x != -2 && upLeftPos.posVar.y != numOfY + 1)
         tileInPos.at(upLeftPos).neighborGround.push_back(ground);
-    if(upPos.y != numOfY + 1)
+    if(upPos.posVar.y != numOfY + 1)
         tileInPos.at(upPos).neighborGround.push_back(ground);
-    if(upRightPos.x != numOfX + 1 && upRightPos.y != numOfY + 1)
+    if(upRightPos.posVar.x != numOfX + 1 && upRightPos.posVar.y != numOfY + 1)
         tileInPos.at(upRightPos).neighborGround.push_back(ground);
-    if(leftPos.x != -2)
+    if(leftPos.posVar.x != -2)
         tileInPos.at(leftPos).neighborGround.push_back(ground);
-    if(rightPos.x != numOfX + 1)
+    if(rightPos.posVar.x != numOfX + 1)
         tileInPos.at(rightPos).neighborGround.push_back(ground);
-    if(downLeftPos.x != -2 && downLeftPos.y != -2)
+    if(downLeftPos.posVar.x != -2 && downLeftPos.posVar.y != -2)
         tileInPos.at(downLeftPos).neighborGround.push_back(ground);
-    if(downPos.y != -2)
+    if(downPos.posVar.y != -2)
         tileInPos.at(downPos).neighborGround.push_back(ground);
-    if(downRightPos.x != numOfX + 1 && downRightPos.y != -2)
+    if(downRightPos.posVar.x != numOfX + 1 && downRightPos.posVar.y != -2)
         tileInPos.at(downRightPos).neighborGround.push_back(ground);
 
 }
@@ -205,8 +205,8 @@ void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders, bool show
         for(int x = 0; x < numOfX; x++)
         {
             Pos pos;
-            pos.y = y;
-            pos.x = x;
+            pos.posVar.y = y;
+            pos.posVar.x = x;
             if(tileInPos.at(pos).type == Type::WALL)
             {
                 MatrixMath transform = Identity(); // wall transform is set in placeWalls()
@@ -228,8 +228,8 @@ void Tilegrid::createBorderGraphics(std::shared_ptr<ShaderResource> shaders)
     std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("cube");
 
     Pos pos;
-    pos.x = 0;
-    pos.y = 0;
+    pos.posVar.x = 0;
+    pos.posVar.y = 0;
     float wallPosX = -(numOfX + 1) * tileInPos.at(pos).size;
     float wallPosY = -(numOfY + 1) * tileInPos.at(pos).size;
 
@@ -271,8 +271,8 @@ void Tilegrid::createBorderGraphics(std::shared_ptr<ShaderResource> shaders)
 void Tilegrid::placeWalls()
 {
     Pos pos;
-    pos.x = 0;
-    pos.y = 0;
+    pos.posVar.x = 0;
+    pos.posVar.y = 0;
     float wallPosX = -(numOfX - 1) * tileInPos.at(pos).size;
     float wallPosY = -(numOfY - 1) * tileInPos.at(pos).size;
     int wallInt = 0;
@@ -281,8 +281,8 @@ void Tilegrid::placeWalls()
         wallPosX = -(numOfX - 1) * tileInPos.at(pos).size;
         for(int x = 0; x < numOfX; x++)
         {
-            pos.y = y;
-            pos.x = x;
+            pos.posVar.y = y;
+            pos.posVar.x = x;
             if(tileInPos.at(pos).type == Type::WALL)
             {
                 MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + 0.3)) * 

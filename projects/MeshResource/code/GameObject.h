@@ -1,28 +1,29 @@
 #pragma once
+#include "core/VectorMath.h"
 
 struct Pos
 {
-    float x, y;
+    VectorMath2 posVar;
 
     Pos();
     Pos(float x, float y);
+    Pos(VectorMath2);
 
-    void operator=(const Pos pos) {
-        x = pos.x;
-        y = pos.y;
+    void operator=(Pos posIn){
+        posVar = posIn.posVar;
     }
-    bool operator==(const Pos& pos) const {
-        if(pos.x == x && pos.y == y)
+    bool operator==(const Pos& posIn){
+        if(posVar == posIn.posVar)
             return true;
 
         return false;
     }
-    bool operator<(const Pos& pos) const {
-        if(x < pos.x) return true;
-        if(x > pos.x) return false;
+    bool operator<(const Pos& posIn) const {
+        if(posVar.x < posIn.posVar.x) return true;
+        if(posVar.x > posIn.posVar.x) return false;
         //x == coord.x
-        if(y < pos.y) return true;
-        if(y > pos.y) return false;
+        if(posVar.y < posIn.posVar.y) return true;
+        if(posVar.y > posIn.posVar.y) return false;
 
         return false;
     }
