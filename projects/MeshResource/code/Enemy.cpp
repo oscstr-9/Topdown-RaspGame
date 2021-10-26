@@ -14,9 +14,15 @@ void Enemy::SetupEnemy(std::shared_ptr<ShaderResource> shaders){
     std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("moon2");
     // Object transform
     MatrixMath rotationCorrectionMatrix = RotateMatrix(M_PI, VectorMath3(0,0,1))  * RotateMatrix(M_PI/2, VectorMath3(0,-1,0));
-    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(0, 0,-6.8)) * ScalarMatrix(VectorMath3(0.001, 0.001, 0.001)) * rotationCorrectionMatrix;
+    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(posX, posY,-6.8)) * ScalarMatrix(VectorMath3(0.001, 0.001, 0.001)) * rotationCorrectionMatrix;
     // Object graphicnodes
     enemyObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
+}
+
+void Enemy::setRenderPos()
+{
+    posX = pos.x;
+    posY = pos.y;
 }
 
 void Enemy::DrawEnemy(){

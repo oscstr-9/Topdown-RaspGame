@@ -100,11 +100,13 @@ bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
     }
     
     rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
+    posX = pos.x;
+    posY = pos.y;
     positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(posX, posY, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
     //positionMatrix = MatrixMath::TranslationMatrix((VectorMath3(-right, forward, 0) )) * positionMatrix * rotationMatrix;
     playerObject->setTransform(positionMatrix);
-    cameraPos = VectorMath3(cameraPos.x-right*deltatTime*movementSpeed, cameraPos.y+forward*deltatTime*movementSpeed, cameraPos.z);
+    cameraPos = VectorMath3(-posX, -posY + 0.5, cameraPos.z);
     return quit;
 }
 
@@ -115,8 +117,8 @@ MatrixMath Player::GetPos(){
 // convert from graphics pos to grid pos
 void Player::setRenderPos()
 {
-    posX = pos.x;
-    posY = pos.y;
+    // posX = pos.x;
+    // posY = pos.y;
 }
 
 void Player::DrawPlayer(){

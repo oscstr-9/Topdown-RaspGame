@@ -13,11 +13,13 @@ void Tilegrid::createGrid(float tileSize)
     // -------- Tiles --------
     int random;
     int increment = 0;
+    float posY = -(numOfY - 1) * tileSize;
     for(int y = 0; y < numOfY; y++)
     {
         // create new empty row for storing tiles
         std::vector<Tile> tileRow;
         tiles.push_back(tileRow);
+        float posX = -(numOfX - 1) * tileSize;
         for(int x = 0; x < numOfX; x++)
         {
             // create new tile to add to this row of tiles
@@ -25,12 +27,13 @@ void Tilegrid::createGrid(float tileSize)
             tile.size = tileSize;
             tile.pos.x = x;
             tile.pos.y = y;
+            tile.worldPos = Pos(posX, posY);
 
             // make the tile ground or wall
             srand(time(0) + increment++);
             random = rand()%10;
             // lower number means less chance of becoming ground
-            if(random < 9)
+            if(random < 8)
             {
                 tile.type = Type::GROUND;
             }
@@ -39,16 +42,28 @@ void Tilegrid::createGrid(float tileSize)
                 tile.type = Type::WALL;
             }
 
+            // -------- testing --------
+            // if(x == 0 && y == 37)
+            // {
+            //     tile.type = Type::WALL;
+            // }
+            // --------
+
             tiles[y].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
+
+            posX += 2 * tileSize;
         }
+        posY += 2 * tileSize;
     }
     // -------- Add walls around grid --------
+    posY = -(numOfY + 1) * tileSize;
     for(int y = -1; y < numOfY + 1; y++)
     {
         // create new empty row for storing tiles
         std::vector<Tile> tileRow;
         tiles.push_back(tileRow);
+        float posX = -(numOfX + 1) * tileSize;
         // bottom and top border
         if(y == -1 || y == numOfY)
         {
@@ -59,44 +74,60 @@ void Tilegrid::createGrid(float tileSize)
                 tile.size = tileSize;
                 tile.pos.x = x;
                 tile.pos.y = y;
+                // add on tilePos
+                if(y == numOfY)
+                {
+                    posY = (numOfY + 1) * tileSize;
+                }
+                tile.worldPos = Pos(posX, posY);
                 tile.type = Type::WALL;
                 tiles[tiles.size() - 1].push_back(tile);
                 tileInPos.insert(std::make_pair(tile.pos, tile));
+                posX += 2 * tileSize;
             }
+            posY += 2 * tileSize;
         }
         // side borders
         else
         {
+            // left
             Tile tile;
             tile.size = tileSize;
             tile.pos.x = -1;
             tile.pos.y = y;
+            posX = -(numOfX + 1) * tileSize;
+            tile.worldPos = Pos(posX, posY);
             tile.type = Type::WALL;
             tiles[tiles.size() - 1].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
 
+            // right
             tile.size = tileSize;
             tile.pos.x = numOfX;
+            posX = -(numOfX - 1) * tileSize;
+            posX += tile.pos.x * 2 * tileSize;
+            tile.worldPos.x = posX;
             tiles[tiles.size() - 1].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
+
+            posY += 2 * tileSize;
         }
     }
     // -------- Grid size --------
-    Pos pos;
-    pos.x = 0;
-    pos.y = 0;
+    Pos pos(0, 0);
     sizeX = numOfX * tileInPos.at(pos).size;
     sizeY = numOfY * tileInPos.at(pos).size;
     // -------- Add neighbors to the tiles --------
-    for(int y = 0; y < numOfY; y++)
+    for(int y = 0; y < tiles.size(); y++)
     {
-        for(int x = 0; x < numOfX; x++)
+        for(int x = 0; x < tiles[y].size(); x++)
         {
-            pos.y = y;
-            pos.x = x;
-            if(tileInPos.at(pos).type == Type::WALL)
+            if(tiles[y][x].type == Type::WALL)
             {
-                addWallToNeighbors(tiles[y][x]);
+                if(x == 0 && y == 37)
+                    addWallToNeighbors(tiles[y][x]);
+                else
+                    addWallToNeighbors(tiles[y][x]);
             }
             else
             {
@@ -257,9 +288,9 @@ void Tilegrid::createBorderGraphics(std::shared_ptr<ShaderResource> shaders)
             MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
                     ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
             wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-            wallPosX += 2 * tileInPos.at(pos).size * (numOfX + 1);
 
             // right
+            wallPosX += 2 * tileInPos.at(pos).size * (numOfX + 1);
             transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
                     ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
             wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));

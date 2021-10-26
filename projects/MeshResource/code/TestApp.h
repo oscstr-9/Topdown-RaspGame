@@ -31,6 +31,7 @@ public:
 	bool Open();
 	void ControllerInputs();
 	void spawnPlayerObject(int id, int tileX, int tileY);
+	void spawnEnemyObject(int id, int tileX, int tileY);
 	Pos tileToWorldPos(Pos tilePos);
 	/// run app
 	void Run();

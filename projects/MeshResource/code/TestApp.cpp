@@ -23,10 +23,7 @@ namespace Example
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
-		// converting to world pos
-		
 		player.pos = tileToWorldPos(Pos(tileX, tileY));
-		player.setRenderPos();
 		player.previousPos = player.pos;
 		player.size = 0.2;
 		player.ID = id;
@@ -37,11 +34,25 @@ namespace Example
 		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(Pos(tileX, tileY)), tilegrid);
 	}
 
+	void ExampleApp::spawnEnemyObject(int id, int tileX, int tileY)
+	{
+		enemy.pos = tileToWorldPos(Pos(tileX, tileY));
+		enemy.setRenderPos();
+		enemy.previousPos = enemy.pos;
+		enemy.size = 0.2;
+		enemy.ID = id;
+		gameObjects.push_back(&enemy);
+
+		tilegrid->tileInPos.at(Pos(tileX, tileY)).gameObjects.push_back(&enemy);
+
+		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(Pos(tileX, tileY)), tilegrid);
+	}
+
 	Pos ExampleApp::tileToWorldPos(Pos tilePos)
 	{
 		// tile (0, 0) in worldPos
 		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
-		float posY = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
 		// add on tilePos
 		posX += tilePos.x * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
 		posY += tilePos.y * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
@@ -113,6 +124,9 @@ namespace Example
 			// Create player
 			spawnPlayerObject(spawnID++, tilegrid->numOfX/2, tilegrid->numOfY/2);
 			player.setupPlayer(shaders);
+
+			// Create enemies (should probably spawn in run loop instead)
+			//spawnEnemyObject(spawnID++, tilegrid->numOfX/2 - 1, tilegrid->numOfY/2 - 1);
 			
 
 			return true;
