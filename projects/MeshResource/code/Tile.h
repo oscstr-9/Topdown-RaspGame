@@ -17,6 +17,7 @@ public:
     float size;
     Type type;
     Pos pos;
+    Pos worldPos;
     std::vector<Tile> neighborWalls;
     std::vector<Tile> neighborGround;
     std::vector<GameObject*> gameObjects;

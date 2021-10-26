@@ -19,7 +19,7 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
             for(int k = 0; k < tile->neighborWalls.size(); k++)
             {
                 // check aabb
-                if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].pos, tile->neighborWalls[k].size))
+                if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].worldPos, tile->neighborWalls[k].size))
                 {
                     //std::cout << "TestObject is colliding with wall, moving to previous pos" << std::endl;
                     tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
@@ -37,8 +37,8 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
 }
 bool CollisionHandler::AABBCollision(Pos pos1, float size1, Pos pos2, float size2)
 {
-    //pos2.posVar = 2 * size2;
-    
+    size1 = size1 * 1.9;
+    size2 = size2 * 1.9;
     if(pos1.posVar.x + size1 > pos2.posVar.x && pos2.posVar.x + size2 > pos1.posVar.x &&
        pos1.posVar.y + size1 > pos2.posVar.y && pos2.posVar.y + size2 > pos1.posVar.y)
     {
@@ -50,9 +50,9 @@ bool CollisionHandler::AABBCollision(Pos pos1, float size1, Pos pos2, float size
 bool CollisionHandler::pointInsideTile(Pos pointPos, Pos tilePos, float tileSize)
 {
     // add all points necessary before doing the math/comparisons
-    tilePos.posVar = tilePos.posVar * tileSize;
     // tilePos.x = tilePos.x * tileSize;
     // tilePos.y = tilePos.y * tileSize;
+
     float bottomLeftX, bottomLeftY, topRightX, topRightY;
     bottomLeftX = tilePos.posVar.x - tileSize/2;
     bottomLeftY = tilePos.posVar.y - tileSize/2;
@@ -97,7 +97,7 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
     {
         GameObject* object = tile->gameObjects[k];
 
-        if(pointInsideTile(object->pos, tile->pos, tile->size))
+        if(pointInsideTile(object->pos, tile->worldPos, tile->size))
         {
             // If inside, do nothing.
         }
@@ -109,7 +109,7 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
                 Tile* groundTile = &tile->neighborGround[i];
 
                 // find corresponding ground tile
-                if(pointInsideTile(object->pos, groundTile->pos, groundTile->size))
+                if(pointInsideTile(object->pos, groundTile->worldPos, groundTile->size))
                 {
                     // remove old object
                     for(int j = 0; j < tile->gameObjects.size(); j++)

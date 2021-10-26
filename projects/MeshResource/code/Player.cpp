@@ -133,8 +133,8 @@ VectorMath2 Player::GetPos(){
 // convert from graphics pos to grid pos
 void Player::setRenderPos()
 {
-    posX = pos.posVar.x;
-    posY = pos.posVar.y;
+    // posX = pos.posVar.x;
+    // posY = pos.posVar.y;
 }
 
 void Player::DrawPlayer(){
