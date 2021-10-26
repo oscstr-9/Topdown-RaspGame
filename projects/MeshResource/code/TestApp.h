@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "Player.h"
+#include "Enemy.h"
 #include "Tilegrid.h"
 #include "CollisionHandler.h"
 
@@ -50,7 +51,9 @@ private:
 	// GraphicsNode* objObject;
 	Display::Window* window;
 
-	Player* player;
+	Player player;
+	Enemy enemy;
+
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;

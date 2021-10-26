@@ -23,18 +23,16 @@ namespace Example
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
-		player = new Player();
-
 		// converting to world pos
 		
-		player->pos = tileToWorldPos(Pos(tileX, tileY));
-		player->setRenderPos();
-		player->previousPos = player->pos;
-		player->size = 0.2;
-		player->ID = id;
-		gameObjects.push_back(player);
+		player.pos = tileToWorldPos(Pos(tileX, tileY));
+		player.setRenderPos();
+		player.previousPos = player.pos;
+		player.size = 0.2;
+		player.ID = id;
+		gameObjects.push_back(&player);
 
-		tilegrid->tileInPos.at(Pos(tileX, tileY)).gameObjects.push_back(player);
+		tilegrid->tileInPos.at(Pos(tileX, tileY)).gameObjects.push_back(&player);
 
 		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(Pos(tileX, tileY)), tilegrid);
 	}
@@ -68,7 +66,7 @@ namespace Example
 			// case GLFW_KEY_LEFT:
 			// 	left = action;
 			// 	break;
-			// case GLFW_KEY_S:
+			// case GLFW_KEY_S:square
 			// case GLFW_KEY_DOWN:
 			// 	backward = action;
 			// 	break;
@@ -114,7 +112,7 @@ namespace Example
 
 			// Create player
 			spawnPlayerObject(spawnID++, tilegrid->numOfX/2, tilegrid->numOfY/2);
-			player->setupPlayer(shaders);
+			player.setupPlayer(shaders);
 			
 
 			return true;
@@ -136,6 +134,8 @@ namespace Example
 
 		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");
 
+		enemy.SetupEnemy(shaders);
+
 		float startTime = glfwGetTime();
 		while (this->window->IsOpen())
 		{
@@ -149,7 +149,7 @@ namespace Example
 
 			// Controll character
 
-			quit = player->ControllerInputs(deltaTime, cameraPos);
+			quit = player.ControllerInputs(deltaTime, cameraPos);
 			if(quit){
 				this->window->Close();
 			}
@@ -167,7 +167,8 @@ namespace Example
 			collisionHandler->handleCollisions(tilegrid);
 
 			// Draw to screen
-			player->DrawPlayer();
+			player.DrawPlayer();
+			enemy.DrawEnemy();
 			tilegrid->Draw();
 
 			this->window->SwapBuffers();
