@@ -13,16 +13,16 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
     {
         tile = tilesToUpdate[i];
         // check testObjects
-        for(int j = 0; j < tile->testObjects.size(); j++)
+        for(int j = 0; j < tile->gameObjects.size(); j++)
         {
             // check against walls
             for(int k = 0; k < tile->neighborWalls.size(); k++)
             {
                 // check aabb
-                if(AABBCollision(tile->testObjects[j]->pos, tile->testObjects[j]->size, tile->neighborWalls[k].pos, tile->neighborWalls[k].size))
+                if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].pos, tile->neighborWalls[k].size))
                 {
                     //std::cout << "TestObject is colliding with wall, moving to previous pos" << std::endl;
-                    tile->testObjects[j]->pos = tile->testObjects[j]->previousPos;
+                    tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
                 }
             }
         }
@@ -77,7 +77,7 @@ bool CollisionHandler::updateListOfTiles(Tile* tile, Tilegrid* tilegrid)
         {
             return false;
         }
-        if(tilesToUpdate[j]->testObjects.empty())
+        if(tilesToUpdate[j]->gameObjects.empty())
         {	
             tilesToUpdate.erase(tilesToUpdate.begin() + j);
             j--;
@@ -92,9 +92,9 @@ bool CollisionHandler::updateListOfTiles(Tile* tile, Tilegrid* tilegrid)
 // makes sure all objects from this tile is always inside its corresponding tile
 void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegrid)
 {
-    for(int k = 0; k < tile->testObjects.size(); k++)
+    for(int k = 0; k < tile->gameObjects.size(); k++)
     {
-        TestObject* object = tile->testObjects[k];
+        GameObject* object = tile->gameObjects[k];
 
         if(pointInsideTile(object->pos, tile->pos, tile->size))
         {
@@ -111,17 +111,17 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
                 if(pointInsideTile(object->pos, groundTile->pos, groundTile->size))
                 {
                     // remove old object
-                    for(int j = 0; j < tile->testObjects.size(); j++)
+                    for(int j = 0; j < tile->gameObjects.size(); j++)
                     {
-                        if(object->ID = tile->testObjects[j]->ID)
+                        if(object->ID = tile->gameObjects[j]->ID)
                         {
-                            tile->testObjects.erase(tile->testObjects.begin() + j);
+                            tile->gameObjects.erase(tile->gameObjects.begin() + j);
                             k--;
                         }
                     }
 
                     // add new object
-                    tilegrid->tileInPos.at(groundTile->pos).testObjects.push_back(object);
+                    tilegrid->tileInPos.at(groundTile->pos).gameObjects.push_back(object);
                     //std::cout << "TestObject has moved to another ground tile" << std::endl;
                     
                     // -------- update the tilesToUpdate list --------

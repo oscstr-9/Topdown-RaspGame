@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Tilegrid.h"
-#include "TestObject.h"
+#include "GameObject.h"
 #include <stdio.h>
 
 class CollisionHandler {

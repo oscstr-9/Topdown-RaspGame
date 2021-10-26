@@ -21,22 +21,34 @@ namespace Example
 	ExampleApp::~ExampleApp()
 	{/*so cool*/}
 
-	void ExampleApp::spawnTestObject(int id)
+	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
-		TestObject* testObject = new TestObject();
-		testObject->pos.x = 0;
-		testObject->pos.y = 0;
-		testObject->previousPos = testObject->pos;
-		testObject->size = 0.2;
-		testObject->ID = id;
-		testObjects.push_back(testObject);
+		player = new Player();
 
-		Pos objectPos;
-		objectPos.x = testObject->pos.x / testObject->size;
-		objectPos.y = testObject->pos.y / testObject->size;
-		tilegrid->tileInPos.at(objectPos).testObjects.push_back(testObject);
+		// converting to world pos
+		
+		player->pos = tileToWorldPos(Pos(tileX, tileY));
+		player->setRenderPos();
+		player->previousPos = player->pos;
+		player->size = 0.2;
+		player->ID = id;
+		gameObjects.push_back(player);
 
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(objectPos), tilegrid);
+		tilegrid->tileInPos.at(Pos(tileX, tileY)).gameObjects.push_back(player);
+
+		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(Pos(tileX, tileY)), tilegrid);
+	}
+
+	Pos ExampleApp::tileToWorldPos(Pos tilePos)
+	{
+		// tile (0, 0) in worldPos
+		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		float posY = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		// add on tilePos
+		posX += tilePos.x * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		posY += tilePos.y * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
+
+		return Pos(posX, posY);
 	}
 
 	bool ExampleApp::Open()
@@ -95,15 +107,15 @@ namespace Example
 			shaders = std::make_shared<ShaderResource>();
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
-			player.setupPlayer(shaders);
-
 			// Create grid
-			tilegrid = new Tilegrid(30, 30, -8, 0.2);
+			tilegrid = new Tilegrid(40, 40, -8, 0.2);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
-			int id = 1;
-			spawnTestObject(id++);
-			spawnTestObject(id++);
+
+			// Create player
+			spawnPlayerObject(spawnID++, tilegrid->numOfX/2, tilegrid->numOfY/2);
+			player->setupPlayer(shaders);
+			
 
 			return true;
 		}
@@ -137,7 +149,7 @@ namespace Example
 
 			// Controll character
 
-			quit = player.ControllerInputs(deltaTime, cameraPos);
+			quit = player->ControllerInputs(deltaTime, cameraPos);
 			if(quit){
 				this->window->Close();
 			}
@@ -151,18 +163,11 @@ namespace Example
 			// Set projection-view-matrix
 			shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
 
-			// -------- just testing collision -------- 
-			for(int i = 0; i < testObjects.size(); i++)
-			{
-				testObjects[i]->previousPos = testObjects[i]->pos;
-				testObjects[i]->pos.x += 0.05;
-			}
-
+			// After all input and GameObject updates are done, handle collision
 			collisionHandler->handleCollisions(tilegrid);
-			// -------- 
 
 			// Draw to screen
-			player.DrawPlayer();
+			player->DrawPlayer();
 			tilegrid->Draw();
 
 			this->window->SwapBuffers();

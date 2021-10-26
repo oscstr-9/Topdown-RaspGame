@@ -82,14 +82,19 @@ void Tilegrid::createGrid(float tileSize)
         }
     }
     // -------- Grid size --------
-    sizeX = numOfX * tiles[0][0].size;
-    sizeY = numOfY * tiles[0][0].size;
+    Pos pos;
+    pos.x = 0;
+    pos.y = 0;
+    sizeX = numOfX * tileInPos.at(pos).size;
+    sizeY = numOfY * tileInPos.at(pos).size;
     // -------- Add neighbors to the tiles --------
-    for(int y = 0; y < tiles.size(); y++)
+    for(int y = 0; y < numOfY; y++)
     {
-        for(int x = 0; x < tiles[y].size(); x++)
+        for(int x = 0; x < numOfX; x++)
         {
-            if(tiles[y][x].type == Type::WALL)
+            pos.y = y;
+            pos.x = x;
+            if(tileInPos.at(pos).type == Type::WALL)
             {
                 addWallToNeighbors(tiles[y][x]);
             }
@@ -199,7 +204,10 @@ void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders, bool show
     {
         for(int x = 0; x < numOfX; x++)
         {
-            if(tiles[y][x].type == Type::WALL)
+            Pos pos;
+            pos.y = y;
+            pos.x = x;
+            if(tileInPos.at(pos).type == Type::WALL)
             {
                 MatrixMath transform = Identity(); // wall transform is set in placeWalls()
                 wallTiles.push_back(GraphicsNode(wallMesh, wallTexture, shaders, transform));
@@ -219,63 +227,71 @@ void Tilegrid::createBorderGraphics(std::shared_ptr<ShaderResource> shaders)
     texture->LoadFromFile();
     std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("cube");
 
-    float wallPosX = -(numOfX + 1) * tiles[0][0].size;
-    float wallPosY = -(numOfY + 1) * tiles[0][0].size;
+    Pos pos;
+    pos.x = 0;
+    pos.y = 0;
+    float wallPosX = -(numOfX + 1) * tileInPos.at(pos).size;
+    float wallPosY = -(numOfY + 1) * tileInPos.at(pos).size;
 
     float zOffset = 0.8;
 
     for(int y = -1; y < numOfY + 1; y++)
     {
-        wallPosX = -(numOfX + 1) * tiles[0][0].size;
+        wallPosX = -(numOfX + 1) * tileInPos.at(pos).size;
         // bottom and top border
         if(y == -1 || y == numOfY)
         {
             for(int x = -1; x < numOfX + 1; x++)
             {
                 MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
                 wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-                wallPosX += 2 * tiles[0][0].size;
+                wallPosX += 2 * tileInPos.at(pos).size;
             }
-            wallPosY += 2 * tiles[0][0].size;
+            wallPosY += 2 * tileInPos.at(pos).size;
         }
         // side borders
         else
         {
             // left
             MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
             wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-            wallPosX += 2 * tiles[0][0].size * (numOfX + 1);
+            wallPosX += 2 * tileInPos.at(pos).size * (numOfX + 1);
 
             // right
             transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
             wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-            wallPosY += 2 * tiles[0][0].size;
+            wallPosY += 2 * tileInPos.at(pos).size;
         }
     }
 }
 
 void Tilegrid::placeWalls()
 {
-    float wallPosX = -(numOfX - 1) * tiles[0][0].size;
-    float wallPosY = -(numOfY - 1) * tiles[0][0].size;
+    Pos pos;
+    pos.x = 0;
+    pos.y = 0;
+    float wallPosX = -(numOfX - 1) * tileInPos.at(pos).size;
+    float wallPosY = -(numOfY - 1) * tileInPos.at(pos).size;
     int wallInt = 0;
     for(int y = 0; y < numOfY; y++)
     {
-        wallPosX = -(numOfX - 1) * tiles[0][0].size;
+        wallPosX = -(numOfX - 1) * tileInPos.at(pos).size;
         for(int x = 0; x < numOfX; x++)
         {
-            if(tiles[y][x].type == Type::WALL)
+            pos.y = y;
+            pos.x = x;
+            if(tileInPos.at(pos).type == Type::WALL)
             {
                 MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + 0.3)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
                 wallTiles[wallInt++].setTransform(transform);
             }
-            wallPosX += 2 * tiles[0][0].size;
+            wallPosX += 2 * tileInPos.at(pos).size;
         }
-        wallPosY += 2 * tiles[0][0].size;
+        wallPosY += 2 * tileInPos.at(pos).size;
     }
 }
 

@@ -112,6 +112,13 @@ MatrixMath Player::GetPos(){
     return positionMatrix;
 }
 
+// convert from graphics pos to grid pos
+void Player::setRenderPos()
+{
+    posX = pos.x;
+    posY = pos.y;
+}
+
 void Player::DrawPlayer(){
     playerObject->Draw();
 }

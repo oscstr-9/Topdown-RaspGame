@@ -16,7 +16,6 @@
 #include "Player.h"
 #include "Tilegrid.h"
 #include "CollisionHandler.h"
-#include "TestObject.h"
 
 namespace Example
 {
@@ -30,7 +29,8 @@ public:
 	/// open app
 	bool Open();
 	void ControllerInputs();
-	void spawnTestObject(int id);
+	void spawnPlayerObject(int id, int tileX, int tileY);
+	Pos tileToWorldPos(Pos tilePos);
 	/// run app
 	void Run();
 private:
@@ -40,6 +40,7 @@ private:
 	bool quit = false;
 	float size = 1;
 	float speed = 0.003;
+	int spawnID = 1;
 
 	MatrixMath camRotMat = MatrixMath::TranslationMatrix(VectorMath3(0, 3, -2)) * RotateMatrix(M_PI/5, VectorMath3(-1, 0, 0));
 	MatrixMath posMat = Identity();
@@ -49,10 +50,10 @@ private:
 	// GraphicsNode* objObject;
 	Display::Window* window;
 
-	Player player;
+	Player* player;
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;
-	std::vector<TestObject*> testObjects;
+	std::vector<GameObject*> gameObjects;
 };
 } // namespace Example

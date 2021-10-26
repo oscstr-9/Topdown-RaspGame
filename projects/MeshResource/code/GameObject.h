@@ -4,6 +4,9 @@ struct Pos
 {
     float x, y;
 
+    Pos();
+    Pos(float x, float y);
+
     void operator=(const Pos pos) {
         x = pos.x;
         y = pos.y;
@@ -25,7 +28,7 @@ struct Pos
     }
 };
 
-class TestObject {
+class GameObject {
 public:
     int ID;
     Pos pos;

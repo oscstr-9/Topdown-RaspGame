@@ -4,9 +4,10 @@
 #include "render/GraphicsNode.h"
 #include <memory>
 
+#include "GameObject.h"
 
 
-class Player
+class Player : public GameObject
 {
 public:
     Player();
@@ -14,6 +15,7 @@ public:
     void setupPlayer(std::shared_ptr<ShaderResource> shaders);
     bool ControllerInputs(float deltaTime, VectorMath3 &cameraPos);
     MatrixMath GetPos();
+    void setRenderPos();
     void DrawPlayer();
 private:
     MatrixMath positionMatrix = Identity();

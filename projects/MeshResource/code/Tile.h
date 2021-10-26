@@ -3,7 +3,8 @@
 // TODO: use for the list of enemies that currently are inside this tile
 #include <vector>
 #include "render/GraphicsNode.h"
-#include "TestObject.h"
+//#include "GameObject.h"
+#include "Player.h"
 
 enum class Type
 {
@@ -18,5 +19,5 @@ public:
     Pos pos;
     std::vector<Tile> neighborWalls;
     std::vector<Tile> neighborGround;
-    std::vector<TestObject*> testObjects;
+    std::vector<GameObject*> gameObjects;
 };
