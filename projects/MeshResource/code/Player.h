@@ -16,7 +16,6 @@ public:
     void setupPlayer(std::shared_ptr<ShaderResource> shaders);
     void ControllerInputs(float deltaTime);
     VectorMath2 GetPos();
-    void setRenderPos();
     void DrawPlayer();
 private:
     MatrixMath positionMatrix = Identity();

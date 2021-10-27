@@ -33,6 +33,7 @@ public:
 	void spawnPlayerObject(int id, int tileX, int tileY);
 	void spawnEnemyObject(int id, int tileX, int tileY);
 	VectorMath2 tileToWorldPos(VectorMath2 tilePos);
+	VectorMath2 worldToTilePos(VectorMath2 tilePos);
 	/// run app
 	void Run();
 private:
