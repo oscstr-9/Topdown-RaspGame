@@ -12,6 +12,7 @@
 #include "core/MatrixMath.h"
 #include "render/Camera.h"
 #include "render/Lighting.h"
+#include "RenderDebug.h"
 
 using namespace Display;
 namespace Example
@@ -89,9 +90,13 @@ namespace Example
 			// case GLFW_KEY_SPACE:
 			// 	up = action;
 			// 	break;
-			// case GLFW_KEY_LEFT_SHIFT:
-			// 	down = action;
-			// 	break;
+			case GLFW_KEY_F1:{
+				if(action == GLFW_PRESS){
+					debug = !debug;
+					std::cout << debug << std::endl;
+				}
+			}
+				break;
 			case GLFW_KEY_ESCAPE:
 				this->window->Close();
 				break;
@@ -118,7 +123,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(100, 100, -8, 0.4);
+			tilegrid = new Tilegrid(40, 40, -8, 0.4);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
@@ -140,6 +145,9 @@ namespace Example
 		// Create camera
 		ScreenCamera camera(90, width, height, 0.001, 100);
 		camera.SetPosition(cameraPos);
+
+		ScreenCamera debugCamera(90, width, height, 0.001, 100);
+		debugCamera.SetPosition(debugCameraPos);
 
 		// Create light source
 		Lighting light(VectorMath3(0, 0, 0), VectorMath3(1, 1, 1), 1);
@@ -164,28 +172,41 @@ namespace Example
 
 			// Controll character
 
-			quit = player.ControllerInputs(deltaTime, cameraPos);
-			if(quit){
-				this->window->Close();
-			}
-
+			player.ControllerInputs(deltaTime);
 			// Update camera pos
+			cameraPos = VectorMath3(player.pos.posVar + VectorMath2(0, -6), 2);
 			camera.SetRotMat(camRotMat);
 			camera.SetPosition(cameraPos);
+
+			debugCamera.SetPosition(-debugCameraPos);
+			debugCamera.SetRotMat(debugCamRotMat);
+			if(debug){
+				shaders->setMat4(debugCamera.GetProjViewMatrix(), "projectionViewMatrix");
+			}
+			else{
+				shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
+			}
 
 			// Bind light
 			light.bindLight(shaders, camera.GetPosition());
 			// Set projection-view-matrix
-			shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
+			//shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
 
 			// After all input and GameObject updates are done, handle collision
 			collisionHandler->handleCollisions(tilegrid);
 
 			enemy.MoveToPoint(player.GetPos(), deltaTime);
+
 			// Draw to screen
 			player.DrawPlayer();
 			enemy.DrawEnemy();
-			tilegrid->Draw();
+			tilegrid->Draw(camera.GetProjViewMatrix());
+			if(debug){
+				Debug::Render(debugCamera.GetProjViewMatrix());
+			}
+			else{
+				Debug::Render(camera.GetProjViewMatrix());
+			}
 
 			this->window->SwapBuffers();
 		}

@@ -39,13 +39,15 @@ private:
 	//screen size
 	int width, height;
 
-	bool quit = false;
+	bool debug = false;
 	float size = 1;
 	float speed = 0.003;
 	int spawnID = 1;
 
 	MatrixMath camRotMat = RotateMatrix(M_PI/4, VectorMath3(-1, 0, 0));
 	VectorMath3 cameraPos = VectorMath3(0, 4, 2);
+	MatrixMath debugCamRotMat = Identity();
+	VectorMath3 debugCameraPos = VectorMath3(0, 0, -20);
 	MatrixMath posMat = Identity();
 	MatrixMath characterPosMat = Identity();
 	std::shared_ptr<ShaderResource> shaders;

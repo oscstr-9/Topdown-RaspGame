@@ -181,6 +181,7 @@ struct VectorMath3
 	VectorMath3 operator+(VectorMath3 vectorA);
 	VectorMath3 operator-(VectorMath3 vectorA);
 	VectorMath3 operator*(float multiplier);
+	VectorMath3 operator-();
 	float Length();
 	void Normalize();
 	VectorMath3 NormalizeNew();
@@ -237,6 +238,16 @@ inline VectorMath3 VectorMath3::operator-(VectorMath3 vectorA) {
 	for (int i = 0; i < 3; i++)
 	{
 		temp[i] = coords[i] - vectorA[i];
+	}
+	return temp;
+}
+
+// - operator overload
+inline VectorMath3 VectorMath3::operator-() {
+	VectorMath3 temp;
+	for (int i = 0; i < 3; i++)
+	{
+		temp[i] = -coords[i];
 	}
 	return temp;
 }
