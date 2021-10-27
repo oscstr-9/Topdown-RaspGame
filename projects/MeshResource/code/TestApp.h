@@ -32,7 +32,7 @@ public:
 	void ControllerInputs();
 	void spawnPlayerObject(int id, int tileX, int tileY);
 	void spawnEnemyObject(int id, int tileX, int tileY);
-	Pos tileToWorldPos(Pos tilePos);
+	VectorMath2 tileToWorldPos(VectorMath2 tilePos);
 	/// run app
 	void Run();
 private:
@@ -53,6 +53,7 @@ private:
 	Display::Window* window;
 
 	Player player;
+	Enemy enemy;
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;

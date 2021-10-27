@@ -22,7 +22,7 @@ struct VectorMath2
 	VectorMath2 operator-(VectorMath2 vectorA);
 	VectorMath2 operator*(float multiplier);
 	bool operator== (VectorMath2 vectorA);
-	bool operator< (VectorMath2 vectorA);
+	bool operator<(const VectorMath2& vectorA) const;
 	bool operator> (VectorMath2 vectorA);
 	float Length();
 	void Normalize();
@@ -92,7 +92,7 @@ inline bool VectorMath2::operator==(const VectorMath2 vectorA) {
         return false;
 }
 
-inline bool VectorMath2::operator<(const VectorMath2 vectorA) {
+inline bool VectorMath2::operator<(const VectorMath2& vectorA) const {
         if(x < vectorA.x) return true;
         if(x > vectorA.x) return false;
         //x == coord.x

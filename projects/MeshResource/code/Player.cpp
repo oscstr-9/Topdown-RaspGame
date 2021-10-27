@@ -18,7 +18,7 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders){
     // Object meshes
     std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
     // Object transform
-    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos.posVar,-7)) * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
     // Object graphicnodes
     playerObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 }
@@ -118,8 +118,9 @@ bool Player::ControllerInputs(float deltaTime, VectorMath3 &cameraPos){
     }
     
     rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
-    pos.posVar = VectorMath2(posX, posY);
-    positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos.posVar, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+    previousPos = pos;
+    pos = pos + VectorMath2(posX, posY);
+    positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
     playerObject->setTransform(positionMatrix);
     cameraPos = VectorMath3(cameraPos.x-right*deltaTime*movementSpeed, cameraPos.y+forward*deltaTime*movementSpeed, cameraPos.z);
@@ -127,7 +128,7 @@ bool Player::ControllerInputs(float deltaTime, VectorMath3 &cameraPos){
 }
 
 VectorMath2 Player::GetPos(){
-    return pos.posVar;
+    return pos;
 }
 
 // convert from graphics pos to grid pos

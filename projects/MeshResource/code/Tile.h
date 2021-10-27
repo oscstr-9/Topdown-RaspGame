@@ -16,8 +16,8 @@ class Tile {
 public:
     float size;
     Type type;
-    Pos pos;
-    Pos worldPos;
+    VectorMath2 pos;
+    VectorMath2 worldPos;
     std::vector<Tile> neighborWalls;
     std::vector<Tile> neighborGround;
     std::vector<GameObject*> gameObjects;
