@@ -134,7 +134,7 @@ namespace Example
 			player.setupPlayer(shaders);
 
 			// Create enemies (should probably spawn in run loop instead)
-			spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 3, tilegrid->numOfY/2 + 3);
+			spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 6, tilegrid->numOfY/2 + 6);
 			
 
 			return true;
@@ -199,8 +199,6 @@ namespace Example
 
 			// After all input and GameObject updates are done, handle collision
 			collisionHandler->handleCollisions(tilegrid);
-
-			enemy.MoveToPoint(player.GetPos(), deltaTime);
 
 			// Draw to screen
 			player.DrawPlayer();

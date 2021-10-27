@@ -22,40 +22,7 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
                 if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].worldPos, tile->neighborWalls[k].size))
                 {
                     //std::cout << "TestObject is colliding with wall, moving to previous pos" << std::endl;
-                    //tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
-                    // TODO: check which direction to move back to
-                    VectorMath2 objectPos = tile->gameObjects[j]->pos;
-                    float objectSize = tile->gameObjects[j]->size * 1.9;
-                    VectorMath2 wallPos = tile->neighborWalls[k].worldPos;
-                    float wallSize = tile->neighborWalls[k].size * 1.9;
-
-                    VectorMath2 intersectionDepth(0, 0);
-                    //intersectionDepth.x = 
-                    
-
-                    VectorMath2 direction = tile->neighborWalls[k].pos - tile->pos;
-                    // vertical
-                    if(abs(direction.y) && !abs(direction.x))
-                    {
-                        std::cout << "vertical" << std::endl;
-                        intersectionDepth.y = (objectPos.y + objectSize) - (wallPos.y + wallSize);
-                    }
-                    // horizontal
-                    else if(!abs(direction.y) && abs(direction.x))
-                    {
-                        std::cout << "horizontal" << std::endl;
-                        intersectionDepth.x = (objectPos.x + objectSize) - (wallPos.x + wallSize);
-                    }
-                    // diagonal
-                    else
-                    {
-                        std::cout << "diagonal" << std::endl;
-                        intersectionDepth.y = (objectPos.y + objectSize) - (wallPos.y + wallSize);
-                        intersectionDepth.x = (objectPos.x + objectSize) - (wallPos.x + wallSize);
-                    }
-                    intersectionDepth = intersectionDepth * (objectSize / 4);
-                    tile->gameObjects[j]->pos = tile->gameObjects[j]->pos + intersectionDepth;
-
+                    tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
                 }
             }
         }
