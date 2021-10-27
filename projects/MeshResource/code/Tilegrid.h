@@ -30,7 +30,7 @@ public:
     void addWallToNeighbors(Tile wall);
     void addGroundToNeighbors(Tile ground);
 
-    void Draw();
+    void Draw(MatrixMath viewMat);
 
     ~Tilegrid();
 };

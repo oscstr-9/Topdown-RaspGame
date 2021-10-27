@@ -14,7 +14,7 @@ public:
     Player();
     ~Player();
     void setupPlayer(std::shared_ptr<ShaderResource> shaders);
-    bool ControllerInputs(float deltaTime, VectorMath3 &cameraPos);
+    void ControllerInputs(float deltaTime);
     VectorMath2 GetPos();
     void setRenderPos();
     void DrawPlayer();
@@ -42,4 +42,5 @@ private:
 	float forward = 0;
 	float backward = 0;
     bool quit = false;
+    bool debug = false;
 };

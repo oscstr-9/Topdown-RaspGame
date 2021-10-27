@@ -23,7 +23,7 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders){
     playerObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 }
 
-bool Player::ControllerInputs(float deltaTime, VectorMath3 &cameraPos){
+void Player::ControllerInputs(float deltaTime){
     // Controller Inputs
     GLFWgamepadstate state;
 
@@ -49,7 +49,10 @@ bool Player::ControllerInputs(float deltaTime, VectorMath3 &cameraPos){
             movementSpeed = 1;
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
-            quit = true;
+            if(debug)
+                debug = false;
+            else
+                debug = true;
         }
         if (state.buttons[GLFW_GAMEPAD_BUTTON_START]){
             quit = true;
@@ -84,8 +87,6 @@ bool Player::ControllerInputs(float deltaTime, VectorMath3 &cameraPos){
     else{
         x = 0;
     }
-
-    std::cout << x << ", " << y << std::endl;
 
     // If left joystick is unmoved look towards move direction
     if(x == 0 && y == 0){
@@ -123,8 +124,6 @@ bool Player::ControllerInputs(float deltaTime, VectorMath3 &cameraPos){
     positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
     playerObject->setTransform(positionMatrix);
-    cameraPos = VectorMath3(cameraPos.x-right*deltaTime*movementSpeed, cameraPos.y+forward*deltaTime*movementSpeed, cameraPos.z);
-    return quit;
 }
 
 VectorMath2 Player::GetPos(){
