@@ -24,42 +24,41 @@ namespace Example
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
-		player.pos = tileToWorldPos(Pos(tileX, tileY));
+		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
 		player.previousPos = player.pos;
 		player.size = 0.2;
 		player.ID = id;
 		gameObjects.push_back(&player);
 
-		tilegrid->tileInPos.at(Pos(tileX, tileY)).gameObjects.push_back(&player);
+		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&player);
 
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(Pos(tileX, tileY)), tilegrid);
+		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
 
 	void ExampleApp::spawnEnemyObject(int id, int tileX, int tileY)
 	{	
-		Enemy enemy = Enemy(shaders, VectorMath2(0,0));
-		enemy.pos = tileToWorldPos(Pos(tileX, tileY));
-		//enemy.setRenderPos();
+		enemy = Enemy(shaders, VectorMath2(0,0));
+		enemy.pos = tileToWorldPos(VectorMath2(tileX, tileY));
 		enemy.previousPos = enemy.pos;
 		enemy.size = 0.2;
 		enemy.ID = id;
 		gameObjects.push_back(&enemy);
 
-		tilegrid->tileInPos.at(Pos(tileX, tileY)).gameObjects.push_back(&enemy);
+		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&enemy);
 
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(Pos(tileX, tileY)), tilegrid);
+		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
 
-	Pos ExampleApp::tileToWorldPos(Pos tilePos)
+	VectorMath2 ExampleApp::tileToWorldPos(VectorMath2 tilePos)
 	{
 		// tile (0, 0) in worldPos
-		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
-		float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
 		// add on tilePos
-		posX += tilePos.posVar.x * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
-		posY += tilePos.posVar.y * 2 * tilegrid->tileInPos.at(Pos(0, 0)).size;
+		posX += tilePos.x * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		posY += tilePos.y * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
 
-		return Pos(posX, posY);
+		return VectorMath2(posX, posY);
 	}
 
 	bool ExampleApp::Open()
@@ -132,7 +131,7 @@ namespace Example
 			player.setupPlayer(shaders);
 
 			// Create enemies (should probably spawn in run loop instead)
-			//spawnEnemyObject(spawnID++, tilegrid->numOfX/2 - 1, tilegrid->numOfY/2 - 1);
+			spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 3, tilegrid->numOfY/2 + 3);
 			
 
 			return true;
@@ -157,7 +156,7 @@ namespace Example
 
 		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");
 
-		Enemy enemy = Enemy(shaders, VectorMath2(0,0));
+		//Enemy enemy = Enemy(shaders, VectorMath2(0,0));
 
 		float startTime = glfwGetTime();
 		while (this->window->IsOpen())
@@ -173,8 +172,11 @@ namespace Example
 			// Controll character
 
 			player.ControllerInputs(deltaTime);
+
+			enemy.MoveToPoint(player.GetPos(), deltaTime);
+
 			// Update camera pos
-			cameraPos = VectorMath3(player.pos.posVar + VectorMath2(0, -6), 2);
+			cameraPos = VectorMath3(player.pos + VectorMath2(0, -6), 2);
 			camera.SetRotMat(camRotMat);
 			camera.SetPosition(cameraPos);
 

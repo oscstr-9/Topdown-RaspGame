@@ -16,6 +16,7 @@ private:
     float movementSpeed = 1;
     float rotAngle;
 public:
+    Enemy();
     Enemy(std::shared_ptr<ShaderResource> shaders, VectorMath2 posIn);
     ~Enemy();
     void MoveToPoint(VectorMath2 posIn, float deltaTime);

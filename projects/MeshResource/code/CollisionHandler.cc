@@ -22,7 +22,40 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
                 if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].worldPos, tile->neighborWalls[k].size))
                 {
                     //std::cout << "TestObject is colliding with wall, moving to previous pos" << std::endl;
-                    tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
+                    //tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
+                    // TODO: check which direction to move back to
+                    VectorMath2 objectPos = tile->gameObjects[j]->pos;
+                    float objectSize = tile->gameObjects[j]->size * 1.9;
+                    VectorMath2 wallPos = tile->neighborWalls[k].worldPos;
+                    float wallSize = tile->neighborWalls[k].size * 1.9;
+
+                    VectorMath2 intersectionDepth(0, 0);
+                    //intersectionDepth.x = 
+                    
+
+                    VectorMath2 direction = tile->neighborWalls[k].pos - tile->pos;
+                    // vertical
+                    if(abs(direction.y) && !abs(direction.x))
+                    {
+                        std::cout << "vertical" << std::endl;
+                        intersectionDepth.y = (objectPos.y + objectSize) - (wallPos.y + wallSize);
+                    }
+                    // horizontal
+                    else if(!abs(direction.y) && abs(direction.x))
+                    {
+                        std::cout << "horizontal" << std::endl;
+                        intersectionDepth.x = (objectPos.x + objectSize) - (wallPos.x + wallSize);
+                    }
+                    // diagonal
+                    else
+                    {
+                        std::cout << "diagonal" << std::endl;
+                        intersectionDepth.y = (objectPos.y + objectSize) - (wallPos.y + wallSize);
+                        intersectionDepth.x = (objectPos.x + objectSize) - (wallPos.x + wallSize);
+                    }
+                    intersectionDepth = intersectionDepth * (objectSize / 4);
+                    tile->gameObjects[j]->pos = tile->gameObjects[j]->pos + intersectionDepth;
+
                 }
             }
         }
@@ -35,32 +68,32 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
     // check all the other collisions
     // enemy vs player
 }
-bool CollisionHandler::AABBCollision(Pos pos1, float size1, Pos pos2, float size2)
+bool CollisionHandler::AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2)
 {
     size1 = size1 * 1.9;
     size2 = size2 * 1.9;
-    if(pos1.posVar.x + size1 > pos2.posVar.x && pos2.posVar.x + size2 > pos1.posVar.x &&
-       pos1.posVar.y + size1 > pos2.posVar.y && pos2.posVar.y + size2 > pos1.posVar.y)
+    if(pos1.x + size1 > pos2.x && pos2.x + size2 > pos1.x &&
+       pos1.y + size1 > pos2.y && pos2.y + size2 > pos1.y)
     {
         return true;
     }
 
     return false;
 }
-bool CollisionHandler::pointInsideTile(Pos pointPos, Pos tilePos, float tileSize)
+bool CollisionHandler::pointInsideTile(VectorMath2 pointPos, VectorMath2 tilePos, float tileSize)
 {
     // add all points necessary before doing the math/comparisons
     // tilePos.x = tilePos.x * tileSize;
     // tilePos.y = tilePos.y * tileSize;
 
     float bottomLeftX, bottomLeftY, topRightX, topRightY;
-    bottomLeftX = tilePos.posVar.x - tileSize/2;
-    bottomLeftY = tilePos.posVar.y - tileSize/2;
-    topRightX = tilePos.posVar.x + tileSize/2;
-    topRightY = tilePos.posVar.y + tileSize/2;
+    bottomLeftX = tilePos.x - tileSize/2;
+    bottomLeftY = tilePos.y - tileSize/2;
+    topRightX = tilePos.x + tileSize/2;
+    topRightY = tilePos.y + tileSize/2;
 
-    if(pointPos.posVar.x >= bottomLeftX && pointPos.posVar.x <= topRightX && 
-        pointPos.posVar.y >= bottomLeftY && pointPos.posVar.y <= topRightY)
+    if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
+        pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
     {
         // point is inside tile
         return true;
