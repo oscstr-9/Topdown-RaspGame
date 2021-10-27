@@ -22,40 +22,7 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
                 if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].worldPos, tile->neighborWalls[k].size))
                 {
                     //std::cout << "TestObject is colliding with wall, moving to previous pos" << std::endl;
-                    //tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
-                    // TODO: check which direction to move back to
-                    VectorMath2 objectPos = tile->gameObjects[j]->pos;
-                    float objectSize = tile->gameObjects[j]->size * 1.9;
-                    VectorMath2 wallPos = tile->neighborWalls[k].worldPos;
-                    float wallSize = tile->neighborWalls[k].size * 1.9;
-
-                    VectorMath2 intersectionDepth(0, 0);
-                    //intersectionDepth.x = 
-                    
-
-                    VectorMath2 direction = tile->neighborWalls[k].pos - tile->pos;
-                    // vertical
-                    if(abs(direction.y) && !abs(direction.x))
-                    {
-                        std::cout << "vertical" << std::endl;
-                        intersectionDepth.y = (objectPos.y + objectSize) - (wallPos.y + wallSize);
-                    }
-                    // horizontal
-                    else if(!abs(direction.y) && abs(direction.x))
-                    {
-                        std::cout << "horizontal" << std::endl;
-                        intersectionDepth.x = (objectPos.x + objectSize) - (wallPos.x + wallSize);
-                    }
-                    // diagonal
-                    else
-                    {
-                        std::cout << "diagonal" << std::endl;
-                        intersectionDepth.y = (objectPos.y + objectSize) - (wallPos.y + wallSize);
-                        intersectionDepth.x = (objectPos.x + objectSize) - (wallPos.x + wallSize);
-                    }
-                    intersectionDepth = intersectionDepth * (objectSize / 4);
-                    tile->gameObjects[j]->pos = tile->gameObjects[j]->pos + intersectionDepth;
-
+                    tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
                 }
             }
         }
@@ -65,8 +32,45 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
     {
         moveObjectsToNeighborOfTile(tilesToUpdate[i], tilegrid);
     }
-    // check all the other collisions
-    // enemy vs player
+    
+    // -------- enemy vs player --------
+    // find player inside tile and remove it from gameObject list
+    GameObject* player;
+    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    {
+        if(tilegrid->playerTile->gameObjects[i]->objectType == ObjectType::PLAYER)
+        {
+            player = tilegrid->playerTile->gameObjects[i];
+            tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
+        }
+    }
+
+    // check inside its own tile
+    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    {
+        if(AABBCollision(player->pos, player->size, tilegrid->playerTile->gameObjects[i]->pos, tilegrid->playerTile->gameObjects[i]->size))
+        {
+            //std::cout << "Player has collided with an enemy" << std::endl;
+        }
+    }
+
+    // check against neighbor ground
+    for(int i = 0; i < tilegrid->playerTile->neighborGround.size(); i++)
+    {
+        // check against enemies
+        tile = &tilegrid->tileInPos.at(tilegrid->playerTile->neighborGround[i].pos);
+        for(int j = 0; j < tile->gameObjects.size(); j++)
+        {
+            if(AABBCollision(player->pos, player->size, tile->gameObjects[j]->pos, tile->gameObjects[j]->size))
+            {
+                //std::cout << "Player has collided with an enemy" << std::endl;
+            }
+        }
+        
+    }
+    // put back player into gameObject list
+    tilegrid->playerTile->gameObjects.push_back(player);
+    // --------
 }
 bool CollisionHandler::AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2)
 {
@@ -156,6 +160,10 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
 
                     // add new object
                     tilegrid->tileInPos.at(groundTile->pos).gameObjects.push_back(object);
+                    if(object->objectType == ObjectType::PLAYER)
+                    {
+                        tilegrid->playerTile = &tilegrid->tileInPos.at(groundTile->pos);
+                    }
                     //std::cout << "TestObject has moved to another ground tile" << std::endl;
                     
                     // -------- update the tilesToUpdate list --------
