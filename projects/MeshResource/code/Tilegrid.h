@@ -8,6 +8,7 @@ class Tilegrid {
 public:
     int numOfX, numOfY;
     float sizeX, sizeY;
+    float tileSize;
     std::vector<std::vector<Tile>> tiles;
     // might not need tileInPos, could fix tiles so it can use size() - 2 and size() - 1 for the bottom and top y border positions
     // lookup is pretty slow. Is used in TestApp, CollisionHandler and Tilegrid.

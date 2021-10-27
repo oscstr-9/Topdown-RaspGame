@@ -48,6 +48,7 @@ void Render(MatrixMath projView){
 
     glDrawArrays(GL_TRIANGLES, 0, buffer.numOfVert);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    buffer.numOfVert = 0;
 }
 void DrawSquare(float size, VectorMath3 pos, VectorMath4 color){
     PushVertex(Vertex{pos + VectorMath3(-0.5*size, -0.5 * size, 0), color});
@@ -59,4 +60,7 @@ void DrawSquare(float size, VectorMath3 pos, VectorMath4 color){
     PushVertex(Vertex{pos + VectorMath3(0.5*size, 0.5 * size, 0), color});
 }
 
+void DrawLine(VectorMath3 start, VectorMath3 end){
+
+}
 }

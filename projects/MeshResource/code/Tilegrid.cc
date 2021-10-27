@@ -6,6 +6,7 @@ Tilegrid::Tilegrid(int numOfX, int numOfY, float zPlacement, float tileSize)
     this->numOfX = numOfX;
     this->numOfY = numOfY;
     this->zPlacement = zPlacement;
+    this->tileSize = tileSize;
     createGrid(tileSize);
 }
 
@@ -336,26 +337,28 @@ void Tilegrid::Draw(MatrixMath viewMat)
         cullingPos = viewMat.VectorMultiplication(cullingPos);
         cullingPos.x /= cullingPos.w;
         cullingPos.y /= cullingPos.w;
-        if(cullingPos.x < 1 && cullingPos.x > -1 && cullingPos.y < 1 && cullingPos.y > -1){
+        
+        if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
             tile.Draw();
         }
     }
-    for (int y = 0; y < 40; y++)
-    {
-        for (int x = 0; x < 40; x++)
-        {
-            float px = (float)x - 40/2 + 0.4;
-            float py = (float)y - 40/2 + 0.4;
-            VectorMath4 cullingPos = VectorMath4(px,py,0,1);
-            cullingPos = viewMat.VectorMultiplication(cullingPos);
 
+    // Debugging
+  
+    for (int y = 0; y < numOfY; y++)
+    {
+        for (int x = 0; x < numOfX; x++)
+        {
+            VectorMath4 cullingPos = VectorMath4(tiles[y][x].worldPos.x, tiles[y][x].worldPos.y, -7, 1);
+            cullingPos = viewMat.VectorMultiplication(cullingPos);
             cullingPos.x /= cullingPos.w;
             cullingPos.y /= cullingPos.w;
-            if(cullingPos.x < 1 && cullingPos.x > -1 && cullingPos.y < 1 && cullingPos.y > -1){
-                Debug::DrawSquare(0.8, VectorMath3(px, py, -6.9), VectorMath4(0,1,0,1));
+
+            if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
+                Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(0,1,0,1));
             }
             else
-                Debug::DrawSquare(0.8, VectorMath3(px, py, -6.9), VectorMath4(1,0,0,1));
+                Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(1,0,0,1));
         } 
     }
 }

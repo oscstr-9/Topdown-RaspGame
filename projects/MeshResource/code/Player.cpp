@@ -120,7 +120,7 @@ void Player::ControllerInputs(float deltaTime){
     
     rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
     previousPos = pos;
-    pos = pos + VectorMath2(posX, posY);
+    pos = VectorMath2(posX, posY);
     positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
     playerObject->setTransform(positionMatrix);

@@ -25,7 +25,7 @@ private:
     GraphicsNode* playerObject;
 
     // Joystick deadzone
-    float deadzone = 0.04;
+    float deadzone = 0.1;
 
     float movementSpeed = 1;
     float rotAngle = 0;

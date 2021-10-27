@@ -25,6 +25,7 @@ namespace Example
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
 		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
+		player.pos.PrintVector();
 		player.previousPos = player.pos;
 		player.size = 0.2;
 		player.ID = id;
@@ -156,7 +157,8 @@ namespace Example
 
 		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");
 
-		//Enemy enemy = Enemy(shaders, VectorMath2(0,0));
+		Enemy enemyWaves;
+		enemyWaves.CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
 
 		float startTime = glfwGetTime();
 		while (this->window->IsOpen())
@@ -176,7 +178,7 @@ namespace Example
 			enemy.MoveToPoint(player.GetPos(), deltaTime);
 
 			// Update camera pos
-			cameraPos = VectorMath3(player.pos + VectorMath2(0, -6), 2);
+			cameraPos = VectorMath3(player.pos + VectorMath2(0, -3), -1);
 			camera.SetRotMat(camRotMat);
 			camera.SetPosition(cameraPos);
 
@@ -192,7 +194,6 @@ namespace Example
 			// Bind light
 			light.bindLight(shaders, camera.GetPosition());
 			// Set projection-view-matrix
-			//shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
 
 			// After all input and GameObject updates are done, handle collision
 			collisionHandler->handleCollisions(tilegrid);
@@ -203,6 +204,7 @@ namespace Example
 			player.DrawPlayer();
 			enemy.DrawEnemy();
 			tilegrid->Draw(camera.GetProjViewMatrix());
+
 			if(debug){
 				Debug::Render(debugCamera.GetProjViewMatrix());
 			}

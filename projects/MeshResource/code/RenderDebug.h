@@ -6,4 +6,5 @@
 namespace Debug{
 void Render(MatrixMath projView);
 void DrawSquare(float size, VectorMath3 pos, VectorMath4 color);
+void DrawLine(VectorMath3 start, VectorMath3 end);
 }
