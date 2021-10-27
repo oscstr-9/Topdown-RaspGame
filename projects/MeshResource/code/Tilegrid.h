@@ -12,6 +12,7 @@ public:
     // might not need tileInPos, could fix tiles so it can use size() - 2 and size() - 1 for the bottom and top y border positions
     // lookup is pretty slow. Is used in TestApp, CollisionHandler and Tilegrid.
     std::map<VectorMath2, Tile> tileInPos;
+    Tile* playerTile;
     // Placement of {x, y} in grid:
     // {0, 2} {1, 2} {2, 2}
     // {0, 1} {1, 1} {2, 1}

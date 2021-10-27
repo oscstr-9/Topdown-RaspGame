@@ -27,9 +27,11 @@ namespace Example
 		player.previousPos = player.pos;
 		player.size = 0.2;
 		player.ID = id;
+		player.objectType = ObjectType::PLAYER;
 		gameObjects.push_back(&player);
 
 		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&player);
+		tilegrid->playerTile = &tilegrid->tileInPos.at(VectorMath2(tileX, tileY));
 
 		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
@@ -41,6 +43,7 @@ namespace Example
 		enemy.previousPos = enemy.pos;
 		enemy.size = 0.2;
 		enemy.ID = id;
+		enemy.objectType = ObjectType::ENEMY;
 		gameObjects.push_back(&enemy);
 
 		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&enemy);

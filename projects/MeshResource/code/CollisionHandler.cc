@@ -65,8 +65,45 @@ void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
     {
         moveObjectsToNeighborOfTile(tilesToUpdate[i], tilegrid);
     }
-    // check all the other collisions
-    // enemy vs player
+    
+    // -------- enemy vs player --------
+    // find player inside tile and remove it from gameObject list
+    GameObject* player;
+    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    {
+        if(tilegrid->playerTile->gameObjects[i]->objectType == ObjectType::PLAYER)
+        {
+            player = tilegrid->playerTile->gameObjects[i];
+            tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
+        }
+    }
+
+    // check inside its own tile
+    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    {
+        if(AABBCollision(player->pos, player->size, tilegrid->playerTile->gameObjects[i]->pos, tilegrid->playerTile->gameObjects[i]->size))
+        {
+            //std::cout << "Player has collided with an enemy" << std::endl;
+        }
+    }
+
+    // check against neighbor ground
+    for(int i = 0; i < tilegrid->playerTile->neighborGround.size(); i++)
+    {
+        // check against enemies
+        tile = &tilegrid->tileInPos.at(tilegrid->playerTile->neighborGround[i].pos);
+        for(int j = 0; j < tile->gameObjects.size(); j++)
+        {
+            if(AABBCollision(player->pos, player->size, tile->gameObjects[j]->pos, tile->gameObjects[j]->size))
+            {
+                //std::cout << "Player has collided with an enemy" << std::endl;
+            }
+        }
+        
+    }
+    // put back player into gameObject list
+    tilegrid->playerTile->gameObjects.push_back(player);
+    // --------
 }
 bool CollisionHandler::AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2)
 {
@@ -156,6 +193,10 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
 
                     // add new object
                     tilegrid->tileInPos.at(groundTile->pos).gameObjects.push_back(object);
+                    if(object->objectType == ObjectType::PLAYER)
+                    {
+                        tilegrid->playerTile = &tilegrid->tileInPos.at(groundTile->pos);
+                    }
                     //std::cout << "TestObject has moved to another ground tile" << std::endl;
                     
                     // -------- update the tilesToUpdate list --------
