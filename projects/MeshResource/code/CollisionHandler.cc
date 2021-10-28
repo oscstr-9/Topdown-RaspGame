@@ -96,12 +96,18 @@ bool CollisionHandler::pointInsideTile(VectorMath2 pointPos, VectorMath2 tilePos
     topRightX = tilePos.x + tileSize;
     topRightY = tilePos.y + tileSize;
 
-    if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
-        pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
-    {
-        // point is inside tile
+    VectorMath2 tilePosMinus = tilePos - VectorMath2(tileSize,tileSize);
+    VectorMath2 tilePosPlus = tilePos + VectorMath2(tileSize,tileSize);
+
+    if(pointPos.x >= tilePosMinus.x && pointPos.y >= tilePosMinus.y && pointPos.x <= tilePosPlus.x  && pointPos.x <= tilePosPlus.x){
         return true;
     }
+    // if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
+    //     pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
+    // {
+    //     // point is inside tile
+    //     return true;
+    // }
 
     return false;
 }
@@ -285,7 +291,7 @@ Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direc
     else
     {
         // -=
-        nextPoint.x -= direction.x * tileSize;
+        nextPoint.x += direction.x * tileSize;
         if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x - 1, nextTilePos.y)).worldPos, currentTile->size))
         {
             nextTilePos.x--;
@@ -303,7 +309,7 @@ Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direc
     else
     {
         // -=
-        nextPoint.y -= direction.y * tileSize;
+        nextPoint.y += direction.y * tileSize;
         if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x, nextTilePos.y - 1)).worldPos, currentTile->size))
         {
             nextTilePos.y--;

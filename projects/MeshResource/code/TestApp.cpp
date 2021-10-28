@@ -179,6 +179,7 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
     {
         Enemy enemy = Enemy(shader, freeSpawnLoactions[rand() % freeSpawnLoactions.size()]);
         enemies.push_back(enemy);
+		gameObjects.push_back(&enemy);
     }
     waveNum++;
     return enemies;
@@ -218,7 +219,7 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 
 			// Controll character
 
-			player.ControllerInputs(deltaTime);
+			player.ControllerInputs(deltaTime, *collisionHandler, tilegrid);
 			VectorMath2 endRay = player.pos - VectorMath2(10, 0);
 
 			//enemy.MoveToPoint(player.GetPos(), deltaTime);

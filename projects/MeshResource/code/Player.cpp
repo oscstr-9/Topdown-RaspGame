@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "render/MESHRESOURCE.h"
 #include "render/ShaderResource.h"
+#include "CollisionHandler.h"
+#include "Tilegrid.h"
+#include "RenderDebug.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -23,7 +26,7 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders){
     playerObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 }
 
-void Player::ControllerInputs(float deltaTime){
+void Player::ControllerInputs(float deltaTime, CollisionHandler collisionHandler, Tilegrid *tilegrid){
     // Controller Inputs
     GLFWgamepadstate state;
 
@@ -45,7 +48,7 @@ void Player::ControllerInputs(float deltaTime){
             down = false;
         }
         if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-            movementSpeed = 1;
+            collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
             if(debug)
@@ -129,7 +132,10 @@ VectorMath2 Player::GetPos(){
     return pos;
 }
 VectorMath2 Player::GetDirection(){
-    return VectorMath2(rotationMatrix[0][0], rotationMatrix[0][1]);
+    VectorMath4 rotationVector = rotationMatrix.VectorMultiplication(VectorMath4(1,1,1,1));
+    rotationVector.Normalize();
+    Debug::DrawLine(VectorMath3(pos, -6.5), VectorMath3((cos(rotAngle - M_PI/2) * 10) + pos.x, (sin(rotAngle - M_PI/2) * 10) + pos.y, -6.5), VectorMath4(1,0.5,0,1));
+    return VectorMath2(cos(rotAngle - M_PI/2), sin(rotAngle - M_PI/2));
 }
 
 void Player::DrawPlayer(){
