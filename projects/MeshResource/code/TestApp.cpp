@@ -242,7 +242,6 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			// Set projection-view-matrix
 
 			// After all input and GameObject updates are done, handle collision
-			//collisionHandler->checkRayAgainstEnemies(player.pos, endRay, tilegrid);
 			collisionHandler->handleCollisions(tilegrid);
 
 			// Draw to screen
