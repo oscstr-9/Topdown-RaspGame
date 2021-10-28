@@ -195,35 +195,21 @@ void CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
     }
     for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
     {
-        VectorMath2 enemyDirection = tilegrid->playerTile->gameObjects[i]->pos - player->pos;
-        enemyDirection.Normalize();
-        if(enemyDirection.x >= 0 && direction.x >= 0)
+        VectorMath2 pointInTile = start;
+        pointInTile = pointInTile - direction * tilegrid->playerTile->size;
+        while(pointInsideTile(pointInTile, tilegrid->playerTile->worldPos, tilegrid->playerTile->size))
         {
-            // both x = +
-            if(enemyDirection.y >= 0 && direction.y >= 0)
+            if(pointInsideTile(pointInTile, tilegrid->playerTile->gameObjects[i]->pos, tilegrid->playerTile->gameObjects[i]->size))
             {
-                // both y = +, enemy is hit
-                std::cout << "Player hit enemy" << std::endl;
+                std::cout << "Raycast hit an enemy" << std::endl;
+                tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
+                i--;
+                if(tilegrid->playerTile->gameObjects.empty())
+                {
+                    break;
+                }
             }
-            else if(enemyDirection.y < 0 && direction.y < 0)
-            {
-                // both y = -, enemy is hit
-                std::cout << "Player hit enemy" << std::endl;
-            }
-        }
-        else if(enemyDirection.x < 0 && direction.x < 0)
-        {
-            // both x = -
-            if(enemyDirection.y >= 0 && direction.y >= 0)
-            {
-                // both y = +, enemy is hit
-                std::cout << "Player hit enemy" << std::endl;
-            }
-            else if(enemyDirection.y < 0 && direction.y < 0)
-            {
-                // both y = -, enemy is hit
-                std::cout << "Player hit enemy" << std::endl;
-            }
+            pointInTile = pointInTile + direction * (tilegrid->playerTile->gameObjects[i]->size / 3);
         }
     }
     // --------
@@ -243,21 +229,35 @@ void CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
             std::cout << "Raycast hit a wall" << std::endl;
             break;
         }
-        // if enemy is inside, it's hit
+        // if enemy is inside, check if ray is inside the enemy
         for(int i = 0; i < nextTile->gameObjects.size(); i++)
         {
-            std::cout << "Raycast hit an enemy" << std::endl;
-            nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i--);
-            if(nextTile->gameObjects.empty())
+            // have points be more frequent inside tile to see if ray hit enemy
+            VectorMath2 pointInTile = nextTile->worldPos;
+            pointInTile = pointInTile - direction * nextTile->size;
+            while(pointInsideTile(pointInTile, nextTile->worldPos, nextTile->size))
             {
-                for(int j = 0; j < tilesToUpdate.size(); j++)
+                if(pointInsideTile(pointInTile, nextTile->gameObjects[i]->pos, nextTile->gameObjects[i]->size))
                 {
-                    if(tilesToUpdate[j]->pos == nextTile->pos)
+                    std::cout << "Raycast hit an enemy" << std::endl;
+                    nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i);
+                    i--;
+                    if(nextTile->gameObjects.empty())
                     {
-                        tilesToUpdate.erase(tilesToUpdate.begin() + j--);
+                        for(int j = 0; j < tilesToUpdate.size(); j++)
+                        {
+                            if(tilesToUpdate[j]->pos == nextTile->pos)
+                            {
+                                tilesToUpdate.erase(tilesToUpdate.begin() + j);
+                                j--;
+                            }
+                        }
+                        break;
                     }
                 }
+                pointInTile = pointInTile + direction * (nextTile->gameObjects[i]->size / 3);
             }
+            
         }
         nextTile = nextTileInDirection(nextTile, direction, &start, tilegrid);
     }
