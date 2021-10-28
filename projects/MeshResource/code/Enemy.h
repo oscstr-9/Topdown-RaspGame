@@ -23,7 +23,6 @@ public:
     Enemy();
     Enemy(std::shared_ptr<ShaderResource> shaders, VectorMath2 posIn);
     ~Enemy();
-    void CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid);
     void MoveToPoint(VectorMath2 posIn, float deltaTime);
     void DrawEnemy();
     void Destroy();

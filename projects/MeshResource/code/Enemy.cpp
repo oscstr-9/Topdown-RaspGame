@@ -45,37 +45,6 @@ void Enemy::MoveToPoint(VectorMath2 posIn, float deltaTime){
     enemyObject->setTransform(positionMatrix);
 }
 
-void Enemy::CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid){
-    std::vector<Enemy> enemies;
-    std::vector<VectorMath2> freeSpawnLoactions;
-
-
-    for (int x = 0; x < tilegrid.numOfX; x++)
-    {
-        for (int y = 0; y < tilegrid.numOfY; y++)
-            {
-                VectorMath4 cullingPos = VectorMath4(tilegrid.tiles[y][x].worldPos.x, tilegrid.tiles[y][x].worldPos.y, -7, 1);
-                cullingPos = viewMat.VectorMultiplication(cullingPos);
-                cullingPos.x /= cullingPos.w;
-                cullingPos.y /= cullingPos.w;
-
-                if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
-                    freeSpawnLoactions.push_back(VectorMath2(tilegrid.tiles[y][x].worldPos.x, tilegrid.tiles[y][x].worldPos.y));
-                }
-            }
-        }
-    
-    for (int i = 0; i < 10 + pow(waveNum,2); i++)
-    {
-        //Enemy enemy = Enemy(shader, freeSpawnLoactions[rand() % freeSpawnLoactions.size()]);
-        //enemies.push_back(enemy);
-        Debug::DrawSquare(0.6, VectorMath3(freeSpawnLoactions[rand() % (freeSpawnLoactions.size()-1)], -6.5), VectorMath4(0,0,1,1));
-    }
-
-    waveNum++;
-    
-}
-
 void Enemy::DrawEnemy(){
     enemyObject->Draw();
 }

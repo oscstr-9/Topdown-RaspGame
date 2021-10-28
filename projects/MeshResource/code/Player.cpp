@@ -45,7 +45,6 @@ void Player::ControllerInputs(float deltaTime){
             down = false;
         }
         if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-            std::cout << "trigger";
             movementSpeed = 1;
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){

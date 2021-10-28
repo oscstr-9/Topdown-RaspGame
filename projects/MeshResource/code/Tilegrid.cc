@@ -345,22 +345,22 @@ void Tilegrid::Draw(MatrixMath viewMat)
 
     // Debugging
   
-    for (int y = 0; y < numOfY; y++)
-    {
-        for (int x = 0; x < numOfX; x++)
-        {
-            VectorMath4 cullingPos = VectorMath4(tiles[y][x].worldPos.x, tiles[y][x].worldPos.y, -7, 1);
-            cullingPos = viewMat.VectorMultiplication(cullingPos);
-            cullingPos.x /= cullingPos.w;
-            cullingPos.y /= cullingPos.w;
+    // for (int y = 0; y < numOfY; y++)
+    // {
+    //     for (int x = 0; x < numOfX; x++)
+    //     {
+    //         VectorMath4 cullingPos = VectorMath4(tiles[y][x].worldPos.x, tiles[y][x].worldPos.y, -7, 1);
+    //         cullingPos = viewMat.VectorMultiplication(cullingPos);
+    //         cullingPos.x /= cullingPos.w;
+    //         cullingPos.y /= cullingPos.w;
 
-            if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
-                Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(0,1,0,1));
-            }
-            else
-                Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(1,0,0,1));
-        } 
-    }
+    //         if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
+    //             Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(0,1,0,1));
+    //         }
+    //         else
+    //             Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(1,0,0,1));
+    //     } 
+    // }
 }
 
 

@@ -153,6 +153,37 @@ namespace Example
 		return false;
 	}
 
+
+std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid){
+    std::vector<Enemy> enemies;
+    std::vector<VectorMath2> freeSpawnLoactions;
+    srand(time(NULL));
+
+    for (int x = 0; x < tilegrid.numOfX; x++)
+    {
+        for (int y = 0; y < tilegrid.numOfY; y++)
+            {
+                VectorMath4 cullingPos = VectorMath4(tilegrid.tiles[y][x].worldPos.x, tilegrid.tiles[y][x].worldPos.y, -7, 1);
+                cullingPos = viewMat.VectorMultiplication(cullingPos);
+                cullingPos.x /= cullingPos.w;
+                cullingPos.y /= cullingPos.w;
+
+                if(cullingPos.x > 1.1 || cullingPos.x < -1.1 || cullingPos.y > 1 || cullingPos.y < -1.2){
+					if(tilegrid.tiles[y][x].type == Type::GROUND)
+                    	freeSpawnLoactions.push_back(VectorMath2(tilegrid.tiles[y][x].worldPos.x, tilegrid.tiles[y][x].worldPos.y));
+                }
+            }
+        }
+    
+    for (int i = 0; i < 10 + pow(waveNum, 2); i++)
+    {
+        Enemy enemy = Enemy(shader, freeSpawnLoactions[rand() % freeSpawnLoactions.size()]);
+        enemies.push_back(enemy);
+    }
+    waveNum++;
+    return enemies;
+}
+
 	void ExampleApp::Run()
 	{
 		// Create camera
@@ -168,18 +199,19 @@ namespace Example
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
 
-		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");
-
-		Enemy enemyWaves;
-		enemyWaves.CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
+		shaders->setVec4(VectorMath4(1, 1, 1, 1), "colorVector");		
 
 		float startTime = glfwGetTime();
+		float spawntimer = glfwGetTime();
+		enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
 		while (this->window->IsOpen())
 		{
+			if(enemyWaves.size() == 0){
+				enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
+			}
 			float deltaTime = glfwGetTime() - startTime;
 			startTime = glfwGetTime();
 
-			//std::cout << 1/deltaTime << std::endl;
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
@@ -189,7 +221,7 @@ namespace Example
 			player.ControllerInputs(deltaTime);
 			VectorMath2 endRay = player.pos - VectorMath2(10, 0);
 
-			enemy.MoveToPoint(player.GetPos(), deltaTime);
+			//enemy.MoveToPoint(player.GetPos(), deltaTime);
 
 			// Update camera pos
 			cameraPos = VectorMath3(player.pos + VectorMath2(0, -3), -1);
@@ -215,8 +247,11 @@ namespace Example
 
 			// Draw to screen
 			player.DrawPlayer();
-			enemy.DrawEnemy();
 			tilegrid->Draw(camera.GetProjViewMatrix());
+			for (int i = 0; i < enemyWaves.size()-1; i++){
+				enemyWaves[i].MoveToPoint(player.GetPos(), deltaTime);
+				enemyWaves[i].DrawEnemy();
+			}
 
 			if(debug){
 				Debug::Render(debugCamera.GetProjViewMatrix());
