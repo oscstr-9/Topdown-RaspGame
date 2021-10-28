@@ -185,8 +185,7 @@ namespace Example
 			// Controll character
 
 			player.ControllerInputs(deltaTime);
-			VectorMath2 endRay = player.pos - VectorMath2(10, 0);
-
+			//collisionHandler->checkRayAgainstEnemies(player.pos, player.GetDirection(), tilegrid);
 			enemy.MoveToPoint(player.GetPos(), deltaTime);
 
 			// Update camera pos
@@ -209,7 +208,6 @@ namespace Example
 			//shaders->setMat4(camera.GetProjViewMatrix(), "projectionViewMatrix");
 
 			// After all input and GameObject updates are done, handle collision
-			//collisionHandler->checkRayAgainstEnemies(player.pos, endRay, tilegrid);
 			collisionHandler->handleCollisions(tilegrid);
 
 			// Draw to screen

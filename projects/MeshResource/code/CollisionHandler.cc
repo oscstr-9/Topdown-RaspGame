@@ -91,10 +91,10 @@ bool CollisionHandler::pointInsideTile(VectorMath2 pointPos, VectorMath2 tilePos
     // tilePos.y = tilePos.y * tileSize;
 
     float bottomLeftX, bottomLeftY, topRightX, topRightY;
-    bottomLeftX = tilePos.x - tileSize/2;
-    bottomLeftY = tilePos.y - tileSize/2;
-    topRightX = tilePos.x + tileSize/2;
-    topRightY = tilePos.y + tileSize/2;
+    bottomLeftX = tilePos.x - tileSize;
+    bottomLeftY = tilePos.y - tileSize;
+    topRightX = tilePos.x + tileSize;
+    topRightY = tilePos.y + tileSize;
 
     if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
         pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
@@ -179,48 +179,141 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
     }
 }
 
-void CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 end, Tilegrid* tilegrid)
+void CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 direction, Tilegrid* tilegrid)
 {
-    // start is in world pos. Convert that pos to 
-    VectorMath2 startTile = tilegrid->playerTile->pos;
-    // walk tile per tile along ray
-    VectorMath2 direction = end - start;
     direction.Normalize();
 
-    Tile* nextTile = nextTileInDirection(tilegrid->playerTile, direction, start, tilegrid);
+    // -------- check inside player tile first --------
+    GameObject* player;
+    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    {
+        if(tilegrid->playerTile->gameObjects[i]->objectType == ObjectType::PLAYER)
+        {
+            player = tilegrid->playerTile->gameObjects[i];
+            tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
+        }
+    }
+    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    {
+        VectorMath2 enemyDirection = tilegrid->playerTile->gameObjects[i]->pos - player->pos;
+        enemyDirection.Normalize();
+        if(enemyDirection.x >= 0 && direction.x >= 0)
+        {
+            // both x = +
+            if(enemyDirection.y >= 0 && direction.y >= 0)
+            {
+                // both y = +, enemy is hit
+                std::cout << "Player hit enemy" << std::endl;
+            }
+            else if(enemyDirection.y < 0 && direction.y < 0)
+            {
+                // both y = -, enemy is hit
+                std::cout << "Player hit enemy" << std::endl;
+            }
+        }
+        else if(enemyDirection.x < 0 && direction.x < 0)
+        {
+            // both x = -
+            if(enemyDirection.y >= 0 && direction.y >= 0)
+            {
+                // both y = +, enemy is hit
+                std::cout << "Player hit enemy" << std::endl;
+            }
+            else if(enemyDirection.y < 0 && direction.y < 0)
+            {
+                // both y = -, enemy is hit
+                std::cout << "Player hit enemy" << std::endl;
+            }
+        }
+    }
+    // --------
 
+    // -------- walk through the tiles until ray is inside a wall --------
+    Tile* nextTile = nextTileInDirection(tilegrid->playerTile, direction, &start, tilegrid);
+    // move outside of player tile
+    while(nextTile->pos == tilegrid->playerTile->pos)
+    {
+        nextTile = nextTileInDirection(tilegrid->playerTile, direction, &start, tilegrid);
+    }
+    // check the rest of the tiles in ray direction
+    while(true)
+    {
+        if(nextTile->type == Type::WALL)
+        {
+            std::cout << "Raycast hit a wall" << std::endl;
+            break;
+        }
+        // if enemy is inside, it's hit
+        for(int i = 0; i < nextTile->gameObjects.size(); i++)
+        {
+            std::cout << "Raycast hit an enemy" << std::endl;
+            nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i--);
+            if(nextTile->gameObjects.empty())
+            {
+                for(int j = 0; j < tilesToUpdate.size(); j++)
+                {
+                    if(tilesToUpdate[j]->pos == nextTile->pos)
+                    {
+                        tilesToUpdate.erase(tilesToUpdate.begin() + j--);
+                    }
+                }
+            }
+        }
+        nextTile = nextTileInDirection(nextTile, direction, &start, tilegrid);
+    }
+    // --------
+    tilegrid->playerTile->gameObjects.push_back(player);
 }
-Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direction, VectorMath2 rayStart, Tilegrid* tilegrid)
+Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direction, VectorMath2* rayStart, Tilegrid* tilegrid)
 {
     Tile* nextTile;
 
     VectorMath2 nextPoint;
+    VectorMath2 nextTilePos = currentTile->pos;
     float tileSize = currentTile->size * 2;
-    nextPoint = rayStart + direction * tileSize;
+    nextPoint = *rayStart;
 
-
-    // convert nextPoint from world to tile pos
     if(direction.x > 0)
     {
         // +=
-        nextPoint.x = nextPoint.x + tileSize / 2 / tileSize;
+        nextPoint.x += direction.x * tileSize;
+        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x + 1, nextTilePos.y)).worldPos, currentTile->size))
+        {
+            nextTilePos.x++;
+        }
     }
     else
     {
         // -=
+        nextPoint.x -= direction.x * tileSize;
+        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x - 1, nextTilePos.y)).worldPos, currentTile->size))
+        {
+            nextTilePos.x--;
+        }
     }
     if(direction.y > 0)
     {
         // +=
+        nextPoint.y += direction.y * tileSize;
+        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x, nextTilePos.y + 1)).worldPos, currentTile->size))
+        {
+            nextTilePos.y++;
+        }
     }
     else
     {
         // -=
+        nextPoint.y -= direction.y * tileSize;
+        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x, nextTilePos.y - 1)).worldPos, currentTile->size))
+        {
+            nextTilePos.y--;
+        }
     }
 
+    rayStart->x = nextPoint.x;
+    rayStart->y = nextPoint.y;
 
-    //nextTile = &tileInPos.at(nextPoint);
-
+    nextTile = &tilegrid->tileInPos.at(nextTilePos);
 
     return nextTile;
 }

@@ -129,6 +129,9 @@ void Player::ControllerInputs(float deltaTime){
 VectorMath2 Player::GetPos(){
     return pos;
 }
+VectorMath2 Player::GetDirection(){
+    return VectorMath2(rotationMatrix[0][0], rotationMatrix[0][1]);
+}
 
 void Player::DrawPlayer(){
     playerObject->Draw();
