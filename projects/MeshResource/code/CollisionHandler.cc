@@ -178,3 +178,49 @@ void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegri
         }
     }
 }
+
+void CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 end, Tilegrid* tilegrid)
+{
+    // start is in world pos. Convert that pos to 
+    VectorMath2 startTile = tilegrid->playerTile->pos;
+    // walk tile per tile along ray
+    VectorMath2 direction = end - start;
+    direction.Normalize();
+
+    Tile* nextTile = nextTileInDirection(tilegrid->playerTile, direction, start, tilegrid);
+
+}
+Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direction, VectorMath2 rayStart, Tilegrid* tilegrid)
+{
+    Tile* nextTile;
+
+    VectorMath2 nextPoint;
+    float tileSize = currentTile->size * 2;
+    nextPoint = rayStart + direction * tileSize;
+
+
+    // convert nextPoint from world to tile pos
+    if(direction.x > 0)
+    {
+        // +=
+        nextPoint.x = nextPoint.x + tileSize / 2 / tileSize;
+    }
+    else
+    {
+        // -=
+    }
+    if(direction.y > 0)
+    {
+        // +=
+    }
+    else
+    {
+        // -=
+    }
+
+
+    //nextTile = &tileInPos.at(nextPoint);
+
+
+    return nextTile;
+}

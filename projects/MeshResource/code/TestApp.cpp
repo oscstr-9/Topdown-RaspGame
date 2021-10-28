@@ -64,6 +64,16 @@ namespace Example
 
 		return VectorMath2(posX, posY);
 	}
+	VectorMath2 ExampleApp::worldToTilePos(VectorMath2 worldPos)
+	{
+		// tile (0, 0) in tilePos
+		float posX = 0;
+		float posY = 0;
+		// add on tilePos
+		
+
+		return VectorMath2(posX, posY);
+	}
 
 	bool ExampleApp::Open()
 	{
@@ -177,6 +187,7 @@ namespace Example
 			// Controll character
 
 			player.ControllerInputs(deltaTime);
+			VectorMath2 endRay = player.pos - VectorMath2(10, 0);
 
 			enemy.MoveToPoint(player.GetPos(), deltaTime);
 
@@ -199,6 +210,7 @@ namespace Example
 			// Set projection-view-matrix
 
 			// After all input and GameObject updates are done, handle collision
+			//collisionHandler->checkRayAgainstEnemies(player.pos, endRay, tilegrid);
 			collisionHandler->handleCollisions(tilegrid);
 
 			// Draw to screen
