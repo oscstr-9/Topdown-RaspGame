@@ -24,7 +24,7 @@ namespace Example
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
-		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
+		player.pos = VectorMath2(0, 0);
 		player.pos.PrintVector();
 		player.previousPos = player.pos;
 		player.size = 0.2;
@@ -32,10 +32,11 @@ namespace Example
 		player.objectType = ObjectType::PLAYER;
 		gameObjects.push_back(&player);
 
-		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&player);
-		tilegrid->playerTile = &tilegrid->tileInPos.at(VectorMath2(tileX, tileY));
+		//tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&player);
+		//tilegrid->playerTile = &tilegrid->tileInPos.at(VectorMath2(tileX, tileY));
+		tilegrid->tiles[tileY][tileX].gameObjects.push_back(&player);
 
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
+		//collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
 
 	void ExampleApp::spawnEnemyObject(int id, int tileX, int tileY)
@@ -48,21 +49,21 @@ namespace Example
 		enemy.objectType = ObjectType::ENEMY;
 		gameObjects.push_back(&enemy);
 
-		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&enemy);
+		//tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&enemy);
 
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
+		//collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
 
 	VectorMath2 ExampleApp::tileToWorldPos(VectorMath2 tilePos)
 	{
 		// tile (0, 0) in worldPos
-		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		// add on tilePos
-		posX += tilePos.x * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		posY += tilePos.y * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		// float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		// float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		// // add on tilePos
+		// posX += tilePos.x * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		// posY += tilePos.y * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
 
-		return VectorMath2(posX, posY);
+		return VectorMath2(0, 0);
 	}
 	VectorMath2 ExampleApp::worldToTilePos(VectorMath2 worldPos)
 	{
@@ -136,7 +137,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(40, 40, -8, 0.4);
+			tilegrid = new Tilegrid(2, 2, -8, 0.4);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
@@ -145,7 +146,7 @@ namespace Example
 			player.setupPlayer(shaders);
 
 			// Create enemies (should probably spawn in run loop instead)
-			spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 6, tilegrid->numOfY/2 + 6);
+			//spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 6, tilegrid->numOfY/2 + 6);
 			
 
 			return true;
@@ -204,12 +205,12 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 
 		float startTime = glfwGetTime();
 		float spawntimer = glfwGetTime();
-		enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
+		//enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
 		while (this->window->IsOpen())
 		{
-			if(enemyWaves.size() == 0){
-				enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
-			}
+			// if(enemyWaves.size() == 0){
+			// 	enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
+			// }
 			float deltaTime = glfwGetTime() - startTime;
 			startTime = glfwGetTime();
 
@@ -242,16 +243,13 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			light.bindLight(shaders, camera.GetPosition());
 			// Set projection-view-matrix
 
-			// After all input and GameObject updates are done, handle collision
-			collisionHandler->handleCollisions(tilegrid);
-
 			// Draw to screen
 			player.DrawPlayer();
 			tilegrid->Draw(camera.GetProjViewMatrix());
-			for (int i = 0; i < enemyWaves.size()-1; i++){
-				enemyWaves[i].MoveToPoint(player.GetPos(), deltaTime);
-				enemyWaves[i].DrawEnemy();
-			}
+			// for (int i = 0; i < enemyWaves.size()-1; i++){
+			// 	enemyWaves[i].MoveToPoint(player.GetPos(), deltaTime);
+			// 	enemyWaves[i].DrawEnemy();
+			// }
 
 			if(debug){
 				Debug::Render(debugCamera.GetProjViewMatrix());

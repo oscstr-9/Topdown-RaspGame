@@ -48,7 +48,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler collisionHandler
             down = false;
         }
         if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-            collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
+            //collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
             if(debug)
