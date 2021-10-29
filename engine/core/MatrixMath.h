@@ -100,7 +100,7 @@ inline VectorMath4 MatrixMath::VectorMultiplication(VectorMath4 vectorA) {
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			tempVector[i] += (*this)[i][j] * vectorA[i];
+			tempVector[i] += (*this)[j][i] * vectorA[j];
 		}
 	}
 	return tempVector;

@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "render/MESHRESOURCE.h"
 #include "render/ShaderResource.h"
+#include "CollisionHandler.h"
+#include "Tilegrid.h"
+#include "RenderDebug.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -18,26 +21,24 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders){
     // Object meshes
     std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
     // Object transform
-    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(0, 0,-7)) * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
     // Object graphicnodes
     playerObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 }
 
-bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
+void Player::ControllerInputs(float deltaTime, CollisionHandler collisionHandler, Tilegrid *tilegrid){
     // Controller Inputs
     GLFWgamepadstate state;
 
     // Button inputs
     if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state)){
         if(state.buttons[GLFW_GAMEPAD_BUTTON_A]){
-            std::cout << "A" << std::endl;
             movementSpeed += 0.1;
         }
         else{
             up = false;
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_B]){
-            std::cout << "B" << std::endl;
             movementSpeed -= 0.1;
             if (movementSpeed <= 0.2){
                 movementSpeed = 0.2;
@@ -47,11 +48,13 @@ bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
             down = false;
         }
         if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-            std::cout << "Trigger" << std::endl;
-
+            collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
-            std::cout << "Back" << std::endl;
+            if(debug)
+                debug = false;
+            else
+                debug = true;
         }
         if (state.buttons[GLFW_GAMEPAD_BUTTON_START]){
             quit = true;
@@ -60,7 +63,7 @@ bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
     // Joystick inputs
     if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -deadzone){
         forward = state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
-        posY -= forward * movementSpeed * deltatTime;
+        posY -= forward * movementSpeed * deltaTime;
     }
     else{
         forward = 0;
@@ -68,7 +71,7 @@ bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
 
     if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -deadzone){
         right = state.axes[GLFW_GAMEPAD_AXIS_LEFT_X];
-        posX += right * movementSpeed * deltatTime;
+        posX += right * movementSpeed * deltaTime;
     }
     else{
         right = 0;
@@ -86,6 +89,24 @@ bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
     else{
         x = 0;
     }
+
+    // If left joystick is unmoved look towards move direction
+    if(x == 0 && y == 0){
+        if(right != 0){
+            rotAngle = -atan(forward / right)+M_PI/2;
+            if(right < 0){
+                rotAngle += M_PI;
+            }
+        }
+        else{
+            if(forward < 0)
+                rotAngle = M_PI;
+            else if(forward > 0)
+                rotAngle = 0;
+        }
+    }
+
+    // look towards left joystick direction
     if (x != 0){
         rotAngle = -atan(y / x)+M_PI/2;
         if(x < 0){
@@ -93,23 +114,28 @@ bool Player::ControllerInputs(float deltatTime, VectorMath3 &cameraPos){
         }
     }
     else{
-        if(y<0)
+        if(y < 0)
             rotAngle = M_PI;
         else if(y>0)
             rotAngle = 0;
     }
     
     rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
-    positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(posX, posY, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+    previousPos = pos;
+    pos = VectorMath2(posX, posY);
+    positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
-    //positionMatrix = MatrixMath::TranslationMatrix((VectorMath3(-right, forward, 0) )) * positionMatrix * rotationMatrix;
     playerObject->setTransform(positionMatrix);
-    cameraPos = VectorMath3(cameraPos.x-right*deltatTime*movementSpeed, cameraPos.y+forward*deltatTime*movementSpeed, cameraPos.z);
-    return quit;
 }
 
-MatrixMath Player::GetPos(){
-    return positionMatrix;
+VectorMath2 Player::GetPos(){
+    return pos;
+}
+VectorMath2 Player::GetDirection(){
+    VectorMath4 rotationVector = rotationMatrix.VectorMultiplication(VectorMath4(1,1,1,1));
+    rotationVector.Normalize();
+    Debug::DrawLine(VectorMath3(pos, -6.5), VectorMath3((cos(rotAngle - M_PI/2) * 10) + pos.x, (sin(rotAngle - M_PI/2) * 10) + pos.y, -6.5), VectorMath4(1,0.5,0,1));
+    return VectorMath2(cos(rotAngle - M_PI/2), sin(rotAngle - M_PI/2));
 }
 
 void Player::DrawPlayer(){

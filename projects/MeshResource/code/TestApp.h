@@ -14,9 +14,9 @@
 #include <memory>
 
 #include "Player.h"
+#include "Enemy.h"
 #include "Tilegrid.h"
 #include "CollisionHandler.h"
-#include "TestObject.h"
 
 namespace Example
 {
@@ -30,30 +30,41 @@ public:
 	/// open app
 	bool Open();
 	void ControllerInputs();
-	void spawnTestObject();
-	void moveTestObjects();
+	void spawnPlayerObject(int id, int tileX, int tileY);
+	void spawnEnemyObject(int id, int tileX, int tileY);
+	VectorMath2 tileToWorldPos(VectorMath2 tilePos);
+	VectorMath2 worldToTilePos(VectorMath2 tilePos);
+    std::vector<Enemy> CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid);
+
 	/// run app
 	void Run();
 private:
 	//screen size
 	int width, height;
 
-	bool quit = false;
+	bool debug = false;
 	float size = 1;
 	float speed = 0.003;
+	int spawnID = 1;
+	
+	int waveNum = 0;
+	std::vector<Enemy> enemyWaves;
 
-	MatrixMath camRotMat = MatrixMath::TranslationMatrix(VectorMath3(0, 3, -2)) * RotateMatrix(M_PI/5, VectorMath3(-1, 0, 0));
+	MatrixMath camRotMat = RotateMatrix(M_PI/6, VectorMath3(-1, 0, 0));
+	VectorMath3 cameraPos = VectorMath3(0, 4, 2);
+	MatrixMath debugCamRotMat = Identity();
+	VectorMath3 debugCameraPos = VectorMath3(0, 0, -20);
 	MatrixMath posMat = Identity();
 	MatrixMath characterPosMat = Identity();
-	VectorMath3 cameraPos = VectorMath3(0, 3, 0);
 	std::shared_ptr<ShaderResource> shaders;
 	// GraphicsNode* objObject;
 	Display::Window* window;
 
 	Player player;
+	Enemy enemy;
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;
-	std::vector<TestObject> testObjects;
+	std::vector<GameObject*> gameObjects;
 };
 } // namespace Example

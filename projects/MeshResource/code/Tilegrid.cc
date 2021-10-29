@@ -1,10 +1,12 @@
 #include "Tilegrid.h"
+#include "RenderDebug.h"
 
 Tilegrid::Tilegrid(int numOfX, int numOfY, float zPlacement, float tileSize)
 {
     this->numOfX = numOfX;
     this->numOfY = numOfY;
     this->zPlacement = zPlacement;
+    this->tileSize = tileSize;
     createGrid(tileSize);
 }
 
@@ -13,11 +15,13 @@ void Tilegrid::createGrid(float tileSize)
     // -------- Tiles --------
     int random;
     int increment = 0;
+    float posY = -(numOfY - 1) * tileSize;
     for(int y = 0; y < numOfY; y++)
     {
         // create new empty row for storing tiles
         std::vector<Tile> tileRow;
         tiles.push_back(tileRow);
+        float posX = -(numOfX - 1) * tileSize;
         for(int x = 0; x < numOfX; x++)
         {
             // create new tile to add to this row of tiles
@@ -25,6 +29,7 @@ void Tilegrid::createGrid(float tileSize)
             tile.size = tileSize;
             tile.pos.x = x;
             tile.pos.y = y;
+            tile.worldPos = VectorMath2(posX, posY);
 
             // make the tile ground or wall
             srand(time(0) + increment++);
@@ -39,16 +44,28 @@ void Tilegrid::createGrid(float tileSize)
                 tile.type = Type::WALL;
             }
 
+            // -------- testing --------
+            // if(x == 0 && y == 37)
+            // {
+            //     tile.type = Type::WALL;
+            // }
+            // --------
+
             tiles[y].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
+
+            posX += 2 * tileSize;
         }
+        posY += 2 * tileSize;
     }
     // -------- Add walls around grid --------
+    posY = -(numOfY + 1) * tileSize;
     for(int y = -1; y < numOfY + 1; y++)
     {
         // create new empty row for storing tiles
         std::vector<Tile> tileRow;
         tiles.push_back(tileRow);
+        float posX = -(numOfX + 1) * tileSize;
         // bottom and top border
         if(y == -1 || y == numOfY)
         {
@@ -59,31 +76,49 @@ void Tilegrid::createGrid(float tileSize)
                 tile.size = tileSize;
                 tile.pos.x = x;
                 tile.pos.y = y;
+                // add on tilePos
+                if(y == numOfY)
+                {
+                    posY = (numOfY + 1) * tileSize;
+                }
+                tile.worldPos = VectorMath2(posX, posY);
                 tile.type = Type::WALL;
                 tiles[tiles.size() - 1].push_back(tile);
                 tileInPos.insert(std::make_pair(tile.pos, tile));
+                posX += 2 * tileSize;
             }
+            posY += 2 * tileSize;
         }
         // side borders
         else
         {
+            // left
             Tile tile;
             tile.size = tileSize;
             tile.pos.x = -1;
             tile.pos.y = y;
+            posX = -(numOfX + 1) * tileSize;
+            tile.worldPos = VectorMath2(posX, posY);
             tile.type = Type::WALL;
             tiles[tiles.size() - 1].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
 
+            // right
             tile.size = tileSize;
             tile.pos.x = numOfX;
+            posX = -(numOfX - 1) * tileSize;
+            posX += tile.pos.x * 2 * tileSize;
+            tile.worldPos.x = posX;
             tiles[tiles.size() - 1].push_back(tile);
             tileInPos.insert(std::make_pair(tile.pos, tile));
+
+            posY += 2 * tileSize;
         }
     }
     // -------- Grid size --------
-    sizeX = numOfX * tiles[0][0].size;
-    sizeY = numOfY * tiles[0][0].size;
+    VectorMath2 pos(0, 0);
+    sizeX = numOfX * tileInPos.at(pos).size;
+    sizeY = numOfY * tileInPos.at(pos).size;
     // -------- Add neighbors to the tiles --------
     for(int y = 0; y < tiles.size(); y++)
     {
@@ -91,7 +126,10 @@ void Tilegrid::createGrid(float tileSize)
         {
             if(tiles[y][x].type == Type::WALL)
             {
-                addWallToNeighbors(tiles[y][x]);
+                if(x == 0 && y == 37)
+                    addWallToNeighbors(tiles[y][x]);
+                else
+                    addWallToNeighbors(tiles[y][x]);
             }
             else
             {
@@ -103,7 +141,7 @@ void Tilegrid::createGrid(float tileSize)
 
 void Tilegrid::addWallToNeighbors(Tile wall)
 {
-    Pos upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
+    VectorMath2 upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
     upLeftPos.x = wall.pos.x - 1;
     upLeftPos.y = wall.pos.y + 1;
     upPos.x = wall.pos.x;
@@ -142,7 +180,7 @@ void Tilegrid::addWallToNeighbors(Tile wall)
 }
 void Tilegrid::addGroundToNeighbors(Tile ground)
 {
-    Pos upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
+    VectorMath2 upLeftPos, upPos, upRightPos, leftPos, rightPos, downLeftPos, downPos, downRightPos;
     upLeftPos.x = ground.pos.x - 1;
     upLeftPos.y = ground.pos.y + 1;
     upPos.x = ground.pos.x;
@@ -199,7 +237,10 @@ void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders, bool show
     {
         for(int x = 0; x < numOfX; x++)
         {
-            if(tiles[y][x].type == Type::WALL)
+            VectorMath2 pos;
+            pos.y = y;
+            pos.x = x;
+            if(tileInPos.at(pos).type == Type::WALL)
             {
                 MatrixMath transform = Identity(); // wall transform is set in placeWalls()
                 wallTiles.push_back(GraphicsNode(wallMesh, wallTexture, shaders, transform));
@@ -219,73 +260,107 @@ void Tilegrid::createBorderGraphics(std::shared_ptr<ShaderResource> shaders)
     texture->LoadFromFile();
     std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("cube");
 
-    float wallPosX = -(numOfX + 1) * tiles[0][0].size;
-    float wallPosY = -(numOfY + 1) * tiles[0][0].size;
+    VectorMath2 pos;
+    pos.x = 0;
+    pos.y = 0;
+    float wallPosX = -(numOfX + 1) * tileInPos.at(pos).size;
+    float wallPosY = -(numOfY + 1) * tileInPos.at(pos).size;
 
     float zOffset = 0.8;
 
     for(int y = -1; y < numOfY + 1; y++)
     {
-        wallPosX = -(numOfX + 1) * tiles[0][0].size;
+        wallPosX = -(numOfX + 1) * tileInPos.at(pos).size;
         // bottom and top border
         if(y == -1 || y == numOfY)
         {
             for(int x = -1; x < numOfX + 1; x++)
             {
                 MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
                 wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-                wallPosX += 2 * tiles[0][0].size;
+                wallPosX += 2 * tileInPos.at(pos).size;
             }
-            wallPosY += 2 * tiles[0][0].size;
+            wallPosY += 2 * tileInPos.at(pos).size;
         }
         // side borders
         else
         {
             // left
             MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
             wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-            wallPosX += 2 * tiles[0][0].size * (numOfX + 1);
 
             // right
+            wallPosX += 2 * tileInPos.at(pos).size * (numOfX + 1);
             transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + zOffset)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
             wallTiles.push_back(GraphicsNode(mesh, texture, shaders, transform));
-            wallPosY += 2 * tiles[0][0].size;
+            wallPosY += 2 * tileInPos.at(pos).size;
         }
     }
 }
 
 void Tilegrid::placeWalls()
 {
-    float wallPosX = -(numOfX - 1) * tiles[0][0].size;
-    float wallPosY = -(numOfY - 1) * tiles[0][0].size;
+    VectorMath2 pos;
+    pos.x = 0;
+    pos.y = 0;
+    float wallPosX = -(numOfX - 1) * tileInPos.at(pos).size;
+    float wallPosY = -(numOfY - 1) * tileInPos.at(pos).size;
     int wallInt = 0;
     for(int y = 0; y < numOfY; y++)
     {
-        wallPosX = -(numOfX - 1) * tiles[0][0].size;
+        wallPosX = -(numOfX - 1) * tileInPos.at(pos).size;
         for(int x = 0; x < numOfX; x++)
         {
-            if(tiles[y][x].type == Type::WALL)
+            pos.y = y;
+            pos.x = x;
+            if(tileInPos.at(pos).type == Type::WALL)
             {
                 MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + 0.3)) * 
-                    ScalarMatrix(VectorMath3(tiles[0][0].size, tiles[0][0].size, 1));
+                    ScalarMatrix(VectorMath3(tileInPos.at(pos).size, tileInPos.at(pos).size, 1));
                 wallTiles[wallInt++].setTransform(transform);
             }
-            wallPosX += 2 * tiles[0][0].size;
+            wallPosX += 2 * tileInPos.at(pos).size;
         }
-        wallPosY += 2 * tiles[0][0].size;
+        wallPosY += 2 * tileInPos.at(pos).size;
     }
 }
 
-void Tilegrid::Draw()
+void Tilegrid::Draw(MatrixMath viewMat)
 {
     groundTile.Draw();
     for(GraphicsNode tile : wallTiles)
     {
-        tile.Draw();
+        VectorMath4 cullingPos = VectorMath4(tile.getTransform()[3][0], tile.getTransform()[3][1],tile.getTransform()[3][2],tile.getTransform()[3][3]);
+        cullingPos = viewMat.VectorMultiplication(cullingPos);
+        cullingPos.x /= cullingPos.w;
+        cullingPos.y /= cullingPos.w;
+        
+        if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
+            tile.Draw();
+        }
     }
+
+    // Debugging
+  
+    // for (int y = 0; y < numOfY; y++)
+    // {
+    //     for (int x = 0; x < numOfX; x++)
+    //     {
+    //         VectorMath4 cullingPos = VectorMath4(tiles[y][x].worldPos.x, tiles[y][x].worldPos.y, -7, 1);
+    //         cullingPos = viewMat.VectorMultiplication(cullingPos);
+    //         cullingPos.x /= cullingPos.w;
+    //         cullingPos.y /= cullingPos.w;
+
+    //         if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
+    //             Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(0,1,0,1));
+    //         }
+    //         else
+    //             Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(1,0,0,1));
+    //     } 
+    // }
 }
 
 

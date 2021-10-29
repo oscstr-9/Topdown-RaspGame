@@ -20,7 +20,7 @@ void ScreenCamera::SetRotMat(MatrixMath rotMatIn) {
 }
 
 MatrixMath ScreenCamera::GetProjViewMatrix() {
-	return  projectionMat * rotMat * MatrixMath::TranslationMatrix(pos);
+	return  projectionMat * rotMat * MatrixMath::TranslationMatrix(-pos);
 }
 
 VectorMath3 ScreenCamera::GetPosition() {
