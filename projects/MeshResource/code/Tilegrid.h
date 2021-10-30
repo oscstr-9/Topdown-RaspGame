@@ -26,10 +26,8 @@ public:
 
     void createGrid(float tileSize);
     void createGraphics(std::shared_ptr<ShaderResource> shaders, bool showBorders);
-    void createBorderGraphics(std::shared_ptr<ShaderResource> shaders);
     void placeWalls();
-    void addWallToNeighbors(Tile wall);
-    void addGroundToNeighbors(Tile ground);
+    void moveToTile(GameObject* object, VectorMath2 tilePos);
 
     void Draw(MatrixMath viewMat);
 

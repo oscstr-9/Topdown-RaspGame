@@ -126,7 +126,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(5, 3, -8, 0.5);
+			tilegrid = new Tilegrid(10, 10, -8, 0.5);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
@@ -210,8 +210,8 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			// Controll character
 			// Check wall collision inside controllerinputs
 			player.ControllerInputs(deltaTime, collisionHandler, tilegrid);
-			// TODO: 2. move player to other tile if necessary
-			
+			// Move player to other tile if necessary
+			collisionHandler->updateTilePos(&player, tilegrid);
 			// TODO: 3. move enemies (include wall collision here)
 			// TODO: 4. move enemies to other tiles if necessary
 			// TODO: 5. check enemy collision
