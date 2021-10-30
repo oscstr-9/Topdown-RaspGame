@@ -7,8 +7,10 @@
 
 class CollisionHandler {
 public:
-    std::vector<Tile*> tilesToUpdate;
+    //std::vector<Tile*> tilesToUpdate;
 
+    // objectPos is the new position the object will get if no collision occurs
+    bool hasCollidedWithWall(Tilegrid* tilegrid, VectorMath2 objectPos, float objectSize, VectorMath2 tilePos);
     void removeTile(Tile* tile);
     void handleCollisions(Tilegrid* tilegrid);
     bool AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2);

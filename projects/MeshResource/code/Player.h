@@ -14,7 +14,7 @@ public:
     Player();
     ~Player();
     void setupPlayer(std::shared_ptr<ShaderResource> shaders);
-    void ControllerInputs(float deltaTime, class CollisionHandler collisionHandler, class Tilegrid *tilegrid);
+    void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid);
     VectorMath2 GetPos();
     VectorMath2 GetDirection();
     void DrawPlayer();

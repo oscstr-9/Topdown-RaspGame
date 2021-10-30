@@ -1,5 +1,31 @@
 #include "CollisionHandler.h"
 
+bool CollisionHandler::hasCollidedWithWall(Tilegrid* tilegrid, VectorMath2 objectPos, float objectSize, VectorMath2 tilePos)
+{
+    // check all 8 neighbors
+    // y = tilePos.y - 1
+    // y = tilePos.y
+    // y = tilePos.y + 1
+    objectPos.PrintVector();
+    for(int neighborTileY = tilePos.y - 1; neighborTileY <= tilePos.y + 1; neighborTileY++)
+    {
+        for(int neighborTileX = tilePos.x - 1; neighborTileX <= tilePos.x + 1; neighborTileX++)
+        {
+            if(VectorMath2(neighborTileX, neighborTileY) == tilePos)
+                continue;
+            if(tilegrid->tiles[neighborTileY][neighborTileX].type == Type::WALL)
+            {
+                if(AABBCollision(objectPos, objectSize, tilegrid->tiles[neighborTileY][neighborTileX].worldPos, tilegrid->tiles[neighborTileY][neighborTileX].size))
+                {
+                    std::cout << "has collided with wall: " << neighborTileY << ", " << neighborTileX << std::endl;
+                    return true;
+                }
+            }
+        }
+    }
+    std::cout << "has not collided with walls" << std::endl;
+    return false;
+}
 // void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
 // {
 //     if(tilesToUpdate.empty())
@@ -72,18 +98,24 @@
 //     tilegrid->playerTile->gameObjects.push_back(player);
 //     // --------
 // }
-// bool CollisionHandler::AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2)
-// {
-//     size1 = size1 * 1.9;
-//     size2 = size2 * 1.9;
-//     if(pos1.x + size1 > pos2.x && pos2.x + size2 > pos1.x &&
-//        pos1.y + size1 > pos2.y && pos2.y + size2 > pos1.y)
-//     {
-//         return true;
-//     }
+bool CollisionHandler::AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2)
+{
+    // size1 = size1;
+    // size2 = size2;
+    pos1.x -= size1/2;
+    pos1.y -= size1/2;
+    pos2.x -= size2/2;
+    pos2.y -= size2/2;
+    std::cout << pos1.x + size1 << " > " << pos2.x << std::endl << pos1.y + size1 << " > " << pos2.y << std::endl;
+    std::cout << pos2.x + size2 << " > " << pos1.x << std::endl << pos2.y + size2 << " > " << pos1.y << std::endl;
+    if(pos1.x + size1 > pos2.x && pos2.x + size2 > pos1.x &&
+       pos1.y + size1 > pos2.y && pos2.y + size2 > pos1.y)
+    {
+        return true;
+    }
 
-//     return false;
-// }
+    return false;
+}
 // bool CollisionHandler::pointInsideTile(VectorMath2 pointPos, VectorMath2 tilePos, float tileSize)
 // {
 //     // add all points necessary before doing the math/comparisons

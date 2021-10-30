@@ -24,19 +24,14 @@ namespace Example
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
-		player.pos = VectorMath2(0, 0);
-		player.pos.PrintVector();
+		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
 		player.previousPos = player.pos;
-		player.size = 0.2;
+		player.tilePos = VectorMath2(tileX, tileY);
+		player.size = 0.4;
 		player.ID = id;
 		player.objectType = ObjectType::PLAYER;
 		gameObjects.push_back(&player);
-
-		//tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&player);
-		//tilegrid->playerTile = &tilegrid->tileInPos.at(VectorMath2(tileX, tileY));
 		tilegrid->tiles[tileY][tileX].gameObjects.push_back(&player);
-
-		//collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
 
 	void ExampleApp::spawnEnemyObject(int id, int tileX, int tileY)
@@ -48,32 +43,26 @@ namespace Example
 		enemy.ID = id;
 		enemy.objectType = ObjectType::ENEMY;
 		gameObjects.push_back(&enemy);
-
-		//tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&enemy);
-
-		//collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
 	}
 
 	VectorMath2 ExampleApp::tileToWorldPos(VectorMath2 tilePos)
 	{
-		// tile (0, 0) in worldPos
-		// float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		// float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		// // add on tilePos
-		// posX += tilePos.x * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		// posY += tilePos.y * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
+		float posX = -((float)tilegrid->numOfX/2) * tilegrid->tileSize + tilegrid->tileSize / 2;
+		float posY = -((float)tilegrid->numOfY/2) * tilegrid->tileSize + tilegrid->tileSize / 2;
+		posX += tilePos.x * tilegrid->tileSize;
+		posY += tilePos.y * tilegrid->tileSize;
 
-		return VectorMath2(0, 0);
+		return VectorMath2(posX, posY);
 	}
 	VectorMath2 ExampleApp::worldToTilePos(VectorMath2 worldPos)
 	{
-		// tile (0, 0) in tilePos
-		float posX = 0;
-		float posY = 0;
-		// add on tilePos
+		// worldPos(0, 0) in tilePos
+		// int posX = -((worldPos.x + tilegrid->tileSize / 2) / tilegrid->tileSize) * 2;
+		// int posY = -((worldPos.y + tilegrid->tileSize / 2) / tilegrid->tileSize) * 2;
+		// add on worldPos
 		
 
-		return VectorMath2(posX, posY);
+		return VectorMath2(0, 0);
 	}
 
 	bool ExampleApp::Open()
@@ -137,7 +126,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(2, 2, -8, 0.4);
+			tilegrid = new Tilegrid(5, 3, -8, 0.5);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
@@ -219,9 +208,13 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			this->window->Update();
 
 			// Controll character
-
-			player.ControllerInputs(deltaTime, *collisionHandler, tilegrid);
-			VectorMath2 endRay = player.pos - VectorMath2(10, 0);
+			// Check wall collision inside controllerinputs
+			player.ControllerInputs(deltaTime, collisionHandler, tilegrid);
+			// TODO: 2. move player to other tile if necessary
+			
+			// TODO: 3. move enemies (include wall collision here)
+			// TODO: 4. move enemies to other tiles if necessary
+			// TODO: 5. check enemy collision
 
 			//enemy.MoveToPoint(player.GetPos(), deltaTime);
 
