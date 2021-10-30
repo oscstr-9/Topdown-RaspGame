@@ -76,7 +76,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         right = state.axes[GLFW_GAMEPAD_AXIS_LEFT_X];
         if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + right * movementSpeed * deltaTime, pos.y), size, tilePos))
         {
-            pos.x += 0.001;
+            pos.x += right * movementSpeed * deltaTime;
         }
     }
     else{

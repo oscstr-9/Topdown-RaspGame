@@ -25,24 +25,21 @@ namespace Example
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
 		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
-		player.previousPos = player.pos;
 		player.tilePos = VectorMath2(tileX, tileY);
 		player.size = 0.4;
 		player.ID = id;
 		player.objectType = ObjectType::PLAYER;
-		gameObjects.push_back(&player);
 		tilegrid->tiles[tileY][tileX].gameObjects.push_back(&player);
 	}
 
 	void ExampleApp::spawnEnemyObject(int id, int tileX, int tileY)
 	{	
-		enemy = Enemy(shaders, VectorMath2(0,0));
-		enemy.pos = tileToWorldPos(VectorMath2(tileX, tileY));
-		enemy.previousPos = enemy.pos;
-		enemy.size = 0.2;
-		enemy.ID = id;
-		enemy.objectType = ObjectType::ENEMY;
-		gameObjects.push_back(&enemy);
+		enemyWaves.push_back(new Enemy(shaders, tileToWorldPos(VectorMath2(tileX, tileY))));
+		enemyWaves[enemyWaves.size() - 1]->tilePos = VectorMath2(tileX, tileY);
+		enemyWaves[enemyWaves.size() - 1]->size = 0.4;
+		enemyWaves[enemyWaves.size() - 1]->ID = id;
+		enemyWaves[enemyWaves.size() - 1]->objectType = ObjectType::ENEMY;
+		tilegrid->tiles[tileY][tileX].gameObjects.push_back(enemyWaves[enemyWaves.size() - 1]);
 	}
 
 	VectorMath2 ExampleApp::tileToWorldPos(VectorMath2 tilePos)
@@ -53,16 +50,6 @@ namespace Example
 		posY += tilePos.y * tilegrid->tileSize;
 
 		return VectorMath2(posX, posY);
-	}
-	VectorMath2 ExampleApp::worldToTilePos(VectorMath2 worldPos)
-	{
-		// worldPos(0, 0) in tilePos
-		// int posX = -((worldPos.x + tilegrid->tileSize / 2) / tilegrid->tileSize) * 2;
-		// int posY = -((worldPos.y + tilegrid->tileSize / 2) / tilegrid->tileSize) * 2;
-		// add on worldPos
-		
-
-		return VectorMath2(0, 0);
 	}
 
 	bool ExampleApp::Open()
@@ -131,11 +118,12 @@ namespace Example
 			collisionHandler = new CollisionHandler();
 
 			// Create player
-			spawnPlayerObject(spawnID++, tilegrid->numOfX/2, tilegrid->numOfY/2);
+			spawnPlayerObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
 			player.setupPlayer(shaders);
 
 			// Create enemies (should probably spawn in run loop instead)
-			//spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 6, tilegrid->numOfY/2 + 6);
+			spawnEnemyObject(spawnID++, 1, 1);
+			spawnEnemyObject(spawnID++, 1, 4);
 			
 
 			return true;
@@ -169,7 +157,6 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
     {
         Enemy enemy = Enemy(shader, freeSpawnLoactions[rand() % freeSpawnLoactions.size()]);
         enemies.push_back(enemy);
-		gameObjects.push_back(&enemy);
     }
     waveNum++;
     return enemies;
@@ -207,16 +194,18 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
 
-			// Controll character
-			// Check wall collision inside controllerinputs
+			// Controll character, includes wall collision detection
 			player.ControllerInputs(deltaTime, collisionHandler, tilegrid);
 			// Move player to other tile if necessary
 			collisionHandler->updateTilePos(&player, tilegrid);
-			// TODO: 3. move enemies (include wall collision here)
-			// TODO: 4. move enemies to other tiles if necessary
+			for(int i = 0; i < enemyWaves.size(); i++)
+			{
+				// Move enemies, including wall collision detection
+				enemyWaves[i]->MoveToPoint(player.pos, deltaTime, collisionHandler, tilegrid);
+				// Move enemies to other tiles if necessary
+				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
+			}
 			// TODO: 5. check enemy collision
-
-			//enemy.MoveToPoint(player.GetPos(), deltaTime);
 
 			// Update camera pos
 			cameraPos = VectorMath3(player.pos + VectorMath2(0, -3), -1);
@@ -239,10 +228,9 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			// Draw to screen
 			player.DrawPlayer();
 			tilegrid->Draw(camera.GetProjViewMatrix());
-			// for (int i = 0; i < enemyWaves.size()-1; i++){
-			// 	enemyWaves[i].MoveToPoint(player.GetPos(), deltaTime);
-			// 	enemyWaves[i].DrawEnemy();
-			// }
+			for(int i = 0; i < enemyWaves.size(); i++){
+				enemyWaves[i]->DrawEnemy();
+			}
 
 			if(debug){
 				Debug::Render(debugCamera.GetProjViewMatrix());

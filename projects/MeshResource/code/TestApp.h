@@ -33,7 +33,6 @@ public:
 	void spawnPlayerObject(int id, int tileX, int tileY);
 	void spawnEnemyObject(int id, int tileX, int tileY);
 	VectorMath2 tileToWorldPos(VectorMath2 tilePos);
-	VectorMath2 worldToTilePos(VectorMath2 tilePos);
     std::vector<Enemy> CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid);
 
 	/// run app
@@ -48,7 +47,7 @@ private:
 	int spawnID = 1;
 	
 	int waveNum = 0;
-	std::vector<Enemy> enemyWaves;
+	std::vector<Enemy*> enemyWaves;
 
 	MatrixMath camRotMat = RotateMatrix(M_PI/6, VectorMath3(-1, 0, 0));
 	VectorMath3 cameraPos = VectorMath3(0, 4, 2);
@@ -61,10 +60,8 @@ private:
 	Display::Window* window;
 
 	Player player;
-	Enemy enemy;
 
 	Tilegrid* tilegrid;
 	CollisionHandler* collisionHandler;
-	std::vector<GameObject*> gameObjects;
 };
 } // namespace Example

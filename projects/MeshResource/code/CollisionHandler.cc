@@ -11,6 +11,7 @@ bool CollisionHandler::hasCollidedWithWall(Tilegrid* tilegrid, VectorMath2 objec
                 continue;
             if(tilegrid->tiles[neighborTileY][neighborTileX].type == Type::WALL)
             {
+                // TODO: change from AABB to circle square collision
                 if(AABBCollision(objectPos, objectSize, tilegrid->tiles[neighborTileY][neighborTileX].worldPos, tilegrid->tiles[neighborTileY][neighborTileX].size))
                 {
                     return true;
