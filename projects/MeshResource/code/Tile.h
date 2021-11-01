@@ -18,7 +18,7 @@ public:
     Type type;
     VectorMath2 pos;
     VectorMath2 worldPos;
-    std::vector<Tile> neighborWalls;
-    std::vector<Tile> neighborGround;
+    //std::vector<Tile> neighborWalls;
+    //std::vector<Tile> neighborGround;
     std::vector<GameObject*> gameObjects;
 };

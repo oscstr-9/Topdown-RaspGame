@@ -12,6 +12,6 @@ public:
     int ID;
     ObjectType objectType;
     VectorMath2 pos;
-    VectorMath2 previousPos;
+    VectorMath2 tilePos;
     float size;
 };

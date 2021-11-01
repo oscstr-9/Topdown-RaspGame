@@ -3,6 +3,8 @@
 #include "RenderDebug.h"
 #include <vector>
 #include <stdlib.h>
+#include "CollisionHandler.h"
+#include "Tilegrid.h"
 
 Enemy::Enemy(){
 }
@@ -21,13 +23,19 @@ Enemy::Enemy(std::shared_ptr<ShaderResource> shaders, VectorMath2 posIn){
     enemyObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 }
 
-void Enemy::MoveToPoint(VectorMath2 posIn, float deltaTime){
+void Enemy::MoveToPoint(VectorMath2 posIn, float deltaTime, CollisionHandler* collisionHandler, Tilegrid* tilegrid){
 
     VectorMath2 direction = pos - posIn;
     direction.Normalize();
 
-    previousPos = pos;
-    pos = pos - (direction * movementSpeed * deltaTime);
+    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - direction.y * movementSpeed * deltaTime), size, tilePos))
+    {
+        pos.y -= direction.y * movementSpeed * deltaTime;
+    }
+    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x - direction.x * movementSpeed * deltaTime, pos.y), size, tilePos))
+    {
+        pos.x -= direction.x * movementSpeed * deltaTime;
+    }
 
     if (direction.x != 0){
         rotAngle = -atan(direction.y / direction.x)+M_PI/2;

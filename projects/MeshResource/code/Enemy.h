@@ -23,7 +23,7 @@ public:
     Enemy();
     Enemy(std::shared_ptr<ShaderResource> shaders, VectorMath2 posIn);
     ~Enemy();
-    void MoveToPoint(VectorMath2 posIn, float deltaTime);
+    void MoveToPoint(VectorMath2 posIn, float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid* tilegrid);
     void DrawEnemy();
     void Destroy();
 };

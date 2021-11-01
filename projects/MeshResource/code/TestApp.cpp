@@ -25,52 +25,29 @@ namespace Example
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
 		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
-		player.pos.PrintVector();
-		player.previousPos = player.pos;
-		player.size = 0.2;
+		player.tilePos = VectorMath2(tileX, tileY);
+		player.size = 0.4;
 		player.ID = id;
 		player.objectType = ObjectType::PLAYER;
-		gameObjects.push_back(&player);
-
-		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&player);
-		tilegrid->playerTile = &tilegrid->tileInPos.at(VectorMath2(tileX, tileY));
-
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
+		tilegrid->tiles[tileY][tileX].gameObjects.push_back(&player);
 	}
 
 	void ExampleApp::spawnEnemyObject(int id, int tileX, int tileY)
 	{	
-		enemy = Enemy(shaders, VectorMath2(0,0));
-		enemy.pos = tileToWorldPos(VectorMath2(tileX, tileY));
-		enemy.previousPos = enemy.pos;
-		enemy.size = 0.2;
-		enemy.ID = id;
-		enemy.objectType = ObjectType::ENEMY;
-		gameObjects.push_back(&enemy);
-
-		tilegrid->tileInPos.at(VectorMath2(tileX, tileY)).gameObjects.push_back(&enemy);
-
-		collisionHandler->updateListOfTiles(&tilegrid->tileInPos.at(VectorMath2(tileX, tileY)), tilegrid);
+		enemyWaves.push_back(new Enemy(shaders, tileToWorldPos(VectorMath2(tileX, tileY))));
+		enemyWaves[enemyWaves.size() - 1]->tilePos = VectorMath2(tileX, tileY);
+		enemyWaves[enemyWaves.size() - 1]->size = 0.4;
+		enemyWaves[enemyWaves.size() - 1]->ID = id;
+		enemyWaves[enemyWaves.size() - 1]->objectType = ObjectType::ENEMY;
+		tilegrid->tiles[tileY][tileX].gameObjects.push_back(enemyWaves[enemyWaves.size() - 1]);
 	}
 
 	VectorMath2 ExampleApp::tileToWorldPos(VectorMath2 tilePos)
 	{
-		// tile (0, 0) in worldPos
-		float posX = -(tilegrid->numOfX - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		float posY = -(tilegrid->numOfY - 1) * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		// add on tilePos
-		posX += tilePos.x * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-		posY += tilePos.y * 2 * tilegrid->tileInPos.at(VectorMath2(0, 0)).size;
-
-		return VectorMath2(posX, posY);
-	}
-	VectorMath2 ExampleApp::worldToTilePos(VectorMath2 worldPos)
-	{
-		// tile (0, 0) in tilePos
-		float posX = 0;
-		float posY = 0;
-		// add on tilePos
-		
+		float posX = -((float)tilegrid->numOfX/2) * tilegrid->tileSize + tilegrid->tileSize / 2;
+		float posY = -((float)tilegrid->numOfY/2) * tilegrid->tileSize + tilegrid->tileSize / 2;
+		posX += tilePos.x * tilegrid->tileSize;
+		posY += tilePos.y * tilegrid->tileSize;
 
 		return VectorMath2(posX, posY);
 	}
@@ -136,16 +113,17 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(40, 40, -8, 0.4);
+			tilegrid = new Tilegrid(10, 10, -8, 0.5);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
 			// Create player
-			spawnPlayerObject(spawnID++, tilegrid->numOfX/2, tilegrid->numOfY/2);
+			spawnPlayerObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
 			player.setupPlayer(shaders);
 
 			// Create enemies (should probably spawn in run loop instead)
-			spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 6, tilegrid->numOfY/2 + 6);
+			spawnEnemyObject(spawnID++, 1, 1);
+			spawnEnemyObject(spawnID++, 1, 4);
 			
 
 			// set ui rendering function
@@ -186,9 +164,6 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 		Tile spawnTile = freeSpawnTiles[rand() % freeSpawnTiles.size()];
         Enemy enemy = Enemy(shader, spawnTile.worldPos);
         enemies.push_back(enemy);
-		spawnTile.gameObjects.push_back(&enemy);
-		collisionHandler->updateListOfTiles(&spawnTile, &tilegrid);
-		gameObjects.push_back(&enemy);
     }
     waveNum++;
     return enemies;
@@ -213,12 +188,12 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 
 		float startTime = glfwGetTime();
 		float spawntimer = glfwGetTime();
-		enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
+		//enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
 		while (this->window->IsOpen())
 		{
-			if(enemyWaves.size() == 0){
-				enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
-			}
+			// if(enemyWaves.size() == 0){
+			// 	enemyWaves = CreateSpawnWave(shaders, camera.GetProjViewMatrix(), *tilegrid);
+			// }
 			float deltaTime = glfwGetTime() - startTime;
 			startTime = glfwGetTime();
 
@@ -226,12 +201,18 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
 
-			// Controll character
-
-			player.ControllerInputs(deltaTime, *collisionHandler, tilegrid);
-			VectorMath2 endRay = player.pos - VectorMath2(10, 0);
-
-			//enemy.MoveToPoint(player.GetPos(), deltaTime);
+			// Controll character, includes wall collision detection
+			player.ControllerInputs(deltaTime, collisionHandler, tilegrid);
+			// Move player to other tile if necessary
+			collisionHandler->updateTilePos(&player, tilegrid);
+			for(int i = 0; i < enemyWaves.size(); i++)
+			{
+				// Move enemies, including wall collision detection
+				enemyWaves[i]->MoveToPoint(player.pos, deltaTime, collisionHandler, tilegrid);
+				// Move enemies to other tiles if necessary
+				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
+			}
+			// TODO: 5. check enemy collision
 
 			// Update camera pos
 			cameraPos = VectorMath3(player.pos + VectorMath2(0, -3), -1);
@@ -251,15 +232,11 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			light.bindLight(shaders, camera.GetPosition());
 			// Set projection-view-matrix
 
-			// After all input and GameObject updates are done, handle collision
-			collisionHandler->handleCollisions(tilegrid);
-
 			// Draw to screen
 			player.DrawPlayer();
 			tilegrid->Draw(camera.GetProjViewMatrix());
-			for (int i = 0; i < enemyWaves.size()-1; i++){
-				enemyWaves[i].MoveToPoint(player.pos, deltaTime);
-				enemyWaves[i].DrawEnemy();
+			for(int i = 0; i < enemyWaves.size(); i++){
+				enemyWaves[i]->DrawEnemy();
 			}
 
 			if(debug){
