@@ -11,6 +11,7 @@
 // #include "render/GraphicsNode.h"
 #include "render/ShaderResource.h"
 #include "render/window.h"
+#include "UI.h"
 #include <memory>
 
 #include "Player.h"
@@ -46,7 +47,7 @@ private:
 	float size = 1;
 	float speed = 0.003;
 	int spawnID = 1;
-	
+
 	int waveNum = 0;
 	std::vector<Enemy> enemyWaves;
 
@@ -59,6 +60,7 @@ private:
 	std::shared_ptr<ShaderResource> shaders;
 	// GraphicsNode* objObject;
 	Display::Window* window;
+	UI ui;
 
 	Player player;
 	Enemy enemy;

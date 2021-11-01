@@ -148,6 +148,12 @@ namespace Example
 			spawnEnemyObject(spawnID++, tilegrid->numOfX/2 + 6, tilegrid->numOfY/2 + 6);
 			
 
+			// set ui rendering function
+			this->window->SetUiRender([this]()
+			{
+				this->ui.RenderUI();
+			});
+			this->ui.LoadScore();
 			return true;
 		}
 		return false;
@@ -156,7 +162,7 @@ namespace Example
 
 std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid){
     std::vector<Enemy> enemies;
-    std::vector<VectorMath2> freeSpawnLoactions;
+    std::vector<Tile> freeSpawnTiles;
     srand(time(NULL));
 
     for (int x = 0; x < tilegrid.numOfX; x++)
@@ -170,15 +176,18 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 
                 if(cullingPos.x > 1.1 || cullingPos.x < -1.1 || cullingPos.y > 1 || cullingPos.y < -1.2){
 					if(tilegrid.tiles[y][x].type == Type::GROUND)
-                    	freeSpawnLoactions.push_back(VectorMath2(tilegrid.tiles[y][x].worldPos.x, tilegrid.tiles[y][x].worldPos.y));
+                    	freeSpawnTiles.push_back(tilegrid.tiles[y][x]);
                 }
             }
         }
     
     for (int i = 0; i < 10 + pow(waveNum, 2); i++)
     {
-        Enemy enemy = Enemy(shader, freeSpawnLoactions[rand() % freeSpawnLoactions.size()]);
+		Tile spawnTile = freeSpawnTiles[rand() % freeSpawnTiles.size()];
+        Enemy enemy = Enemy(shader, spawnTile.worldPos);
         enemies.push_back(enemy);
+		spawnTile.gameObjects.push_back(&enemy);
+		collisionHandler->updateListOfTiles(&spawnTile, &tilegrid);
 		gameObjects.push_back(&enemy);
     }
     waveNum++;
@@ -249,7 +258,7 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			player.DrawPlayer();
 			tilegrid->Draw(camera.GetProjViewMatrix());
 			for (int i = 0; i < enemyWaves.size()-1; i++){
-				enemyWaves[i].MoveToPoint(player.GetPos(), deltaTime);
+				enemyWaves[i].MoveToPoint(player.pos, deltaTime);
 				enemyWaves[i].DrawEnemy();
 			}
 
