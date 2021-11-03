@@ -48,7 +48,10 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
             down = false;
         }
         if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-            //collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
+            // if(collisionHandler->checkRayAgainstEnemies(pos, GetDirection(), tilegrid))
+            // {
+            //     std::cout << "Ray has hit an enemy" << std::endl;
+            // }
         }
         if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
             if(debug)
@@ -63,7 +66,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
     // Joystick inputs
     if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -deadzone){
         forward = state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
-        if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - forward * movementSpeed * deltaTime), size, tilePos))
+        if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - forward * movementSpeed * deltaTime), radius, tilePos))
         {
             pos.y -= forward * movementSpeed * deltaTime;
         }
@@ -74,7 +77,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
 
     if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -deadzone){
         right = state.axes[GLFW_GAMEPAD_AXIS_LEFT_X];
-        if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + right * movementSpeed * deltaTime, pos.y), size, tilePos))
+        if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + right * movementSpeed * deltaTime, pos.y), radius, tilePos))
         {
             pos.x += right * movementSpeed * deltaTime;
         }
@@ -125,19 +128,19 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         else if(y>0)
             rotAngle = 0;
     }
-    
+    rotAngle = 2.8;
     rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
     
     // for testing without controller
-    // float speed = 4;
-    // if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y + 0.001 * speed), size, tilePos))
-    // {
-    //     pos.y += 0.001 * speed;
-    // }
-    // if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + 0.001 * speed, pos.y), size, tilePos))
-    // {
-    //     pos.x += 0.001 * speed;
-    // }
+    float speed = 4;
+    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - 0.001 * speed), radius, tilePos))
+    {
+        pos.y -= 0.001 * speed;
+    }
+    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + 0.001 * speed, pos.y), radius, tilePos))
+    {
+        pos.x += 0.001 * speed;
+    }
     positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(size/2, size/2, size/2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
     playerObject->setTransform(positionMatrix);
@@ -149,7 +152,7 @@ VectorMath2 Player::GetPos(){
 VectorMath2 Player::GetDirection(){
     VectorMath4 rotationVector = rotationMatrix.VectorMultiplication(VectorMath4(1,1,1,1));
     rotationVector.Normalize();
-    Debug::DrawLine(VectorMath3(pos, -6.5), VectorMath3((cos(rotAngle - M_PI/2) * 10) + pos.x, (sin(rotAngle - M_PI/2) * 10) + pos.y, -6.5), VectorMath4(1,0.5,0,1));
+    Debug::DrawLine(VectorMath3(pos, -7), VectorMath3((cos(rotAngle - M_PI/2) * 10) + pos.x, (sin(rotAngle - M_PI/2) * 10) + pos.y, -6.5), VectorMath4(1,0.5,0,1));
     return VectorMath2(cos(rotAngle - M_PI/2), sin(rotAngle - M_PI/2));
 }
 

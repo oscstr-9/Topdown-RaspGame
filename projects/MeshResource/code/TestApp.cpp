@@ -27,6 +27,7 @@ namespace Example
 		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
 		player.tilePos = VectorMath2(tileX, tileY);
 		player.size = 0.4;
+		player.radius = player.size / 2;
 		player.ID = id;
 		player.objectType = ObjectType::PLAYER;
 		tilegrid->tiles[tileY][tileX].gameObjects.push_back(&player);
@@ -37,6 +38,7 @@ namespace Example
 		enemyWaves.push_back(new Enemy(shaders, tileToWorldPos(VectorMath2(tileX, tileY))));
 		enemyWaves[enemyWaves.size() - 1]->tilePos = VectorMath2(tileX, tileY);
 		enemyWaves[enemyWaves.size() - 1]->size = 0.4;
+		enemyWaves[enemyWaves.size() - 1]->radius = enemyWaves[enemyWaves.size() - 1]->size / 2;
 		enemyWaves[enemyWaves.size() - 1]->ID = id;
 		enemyWaves[enemyWaves.size() - 1]->objectType = ObjectType::ENEMY;
 		tilegrid->tiles[tileY][tileX].gameObjects.push_back(enemyWaves[enemyWaves.size() - 1]);
@@ -77,9 +79,16 @@ namespace Example
 			// case GLFW_KEY_RIGHT:
 			// 	right = action;
 			// 	break;
-			// case GLFW_KEY_SPACE:
-			// 	up = action;
-			// 	break;
+			case GLFW_KEY_SPACE:
+			if(action == GLFW_PRESS){
+					//std::cout << "Fired a shot" << std::endl;
+					if(collisionHandler->checkRayAgainstEnemies(player.GetPos(), player.GetDirection(), tilegrid, player.tilePos))
+					{
+						//std::cout << "Ray has hit an enemy" << std::endl;
+						
+					}
+				}
+				break;
 			case GLFW_KEY_F1:{
 				if(action == GLFW_PRESS){
 					debug = !debug;
@@ -113,25 +122,28 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(10, 10, -8, 0.5);
+			tilegrid = new Tilegrid(10, 10, -8, 0.9);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
 			// Create player
-			spawnPlayerObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
+			spawnPlayerObject(spawnID++, 1, tilegrid->numOfY / 2);
 			player.setupPlayer(shaders);
 
 			// Create enemies (should probably spawn in run loop instead)
-			spawnEnemyObject(spawnID++, 1, 1);
-			spawnEnemyObject(spawnID++, 1, 4);
+			spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
+			spawnEnemyObject(spawnID++, tilegrid->numOfX - 3, tilegrid->numOfY - 2);
+			//spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
+			spawnEnemyObject(spawnID++, tilegrid->numOfX - 5, tilegrid->numOfY - 2);
+			spawnEnemyObject(spawnID++, tilegrid->numOfX - 6, tilegrid->numOfY - 2);
 			
 
 			// set ui rendering function
-			this->window->SetUiRender([this]()
-			{
-				this->ui.RenderUI();
-			});
-			this->ui.LoadScore();
+			// this->window->SetUiRender([this]()
+			// {
+			// 	this->ui.RenderUI();
+			// });
+			// this->ui.LoadScore();
 			return true;
 		}
 		return false;
@@ -201,18 +213,39 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
 
+			// -------- Movement and collision --------
 			// Controll character, includes wall collision detection
 			player.ControllerInputs(deltaTime, collisionHandler, tilegrid);
 			// Move player to other tile if necessary
 			collisionHandler->updateTilePos(&player, tilegrid);
 			for(int i = 0; i < enemyWaves.size(); i++)
 			{
+				// TODO: remove enemy that's been hit
+				if(collisionHandler->hasHitEnemy)
+				{
+					if(collisionHandler->hitEnemyID == enemyWaves[i]->ID)
+					{
+						enemyWaves.erase(enemyWaves.begin() + i);
+						collisionHandler->hasHitEnemy = false;
+						continue;
+					}
+				}
 				// Move enemies, including wall collision detection
 				enemyWaves[i]->MoveToPoint(player.pos, deltaTime, collisionHandler, tilegrid);
 				// Move enemies to other tiles if necessary
 				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
 			}
-			// TODO: 5. check enemy collision
+			// Player vs enemy collision in the tiles around player
+			if(!enemyWaves.empty())
+			{
+				if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->size))
+				{
+					//std::cout << "Player has collided with enemy" << std::endl;
+				}
+			}
+			// --------
+			//player.GetDirection();
+			
 
 			// Update camera pos
 			cameraPos = VectorMath3(player.pos + VectorMath2(0, -3), -1);

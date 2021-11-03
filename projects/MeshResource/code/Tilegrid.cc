@@ -36,7 +36,7 @@ void Tilegrid::createGrid(float tileSize)
             srand(time(0) + increment++);
             random = rand()%10;
             // higher number means higher chance of becoming wall
-            if(random < 2 || // random
+            if(random < 0 || // random
                x == 0 || x == numOfX - 1 || y == 0 || y == numOfY - 1) // border
             {
                 tile.type = Type::WALL;
