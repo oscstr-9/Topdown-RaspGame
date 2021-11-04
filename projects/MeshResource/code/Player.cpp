@@ -30,16 +30,18 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui){
     this->ui = ui;
 }
 
-void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandler, Tilegrid *tilegrid, bool *restart, bool *quit){
+void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandler, Tilegrid *tilegrid, bool *restart, bool *quit, bool *shoot){
     // Controller Inputs
     GLFWgamepadstate state;
-    std::cout << isDead << std::endl;
     if(!isDead){
         // Button inputs
         if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state)){
 
             if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-                //collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
+                *shoot = true;
+            }
+            else{
+                *shoot = false;
             }
         }
         // Joystick inputs

@@ -203,6 +203,8 @@ namespace Example
 
 		// Create light source
 		Lighting light(VectorMath3(0, 0, 0), VectorMath3(1, 1, 1), 1);
+		// Light source for shooting
+		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 99);
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
@@ -211,6 +213,8 @@ namespace Example
 
 		float startTime = glfwGetTime();
 		float spawntimer = glfwGetTime();
+		float shootDelay = glfwGetTime();
+	
 		while (this->window->IsOpen())
 		{
 			// set delta time
@@ -227,11 +231,17 @@ namespace Example
 
 			// -------- Movement and collision --------
 			// Controll character, includes wall collision detection
-			player.ControllerInputs(deltaTime, collisionHandler, tilegrid, &restart, &quit);
+			player.ControllerInputs(deltaTime, collisionHandler, tilegrid, &restart, &quit, &shoot);
 			if(restart)
 				RestartGame();
 			if(quit)
 				this->window->Close();
+			if(shoot && glfwGetTime() - shootDelay >= 0.1){
+				collisionHandler->checkRayAgainstEnemies(player.pos, player.GetDirection(), tilegrid, player.tilePos);
+				// Light is WIP
+				//shootingLight.bindLight(shaders, camera.GetPosition());
+				shootDelay = glfwGetTime();
+			}
 
 			// Move player to other tile if necessary
 			collisionHandler->updateTilePos(&player, tilegrid);

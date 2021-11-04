@@ -12,7 +12,7 @@ public:
     Player();
     ~Player();
     void setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui);
-    void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid, bool *restart, bool *quit);
+    void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid, bool *restart, bool *quit, bool *shoot);
     VectorMath2 GetPos();
     VectorMath2 GetDirection();
     void Dead();
@@ -44,4 +44,5 @@ private:
 	float forward = 0;
 	float backward = 0;
 
+    float counter = 0;
 };
