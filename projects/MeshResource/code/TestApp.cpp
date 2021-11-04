@@ -122,7 +122,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Create grid
-			tilegrid = new Tilegrid(10, 10, -8, 0.9);
+			tilegrid = new Tilegrid(10, 10, -8, 0.5);
 			tilegrid->createGraphics(shaders, true); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 

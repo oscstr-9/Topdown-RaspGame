@@ -68,11 +68,11 @@ void CollisionHandler::updateTilePos(GameObject* object, Tilegrid* tilegrid)
                 }
                 else if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y + 1][object->tilePos.x].worldPos, tilegrid->tileSize))
                 {
-                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y + 1));
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y + 1));
                 }
                 else // it's inside upper left
                 {
-                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y - 1));
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y + 1));
                 }
             }
             else
@@ -232,47 +232,47 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
 {
     direction.Normalize();
     //float stepSize = 100;
-    VectorMath2 playerPos = VectorMath2(playerTilePos.x, playerTilePos.y);
+    VectorMath2 playerPos = VectorMath2(start.x, start.y);
 
     // -------- check inside player tile first --------
     GameObject* player;
-    for(int i = 0; i < tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.size(); i++)
+    for(int i = 0; i < tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.size(); i++)
     {
-        if(tilegrid->tiles[playerPos.y][playerPos.x].gameObjects[i]->objectType == ObjectType::PLAYER)
+        if(tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i]->objectType == ObjectType::PLAYER)
         {
-            player = tilegrid->tiles[playerPos.y][playerPos.x].gameObjects[i];
-            tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.erase(tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.begin() + i);
+            player = tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i];
+            tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.erase(tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.begin() + i);
             break;
         }
     }
-    for(int i = 0; i < tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.size(); i++)
+    for(int i = 0; i < tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.size(); i++)
     {
         // VectorMath2 pointInTile = start;
         // pointInTile = pointInTile + direction * (tilegrid->tiles[playerPos.y][playerPos.x].size / stepSize);
         // while(pointInsideTile(pointInTile, tilegrid->tiles[playerPos.y][playerPos.x].worldPos, tilegrid->tiles[playerPos.y][playerPos.x].size))
         // {
             // TODO: line circle intersection
-            if(lineCircleCollision(tilegrid->tiles[playerPos.y][playerPos.x].gameObjects[i]->radius, playerPos, direction, tilegrid->tiles[playerPos.y][playerPos.x].gameObjects[i]->pos))
+            if(lineCircleCollision(tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i]->radius, playerPos, direction, tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i]->pos))
             {
                 std::cout << "Raycast hit an enemy" << std::endl;
                 hasHitEnemy = true;
-                hitEnemyID = tilegrid->tiles[playerPos.y][playerPos.x].gameObjects[i]->ID;
-                tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.erase(tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.begin() + i);
-                tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.push_back(player);
+                hitEnemyID = tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i]->ID;
+                tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.erase(tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.begin() + i);
+                tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
                 return true;
             }
             //pointInTile = pointInTile + direction * (tilegrid->tiles[playerPos.y][playerPos.x].gameObjects[i]->size / stepSize);
         // }
     }
-    tilegrid->tiles[playerPos.y][playerPos.x].gameObjects.push_back(player);
+    tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
     // --------
 
     // -------- walk through the tiles until ray is inside a wall --------
-    Tile* nextTile = nextTileInDirection(&tilegrid->tiles[playerPos.y][playerPos.x], direction, &start, tilegrid);
+    Tile* nextTile = nextTileInDirection(&tilegrid->tiles[playerTilePos.y][playerTilePos.x], direction, &start, tilegrid);
     // move outside of player tile
-    while(nextTile->pos == tilegrid->tiles[playerPos.y][playerPos.x].pos)
+    while(nextTile->pos == tilegrid->tiles[playerTilePos.y][playerTilePos.x].pos)
     {
-        nextTile = nextTileInDirection(&tilegrid->tiles[playerPos.y][playerPos.x], direction, &start, tilegrid);
+        nextTile = nextTileInDirection(&tilegrid->tiles[playerTilePos.y][playerTilePos.x], direction, &start, tilegrid);
     }
     // check the rest of the tiles in ray direction
     while(true)
@@ -286,7 +286,7 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
         for(int i = 0; i < nextTile->gameObjects.size(); i++)
         {
             // have points be more frequent inside tile to see if ray hit enemy
-            playerPos.PrintVector();
+            //playerPos.PrintVector();
             if(lineCircleCollision(nextTile->gameObjects[i]->radius, playerPos, direction, nextTile->gameObjects[i]->pos))
             {
                 std::cout << "Raycast hit an enemy" << std::endl;
@@ -355,9 +355,29 @@ bool CollisionHandler::lineCircleCollision(float radius, VectorMath2 lineStart, 
     direction.Normalize();
     VectorMath2 circleLineVector = circleCenter - lineStart;
     circleLineVector.Normalize();
+    lineStart.PrintVector();
+    circleCenter.PrintVector();
+    std::cout << " " << std::endl;
+    direction.PrintVector();
+    circleLineVector.PrintVector();
 
+    float v = acos(direction.DotProduct(circleLineVector));
+    std::cout << "dot product: " << direction.DotProduct(circleLineVector) << std::endl;
+    std::cout << "v: " << v << std::endl;
+
+    circleLineVector = circleCenter - lineStart;
+    float distance = sin(v) * circleLineVector.Length();
+    std::cout << "sin(v): " << sin(v) << std::endl;
+    std::cout << "distance: " << distance << std::endl;
+    
+    if(distance < radius)
+    {
+        return true;
+    }
+
+    return false;
     // a normalized vector always has length == 1... 
-    float cosV = direction.Length() / circleLineVector.Length();
+    //float cosV = direction.Length() / circleLineVector.Length();
     // TODO: fix cosV, get a some other way
     // we have two directions, should be able to get the angle out of those.
     // har med dot product att göra o:
@@ -365,24 +385,13 @@ bool CollisionHandler::lineCircleCollision(float radius, VectorMath2 lineStart, 
 
 
 
-    std::cout << "cosV: " << cosV << std::endl;
-    if(cosV > 1 - 0.00000000000001 || cosV < 1 + 0.00000000000001) // v becomes zero (nan) when cosV is 1
-    {
-        return true;
-    }
-    float v = acos(cosV);
-    std::cout << "v: " << v << std::endl;
+    // if(cosV > 1 - 0.00000000000001 || cosV < 1 + 0.00000000000001) // v becomes zero (nan) when cosV is 1
+    // {
+    //     return true;
+    // }
+    // float v = acos(cosV);
 
     // få distance med riktiga längden
-    circleLineVector = circleCenter - lineStart;
-    float distance = sin(v) * circleLineVector.Length();
-    std::cout << "sin(v): " << sin(v) << std::endl;
-    std::cout << "distance: " << distance << std::endl;
 
-    if(distance < radius)
-    {
-        return true;
-    }
 
-    return false;
 }
