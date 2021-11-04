@@ -86,7 +86,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         }
         if (state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] < -deadzone){
             y = state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y];
-        
+        }
         else{
             y = 0;
         }
@@ -153,7 +153,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         }
     }
     rotAngle = 2.8;
-    
+
     rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
     
     // for testing without controller

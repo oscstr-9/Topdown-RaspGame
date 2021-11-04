@@ -165,7 +165,7 @@ namespace Example
 
 			// Create player
 			spawnPlayerObject(spawnID++, 1, tilegrid->numOfY / 2);
-			player.setupPlayer(shaders);
+			player.setupPlayer(shaders, &ui);
 
 			// Create enemies (should probably spawn in run loop instead)
 			spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
