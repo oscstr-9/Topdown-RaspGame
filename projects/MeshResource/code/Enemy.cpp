@@ -22,11 +22,11 @@ void Enemy::MoveToPoint(VectorMath2 posIn, float deltaTime, CollisionHandler* co
     VectorMath2 direction = pos - posIn;
     direction.Normalize();
 
-    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - direction.y * movementSpeed * deltaTime), size, tilePos))
+    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - direction.y * movementSpeed * deltaTime), radius, tilePos))
     {
         pos.y -= direction.y * movementSpeed * deltaTime;
     }
-    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x - direction.x * movementSpeed * deltaTime, pos.y), size, tilePos))
+    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x - direction.x * movementSpeed * deltaTime, pos.y), radius, tilePos))
     {
         pos.x -= direction.x * movementSpeed * deltaTime;
     }
