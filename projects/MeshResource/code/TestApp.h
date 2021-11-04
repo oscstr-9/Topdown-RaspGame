@@ -51,6 +51,7 @@ private:
 	std::vector<Enemy*> enemyWaves;
 	bool restart = false;
 	bool quit = false;
+	bool shoot = false;
 
 	MatrixMath camRotMat = RotateMatrix(M_PI/6, VectorMath3(-1, 0, 0));
 	VectorMath3 cameraPos = VectorMath3(0, 4, 2);
