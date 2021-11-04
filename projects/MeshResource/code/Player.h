@@ -12,11 +12,13 @@ public:
     Player();
     ~Player();
     void setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui);
-    void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid);
+    void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid, bool *restart, bool *quit);
     VectorMath2 GetPos();
     VectorMath2 GetDirection();
     void Dead();
     void DrawPlayer();
+
+    bool isDead = false;
 private:
     MatrixMath positionMatrix = Identity();
     MatrixMath rotationMatrix = Identity();
@@ -27,7 +29,7 @@ private:
     // Joystick deadzone
     float deadzone = 0.1;
 
-    float movementSpeed = 1;
+    float movementSpeed = 1.5;
     float rotAngle = 0;
     float posX = 0;
     float posY = 0;
@@ -41,7 +43,5 @@ private:
 	float right = 0;
 	float forward = 0;
 	float backward = 0;
-    bool quit = false;
 
-    bool isDead = false;
 };

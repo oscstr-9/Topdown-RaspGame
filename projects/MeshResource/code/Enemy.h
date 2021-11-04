@@ -15,7 +15,7 @@ private:
 
     GraphicsNode* enemyObject;
 
-    float movementSpeed = 1;
+    float movementSpeed = 1.4;
     float rotAngle;
 
     unsigned int waveNum = 0;

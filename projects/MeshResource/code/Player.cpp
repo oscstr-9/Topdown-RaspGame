@@ -30,36 +30,16 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui){
     this->ui = ui;
 }
 
-void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandler, Tilegrid *tilegrid){
+void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandler, Tilegrid *tilegrid, bool *restart, bool *quit){
     // Controller Inputs
     GLFWgamepadstate state;
+    std::cout << isDead << std::endl;
     if(!isDead){
         // Button inputs
         if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state)){
-            if(state.buttons[GLFW_GAMEPAD_BUTTON_X]){
-                movementSpeed += 0.1;
-            }
-            else{
-                up = false;
-            }
-            if(state.buttons[GLFW_GAMEPAD_BUTTON_B]){
-                if(movementSpeed >= 0.2)
-                    movementSpeed -= 0.1;
-            }
-            else{
-                down = false;
-            }
+
             if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
                 //collisionHandler.checkRayAgainstEnemies(pos, GetDirection(), tilegrid);
-                
-                this->ui->IncreaseScore();
-                std:: cout << "Trigger" << std::endl;
-            }
-            if(state.buttons[GLFW_GAMEPAD_BUTTON_BACK]){
-                Dead();
-            }
-            if (state.buttons[GLFW_GAMEPAD_BUTTON_START]){
-                quit = true;
             }
         }
         // Joystick inputs
@@ -147,28 +127,14 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
     else{
         if(glfwGetGamepadState(GLFW_JOYSTICK_1, &state)){
             if(state.buttons[GLFW_GAMEPAD_BUTTON_A]){
+                *restart = true;
                 isDead = false;
-                this->ui->SetIsDead(false);
+            }
+            if (state.buttons[GLFW_GAMEPAD_BUTTON_START]){
+                *quit = true;
             }
         }
     }
-    rotAngle = 2.8;
-
-    rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
-    
-    // for testing without controller
-    float speed = 4;
-    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - 0.001 * speed), radius, tilePos))
-    {
-        pos.y -= 0.001 * speed;
-    }
-    if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + 0.001 * speed, pos.y), radius, tilePos))
-    {
-        pos.x += 0.001 * speed;
-    }
-    positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(size/2, size/2, size/2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
-
-    playerObject->setTransform(positionMatrix);
 }
 
 VectorMath2 Player::GetPos(){

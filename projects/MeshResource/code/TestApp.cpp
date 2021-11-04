@@ -88,6 +88,15 @@ namespace Example
 		return VectorMath2(posX, posY);
 	}
 
+	void ExampleApp::RestartGame(){
+		enemyWaves.clear();
+		waveNum = 0;
+		ui.SetIsDead(false);
+		player.isDead = false;
+		restart = false;
+		// tilegrid.reset(); eller nåt
+	}
+
 	bool ExampleApp::Open()
 	{
 		App::Open();
@@ -167,20 +176,20 @@ namespace Example
 			spawnPlayerObject(spawnID++, 1, tilegrid->numOfY / 2);
 			player.setupPlayer(shaders, &ui);
 
-			// Create enemies (should probably spawn in run loop instead)
-			spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
-			spawnEnemyObject(spawnID++, tilegrid->numOfX - 3, tilegrid->numOfY - 2);
-			//spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
-			spawnEnemyObject(spawnID++, tilegrid->numOfX - 5, tilegrid->numOfY - 2);
-			spawnEnemyObject(spawnID++, tilegrid->numOfX - 6, tilegrid->numOfY - 2);
+			// // Create enemies (should probably spawn in run loop instead)
+			// spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
+			// spawnEnemyObject(spawnID++, tilegrid->numOfX - 3, tilegrid->numOfY - 2);
+			// //spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
+			// spawnEnemyObject(spawnID++, tilegrid->numOfX - 5, tilegrid->numOfY - 2);
+			// spawnEnemyObject(spawnID++, tilegrid->numOfX - 6, tilegrid->numOfY - 2);
 			
 
 			// set ui rendering function
-			// this->window->SetUiRender([this]()
-			// {
-			// 	this->ui.RenderUI();
-			// });
-			// this->ui.LoadScore();
+			this->window->SetUiRender([this]()
+			{
+				this->ui.RenderUI();
+			});
+			this->ui.LoadScore();
 			return true;
 		}
 		return false;
@@ -207,19 +216,25 @@ namespace Example
 		float spawntimer = glfwGetTime();
 		while (this->window->IsOpen())
 		{
-			if(enemyWaves.size() == 0){
-				CreateSpawnWave(camera.GetProjViewMatrix());
-			}
+			// set delta time
 			float deltaTime = glfwGetTime() - startTime;
 			startTime = glfwGetTime();
-
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			this->window->Update();
 
+			// Spawn next wave of enemies if all are dead
+			if(enemyWaves.size() <= 0){
+				CreateSpawnWave(camera.GetProjViewMatrix());
+			}
+
 			// -------- Movement and collision --------
 			// Controll character, includes wall collision detection
-			player.ControllerInputs(deltaTime, collisionHandler, tilegrid);
+			player.ControllerInputs(deltaTime, collisionHandler, tilegrid, &restart, &quit);
+			if(restart)
+				RestartGame();
+			if(quit)
+				this->window->Close();
 
 			// Move player to other tile if necessary
 			collisionHandler->updateTilePos(&player, tilegrid);

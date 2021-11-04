@@ -34,6 +34,7 @@ public:
 	void spawnEnemyObject(int id, int tileX, int tileY);
 	VectorMath2 tileToWorldPos(VectorMath2 tilePos);
     void CreateSpawnWave(MatrixMath viewMat);
+	void RestartGame();
 
 	/// run app
 	void Run();
@@ -48,6 +49,8 @@ private:
 
 	int waveNum = 0;
 	std::vector<Enemy*> enemyWaves;
+	bool restart = false;
+	bool quit = false;
 
 	MatrixMath camRotMat = RotateMatrix(M_PI/6, VectorMath3(-1, 0, 0));
 	VectorMath3 cameraPos = VectorMath3(0, 4, 2);
