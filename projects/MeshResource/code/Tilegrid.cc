@@ -36,7 +36,7 @@ void Tilegrid::createGrid(float tileSize)
             srand(time(0) + increment++);
             random = rand()%10;
             // higher number means higher chance of becoming wall
-            if(random < 2 || // random
+            if(random < 1 || // random
                x == 0 || x == numOfX - 1 || y == 0 || y == numOfY - 1) // border
             {
                 tile.type = Type::WALL;
@@ -62,12 +62,12 @@ void Tilegrid::createGrid(float tileSize)
 // assumes the square and wall are the same size; from -1 to 1 in the obj file
 void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders, bool showBorders)
 {
-    // ground, just one square at the size of the width * height of this tilegrid
-    std::shared_ptr<TextureResource> texture = std::make_shared<TextureResource>("wall.png");
-    texture->LoadFromFile();
-    std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("square");
-    MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(0, 0, zPlacement)) * ScalarMatrix(VectorMath3(sizeX / 2, sizeY / 2, 1));
-    groundTile = GraphicsNode(mesh, texture, shaders, transform);
+    // // ground, just one square at the size of the width * height of this tilegrid
+    // std::shared_ptr<TextureResource> texture = std::make_shared<TextureResource>("wall.png");
+    // texture->LoadFromFile();
+    // std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("square");
+    // MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(0, 0, zPlacement)) * ScalarMatrix(VectorMath3(sizeX / 2, sizeY / 2, 1));
+    // groundTile = GraphicsNode(mesh, texture, shaders, transform);
 
     // walls, one graphicsnode per wall
     std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("cubepic.png");
@@ -131,7 +131,7 @@ void Tilegrid::moveToTile(GameObject* object, VectorMath2 tilePos)
 }
 void Tilegrid::Draw(MatrixMath viewMat)
 {
-    groundTile.Draw();
+    //groundTile.Draw();
     for(GraphicsNode tile : wallTiles)
     {
         VectorMath4 cullingPos = VectorMath4(tile.getTransform()[3][0], tile.getTransform()[3][1],tile.getTransform()[3][2],tile.getTransform()[3][3]);

@@ -30,11 +30,10 @@ public:
 	~ExampleApp();
 	/// open app
 	bool Open();
-	void ControllerInputs();
 	void spawnPlayerObject(int id, int tileX, int tileY);
 	void spawnEnemyObject(int id, int tileX, int tileY);
 	VectorMath2 tileToWorldPos(VectorMath2 tilePos);
-    std::vector<Enemy> CreateSpawnWave(std::shared_ptr<ShaderResource> shader, MatrixMath viewMat, Tilegrid tilegrid);
+    void CreateSpawnWave(MatrixMath viewMat);
 
 	/// run app
 	void Run();
@@ -57,6 +56,8 @@ private:
 	MatrixMath posMat = Identity();
 	MatrixMath characterPosMat = Identity();
 	std::shared_ptr<ShaderResource> shaders;
+	std::shared_ptr<TextureResource> objTexture;
+	std::shared_ptr<MeshResource> objMesh;
 	// GraphicsNode* objObject;
 	Display::Window* window;
 	UI ui;

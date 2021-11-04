@@ -3,26 +3,26 @@
 #include "core/MatrixMath.h"
 #include "render/GraphicsNode.h"
 #include "GameObject.h"
+#include "UI.h"
 #include <memory>
-
-#include "GameObject.h"
-
 
 class Player : public GameObject
 {
 public:
     Player();
     ~Player();
-    void setupPlayer(std::shared_ptr<ShaderResource> shaders);
+    void setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui);
     void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid);
     VectorMath2 GetPos();
     VectorMath2 GetDirection();
+    void Dead();
     void DrawPlayer();
 private:
     MatrixMath positionMatrix = Identity();
     MatrixMath rotationMatrix = Identity();
 
     GraphicsNode* playerObject;
+    UI *ui;
 
     // Joystick deadzone
     float deadzone = 0.1;
@@ -42,5 +42,6 @@ private:
 	float forward = 0;
 	float backward = 0;
     bool quit = false;
-    bool debug = false;
+
+    bool isDead = false;
 };
