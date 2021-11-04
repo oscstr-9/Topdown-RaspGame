@@ -245,26 +245,28 @@ Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direc
 {
     VectorMath2 nextTilePos = currentTile->pos;
     float stepSize = currentTile->size / 10;
-    rayStart->x += direction.x * stepSize;
-    rayStart->y += direction.y * stepSize;
 
     // if inside new tile after stepping in direction, update nextTilePos
-    if(direction.x > 0) // +=
+    if(direction.x > 0) { // +=
+        rayStart->x += direction.x * stepSize;
         if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y][nextTilePos.x + 1].worldPos, currentTile->size))
             nextTilePos.x++;
-
-    else // -=
+    }
+    else { // -=
+        rayStart->x += direction.x * stepSize;
         if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y][nextTilePos.x - 1].worldPos, currentTile->size))
             nextTilePos.x--;
-    
-    if(direction.y > 0) // +=
+    }
+    if(direction.y > 0) { // +=
+        rayStart->y += direction.y * stepSize;
         if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y + 1][nextTilePos.x].worldPos, currentTile->size))
             nextTilePos.y++;
-        
-    else // -=
+    }
+    else { // -=
+        rayStart->y += direction.y * stepSize;
         if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y - 1][nextTilePos.x].worldPos, currentTile->size))
             nextTilePos.y--;
-    
+    }
     return &tilegrid->tiles[nextTilePos.y][nextTilePos.x];
 }
 

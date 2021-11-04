@@ -71,6 +71,7 @@ namespace Example
 			enemyWaves.push_back(new Enemy(shaders, objTexture, objMesh, spawnTile.worldPos));
 			enemyWaves[enemyWaves.size() - 1]->tilePos = spawnTile.pos;
 			enemyWaves[enemyWaves.size() - 1]->size = 0.4;
+			enemyWaves[enemyWaves.size() - 1]->radius = enemyWaves[enemyWaves.size() - 1]->size / 2;
 			enemyWaves[enemyWaves.size() - 1]->ID = i;
 			enemyWaves[enemyWaves.size() - 1]->objectType = ObjectType::ENEMY;
 			tilegrid->tiles[spawnTile.pos.y][spawnTile.pos.x].gameObjects.push_back(enemyWaves[enemyWaves.size() - 1]);
@@ -232,19 +233,19 @@ namespace Example
 			// -------- Movement and collision --------
 			// Controll character, includes wall collision detection
 			player.ControllerInputs(deltaTime, collisionHandler, tilegrid, &restart, &quit, &shoot);
+			// Move player to other tile if necessary
+			collisionHandler->updateTilePos(&player, tilegrid);
 			if(restart)
 				RestartGame();
 			if(quit)
 				this->window->Close();
 			if(shoot && glfwGetTime() - shootDelay >= 0.1){
-				collisionHandler->checkRayAgainstEnemies(player.pos, player.GetDirection(), tilegrid, player.tilePos);
+				collisionHandler->checkRayAgainstEnemies(player.GetPos(), player.GetDirection(), tilegrid, player.tilePos);
 				// Light is WIP
 				//shootingLight.bindLight(shaders, camera.GetPosition());
 				shootDelay = glfwGetTime();
 			}
 
-			// Move player to other tile if necessary
-			collisionHandler->updateTilePos(&player, tilegrid);
 			for(int i = 0; i < enemyWaves.size(); i++)
 			{
 				// Remove enemy that's been hit
@@ -261,12 +262,6 @@ namespace Example
 				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
 				// Check if player and enemy collide
 				enemyWaves[i]->PlayerColCheck(&player);
-			}
-			// Player vs enemy collision in the tiles around player
-			if(!enemyWaves.empty()) {
-				if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->size)) {
-					//std::cout << "Player has collided with enemy" << std::endl;
-				}
 			}
 			// --------
 			

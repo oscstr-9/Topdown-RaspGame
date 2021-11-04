@@ -66,10 +66,6 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         else{
             right = 0;
         }
-        if(state.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -0.5){
-            if(collisionHandler->checkRayAgainstEnemies(GetPos(), GetDirection(), tilegrid, tilePos)) {
-                //std::cout << "Ray has hit an enemy" << std::endl;   
-            }
         if (state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] < -deadzone){
             y = state.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y];
         }
@@ -83,7 +79,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         else{
             x = 0;
         }
-    }
+
         // Joystick inputs
         if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -deadzone){
             forward = state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
