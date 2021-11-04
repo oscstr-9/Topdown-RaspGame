@@ -36,7 +36,7 @@ void Tilegrid::createGrid(float tileSize)
             srand(time(0) + increment++);
             random = rand()%10;
             // higher number means higher chance of becoming wall
-            if(random < 2 || // random
+            if(random < 1 || // random
                x == 0 || x == numOfX - 1 || y == 0 || y == numOfY - 1) // border
             {
                 tile.type = Type::WALL;
@@ -59,13 +59,12 @@ void Tilegrid::createGrid(float tileSize)
 
 void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders)
 {
-    // -------- ground, just one square at the size of the width * height of this tilegrid --------
-    std::shared_ptr<TextureResource> texture = std::make_shared<TextureResource>("wall.png");
-    texture->LoadFromFile();
-    std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("square");
-    MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(0, 0, zPlacement)) * ScalarMatrix(VectorMath3(sizeX / 2, sizeY / 2, 1));
-    groundTile = GraphicsNode(mesh, texture, shaders, transform);
-    // --------
+    // // ground, just one square at the size of the width * height of this tilegrid
+    // std::shared_ptr<TextureResource> texture = std::make_shared<TextureResource>("wall.png");
+    // texture->LoadFromFile();
+    // std::shared_ptr<MeshResource> mesh = MeshResource::LoadObj("square");
+    // MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(0, 0, zPlacement)) * ScalarMatrix(VectorMath3(sizeX / 2, sizeY / 2, 1));
+    // groundTile = GraphicsNode(mesh, texture, shaders, transform);
 
     // -------- walls, one graphicsnode per wall --------
     std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("cubepic.png");
@@ -111,7 +110,7 @@ void Tilegrid::moveToTile(GameObject* object, VectorMath2 tilePos)
 
 void Tilegrid::Draw(MatrixMath viewMat)
 {
-    groundTile.Draw();
+    //groundTile.Draw();
     for(GraphicsNode tile : wallTiles)
     {
         VectorMath4 cullingPos = VectorMath4(tile.getTransform()[3][0], tile.getTransform()[3][1],tile.getTransform()[3][2],tile.getTransform()[3][3]);
@@ -119,29 +118,29 @@ void Tilegrid::Draw(MatrixMath viewMat)
         cullingPos.x /= cullingPos.w;
         cullingPos.y /= cullingPos.w;
         
-        if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
+        if(cullingPos.x < 1.2 && cullingPos.x > -1.2 && cullingPos.y < 1.1 && cullingPos.y > -1.2){
             tile.Draw();
         }
     }
 
     // Debugging
   
-    // for (int y = 0; y < numOfY; y++)
-    // {
-    //     for (int x = 0; x < numOfX; x++)
-    //     {
-    //         VectorMath4 cullingPos = VectorMath4(tiles[y][x].worldPos.x, tiles[y][x].worldPos.y, -7, 1);
-    //         cullingPos = viewMat.VectorMultiplication(cullingPos);
-    //         cullingPos.x /= cullingPos.w;
-    //         cullingPos.y /= cullingPos.w;
+    for (int y = 0; y < numOfY; y++)
+    {
+        for (int x = 0; x < numOfX; x++)
+        {
+            VectorMath4 cullingPos = VectorMath4(tiles[y][x].worldPos.x, tiles[y][x].worldPos.y, -7, 1);
+            cullingPos = viewMat.VectorMultiplication(cullingPos);
+            cullingPos.x /= cullingPos.w;
+            cullingPos.y /= cullingPos.w;
 
-    //         if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
-    //             Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(0,1,0,1));
-    //         }
-    //         else
-    //             Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(1,0,0,1));
-    //     } 
-    // }
+            if(cullingPos.x < 1.1 && cullingPos.x > -1.1 && cullingPos.y < 1 && cullingPos.y > -1.2){
+                Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(0,1,0,1));
+            }
+            else
+                Debug::DrawSquare(0.6, VectorMath3(tiles[y][x].worldPos, -6.9), VectorMath4(1,0,0,1));
+        } 
+    }
 }
 
 

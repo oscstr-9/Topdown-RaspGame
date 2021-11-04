@@ -9,14 +9,8 @@
 Enemy::Enemy(){
 }
 
-Enemy::Enemy(std::shared_ptr<ShaderResource> shaders, VectorMath2 posIn){
+Enemy::Enemy(std::shared_ptr<ShaderResource> shaders, std::shared_ptr<TextureResource> objTexture, std::shared_ptr<MeshResource> objMesh, VectorMath2 posIn){
     pos = posIn;
-// Find object textures
-    std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("moon.png");
-    // Load object textures
-    objTexture->LoadFromFile();
-    // Object meshes
-    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("moon2");
     // Object transform
     positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-6.8)) * ScalarMatrix(VectorMath3(0.001, 0.001, 0.001)) * rotationCorrectionMatrix;
     // Object graphicnodes
@@ -51,6 +45,12 @@ void Enemy::MoveToPoint(VectorMath2 posIn, float deltaTime, CollisionHandler* co
     }
     positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-6.8)) * ScalarMatrix(VectorMath3(0.001, 0.001, 0.001)) * RotateMatrix(rotAngle,VectorMath3(0, 0, -1)) * rotationCorrectionMatrix;
     enemyObject->setTransform(positionMatrix);
+}
+
+void Enemy::PlayerColCheck(Player *player){
+        if((pos - player->pos).Length() <= collisionDistance){
+            player->Dead();
+        }
 }
 
 void Enemy::DrawEnemy(){

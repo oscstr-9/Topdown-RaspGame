@@ -1,7 +1,6 @@
 #include "config.h"
 #include "UI.h"
 #include "imgui.h"
-#include <sstream>
 #include <iostream>
 #include <fstream>
 
@@ -15,41 +14,79 @@ UI::~UI()
 }
 
 void UI::RenderUI(){
-    // if (this->window->IsOpen())
-	// {
-	// 	bool show = true;
-	// 	// create a new window
-	// 	ImGui::Begin("Shader Sources", &show, ImGuiWindowFlags_NoSavedSettings);
+    bool show = true;
 
-	// 	// create text editors for shader code
-	// 	ImGui::InputTextMultiline("Vertex Shader", vsBuffer, STRING_BUFFER_SIZE, ImVec2(-1.0f, ImGui::GetTextLineHeight() * 16),
-	// 		ImGuiInputTextFlags_AllowTabInput);
+    if(!isDead){
+    // create a new window
+    ImGui::SetNextWindowPos({ 0,0 }, ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size, ImGuiCond_Always);
+    ImGui::Begin("invis_wnd", &show, ImGuiWindowFlags_NoMove       |
+                                     ImGuiWindowFlags_NoNav        |
+                                     ImGuiWindowFlags_NoDecoration |
+                                     ImGuiWindowFlags_NoInputs     |
+                                     ImGuiWindowFlags_NoBackground);
 
-	// 	ImGui::InputTextMultiline("Pixel Shader", fsBuffer, STRING_BUFFER_SIZE, ImVec2(-1.0f, ImGui::GetTextLineHeight() * 16),
-	// 		ImGuiInputTextFlags_AllowTabInput);
-	// 	// apply button
-	// 	if (ImGui::Button("Apply"))
-	// 	{
-	// 		// if pressed we compile the shaders
-	// 		this->CompileShaders();
-	// 	}
-	// 	if (this->compilerLog.length())
-	// 	{
-	// 		// if compilation produced any output we display it here
-	// 		ImGui::TextWrapped(this->compilerLog.c_str());
-	// 	}
-	// 	// close window
-	// 	ImGui::End();
-	// }
+    auto size = ImGui::GetMainViewport()->Size;
+    ImGui::SetCursorPos({ 0.03f * size.x, 0.03f * size.y });
+     //ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1, 0.4, 0.3, 1));
+    ImGui::Text("%d", points);
+    }
+    else{
+        ImGui::SetNextWindowPos({ 0,0 }, ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size, ImGuiCond_Always);
+        ImGui::Begin("GameOver", &show, ImGuiWindowFlags_NoMove       |
+                                        ImGuiWindowFlags_NoNav        |
+                                        ImGuiWindowFlags_NoDecoration |
+                                        ImGuiWindowFlags_NoInputs);
+
+        auto size = ImGui::GetMainViewport()->Size;
+        ImGui::SetWindowFontScale(1.5);
+
+        // rip
+        auto textWidth = ImGui::CalcTextSize("Game Over!").x;
+        ImGui::SetCursorPos({(size.x-textWidth)/2,size.y/3});
+        ImGui::Text("Game Over!");
+
+        // Points
+        textWidth = ImGui::CalcTextSize("Highscore: ").x;
+        ImGui::SetCursorPos({(size.x-textWidth)/2,size.y/2.5});
+        ImGui::Text("Highscore: %d", highscore);
+
+        textWidth = ImGui::CalcTextSize("Your points: !").x;
+        ImGui::SetCursorPos({(size.x-textWidth)/2,size.y/2.2});
+        ImGui::Text("Your points: %d!", points);
+
+        if(glfwGetTime() - currentTime > 1){
+            currentTime = glfwGetTime();
+            blinkResetMsg = !blinkResetMsg;
+        }
+
+        if(blinkResetMsg){
+            // Reset info
+            textWidth = ImGui::CalcTextSize("Press the A button to reset!").x;
+            ImGui::SetCursorPos({(size.x-textWidth)/2,size.y/1.5});
+            ImGui::Text("Press the A button to reset!");
+        }
+    }
+    
+    // close window
+    ImGui::End();
+}
+
+void UI::SetIsDead(bool isDeadIn){
+    this->isDead = isDeadIn;
+    if(!this->isDead){
+        this->points = 0;
+    }
 }
 
 void UI::IncreaseScore(){
-    this->points++;
+    points++;
     SaveScore();
 }
 
 void UI::SaveScore(){
-    if(this->points > highscore){
+    if(points > highscore){
         highscore = points;
         std::ofstream highscoreFile;
         highscoreFile.open("highscore.txt");
