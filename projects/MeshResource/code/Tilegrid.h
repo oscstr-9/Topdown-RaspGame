@@ -9,15 +9,11 @@ public:
     int numOfX, numOfY;
     float sizeX, sizeY;
     float tileSize;
-    std::vector<std::vector<Tile>> tiles;
-    // might not need tileInPos, could fix tiles so it can use size() - 2 and size() - 1 for the bottom and top y border positions
-    // lookup is pretty slow. Is used in TestApp, CollisionHandler and Tilegrid.
-    //std::map<VectorMath2, Tile> tileInPos;
-    Tile* playerTile;
     // Placement of {x, y} in grid:
     // {0, 2} {1, 2} {2, 2}
     // {0, 1} {1, 1} {2, 1}
     // {0, 0} {0, 1} {2, 0}
+    std::vector<std::vector<Tile>> tiles;
     GraphicsNode groundTile;
     std::vector<GraphicsNode> wallTiles;
     float zPlacement;
@@ -25,8 +21,10 @@ public:
     Tilegrid(int numOfX, int numOfY, float zPlacement, float tileSize);
 
     void createGrid(float tileSize);
-    void createGraphics(std::shared_ptr<ShaderResource> shaders, bool showBorders);
-    void placeWalls();
+    // setup everything so only draw needs to be called during runtime
+    // assumes the square and wall are the same size; from -1 to 1 in the obj file
+    void createGraphics(std::shared_ptr<ShaderResource> shaders);
+    // removes object from its old tile and adds it to the new tile in tilePos
     void moveToTile(GameObject* object, VectorMath2 tilePos);
 
     void Draw(MatrixMath viewMat);

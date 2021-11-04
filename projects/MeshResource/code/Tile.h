@@ -1,9 +1,7 @@
 #pragma once
 
-// TODO: use for the list of enemies that currently are inside this tile
 #include <vector>
 #include "render/GraphicsNode.h"
-//#include "GameObject.h"
 #include "Player.h"
 
 enum class Type
@@ -16,9 +14,10 @@ class Tile {
 public:
     float size;
     Type type;
+    // position in tilegrid
     VectorMath2 pos;
+    // middle point of tile
     VectorMath2 worldPos;
-    //std::vector<Tile> neighborWalls;
-    //std::vector<Tile> neighborGround;
+    // can contain both enemies and the player
     std::vector<GameObject*> gameObjects;
 };

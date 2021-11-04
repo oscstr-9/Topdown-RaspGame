@@ -14,5 +14,6 @@ public:
     VectorMath2 pos;
     VectorMath2 tilePos;
     float radius;
+    // is just twice the radius
     float size;
 };

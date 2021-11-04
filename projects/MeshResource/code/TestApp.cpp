@@ -81,11 +81,8 @@ namespace Example
 			// 	break;
 			case GLFW_KEY_SPACE:
 			if(action == GLFW_PRESS){
-					//std::cout << "Fired a shot" << std::endl;
-					if(collisionHandler->checkRayAgainstEnemies(player.GetPos(), player.GetDirection(), tilegrid, player.tilePos))
-					{
+					if(collisionHandler->checkRayAgainstEnemies(player.GetPos(), player.GetDirection(), tilegrid, player.tilePos)) {
 						//std::cout << "Ray has hit an enemy" << std::endl;
-						
 					}
 				}
 				break;
@@ -123,7 +120,7 @@ namespace Example
 
 			// Create grid
 			tilegrid = new Tilegrid(10, 10, -8, 0.5);
-			tilegrid->createGraphics(shaders, true); // set to false to hide borders
+			tilegrid->createGraphics(shaders); // set to false to hide borders
 			collisionHandler = new CollisionHandler();
 
 			// Create player
@@ -133,7 +130,6 @@ namespace Example
 			// Create enemies (should probably spawn in run loop instead)
 			spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
 			spawnEnemyObject(spawnID++, tilegrid->numOfX - 3, tilegrid->numOfY - 2);
-			//spawnEnemyObject(spawnID++, tilegrid->numOfX - 2, tilegrid->numOfY - 2);
 			spawnEnemyObject(spawnID++, tilegrid->numOfX - 5, tilegrid->numOfY - 2);
 			spawnEnemyObject(spawnID++, tilegrid->numOfX - 6, tilegrid->numOfY - 2);
 			
@@ -220,11 +216,9 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 			collisionHandler->updateTilePos(&player, tilegrid);
 			for(int i = 0; i < enemyWaves.size(); i++)
 			{
-				// TODO: remove enemy that's been hit
-				if(collisionHandler->hasHitEnemy)
-				{
-					if(collisionHandler->hitEnemyID == enemyWaves[i]->ID)
-					{
+				// Remove enemy that's been hit
+				if(collisionHandler->hasHitEnemy) {
+					if(collisionHandler->hitEnemyID == enemyWaves[i]->ID) {
 						enemyWaves.erase(enemyWaves.begin() + i);
 						collisionHandler->hasHitEnemy = false;
 						continue;
@@ -236,15 +230,12 @@ std::vector<Enemy> ExampleApp::CreateSpawnWave(std::shared_ptr<ShaderResource> s
 				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
 			}
 			// Player vs enemy collision in the tiles around player
-			if(!enemyWaves.empty())
-			{
-				if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->size))
-				{
+			if(!enemyWaves.empty()) {
+				if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->size)) {
 					//std::cout << "Player has collided with enemy" << std::endl;
 				}
 			}
 			// --------
-			//player.GetDirection();
 			
 
 			// Update camera pos
