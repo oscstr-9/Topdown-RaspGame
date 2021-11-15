@@ -67,7 +67,7 @@ void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders)
     // groundTile = GraphicsNode(mesh, texture, shaders, transform);
 
     // -------- walls, one graphicsnode per wall --------
-    std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("cubepic.png");
+    std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("furnace.png");
     wallTexture->LoadFromFile();
     std::shared_ptr<MeshResource> wallMesh = MeshResource::LoadObj("cube");
 

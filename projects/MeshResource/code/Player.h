@@ -19,6 +19,7 @@ public:
     void DrawPlayer();
 
     bool isDead = false;
+    float renderSize = 0.03;
 private:
     MatrixMath positionMatrix = Identity();
     MatrixMath rotationMatrix = Identity();

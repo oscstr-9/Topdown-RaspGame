@@ -17,13 +17,13 @@ Player::~Player(){
 
 void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui){
     // Find object textures
-    std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("monkehTexture.png");
+    std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("pumpkin.png");
     // Load object textures
     objTexture->LoadFromFile();
     // Object meshes
-    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
+    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("StarShip");
     // Object transform
-    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(size/2, size/2, size/2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(renderSize, renderSize, renderSize)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
     // Object graphicnodes
     playerObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 
@@ -124,7 +124,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         }
         
         rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
-        positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(size/2, size/2, size/2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+        positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(renderSize, renderSize, renderSize)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
         playerObject->setTransform(positionMatrix);
     }

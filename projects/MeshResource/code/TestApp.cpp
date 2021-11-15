@@ -24,6 +24,24 @@ namespace Example
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
+		if(tilegrid->tiles[tileY][tileX].type == Type::WALL)
+		{
+			bool foundGround = false;
+			for(int y = -1; y < 2; y++)
+			{
+				for(int x = -1; x < 2; x++)
+				{
+					if(tilegrid->tiles[tileY + y][tileX + x].type == Type::GROUND)
+					{
+						foundGround = true;
+						tileY += y;
+						tileX += x;
+					}
+				}
+				if(foundGround)
+					break;
+			}
+		}
 		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
 		player.tilePos = VectorMath2(tileX, tileY);
 		player.size = 0.4;
@@ -159,7 +177,7 @@ namespace Example
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Find object textures
-			objTexture = std::make_shared<TextureResource>("moon.png");
+			objTexture = std::make_shared<TextureResource>("dagger.png");
 			// Load object textures
 			objTexture->LoadFromFile();
 			// Object meshes
