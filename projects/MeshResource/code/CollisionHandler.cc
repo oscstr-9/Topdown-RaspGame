@@ -1,4 +1,5 @@
 #include "CollisionHandler.h"
+#include "RenderDebug.h"
 
 bool CollisionHandler::hasCollidedWithWall(Tilegrid* tilegrid, VectorMath2 objectPos, float objectRadius, VectorMath2 tilePos)
 {
@@ -218,6 +219,7 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
     {
         if(nextTile->type == Type::WALL) {
             // std::cout << "Raycast hit a wall" << std::endl;
+            Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -6.5), VectorMath4(1,0.5,0,1));
             tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
             return false;
         }
@@ -226,6 +228,7 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
         {
             if(lineCircleCollision(playerPos, direction, nextTile->gameObjects[i]->pos, nextTile->gameObjects[i]->radius)) {
                 // std::cout << "Raycast hit an enemy" << std::endl;
+                Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -6.5), VectorMath4(1,0.5,0,1));
                 hasHitEnemy = true;
                 hitEnemyID = nextTile->gameObjects[i]->ID;
                 nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i);
