@@ -214,7 +214,12 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
     // --------
 
     // -------- walk through the tiles until ray is inside a wall --------
+    //start = playerPos + VectorMath2(player->radius, player->radius);
     Tile* nextTile = nextTileInDirection(&tilegrid->tiles[playerTilePos.y][playerTilePos.x], direction, &start, tilegrid);
+    for(int i = 0; i < 4 * tilegrid->tileSize; i++)
+    {
+        nextTile = nextTileInDirection(nextTile, direction, &start, tilegrid);
+    }
     while(true)
     {
         if(nextTile->type == Type::WALL) {

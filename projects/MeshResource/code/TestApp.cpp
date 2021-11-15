@@ -113,7 +113,8 @@ namespace Example
 		ui.SetIsDead(false);
 		player.isDead = false;
 		restart = false;
-		// tilegrid.reset(); eller nåt
+		tilegrid->reset(&player, shaders);
+		
 	}
 
 	bool ExampleApp::Open()
@@ -270,6 +271,7 @@ namespace Example
 				if(collisionHandler->hasHitEnemy) {
 					if(collisionHandler->hitEnemyID == enemyWaves[i]->ID) {
 						enemyWaves.erase(enemyWaves.begin() + i);
+						ui.IncreaseScore();
 						collisionHandler->hasHitEnemy = false;
 						continue;
 					}
@@ -279,7 +281,12 @@ namespace Example
 				// Move enemies to other tiles if necessary
 				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
 				// Check if player and enemy collide
-				enemyWaves[i]->PlayerColCheck(&player);
+				// enemyWaves[i]->PlayerColCheck(&player);
+			}
+			if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->radius))
+			{
+				player.Dead();
+				shoot = false;
 			}
 			// --------
 			

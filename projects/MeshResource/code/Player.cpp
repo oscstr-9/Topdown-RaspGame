@@ -79,20 +79,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         else{
             x = 0;
         }
-
-        // Joystick inputs
-        if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -deadzone){
-            forward = state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
-            if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - forward * movementSpeed * deltaTime), radius, tilePos)) {
-                pos.y -= forward * movementSpeed * deltaTime;
-            }
-        }
-        if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -deadzone){
-            right = state.axes[GLFW_GAMEPAD_AXIS_LEFT_X];
-            if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + right * movementSpeed * deltaTime, pos.y), radius, tilePos)) {
-                pos.x += right * movementSpeed * deltaTime;
-            }
-        }
+        
         // If left joystick is unmoved look towards move direction
         if(x == 0 && y == 0){
             if(right != 0){

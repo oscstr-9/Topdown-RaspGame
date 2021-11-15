@@ -30,7 +30,7 @@ private:
     // Joystick deadzone
     float deadzone = 0.1;
 
-    float movementSpeed = 1.5;
+    float movementSpeed = 3;
     float rotAngle = 0;
     float posX = 0;
     float posY = 0;

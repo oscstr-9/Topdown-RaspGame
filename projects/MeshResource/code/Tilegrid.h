@@ -26,6 +26,8 @@ public:
     void createGraphics(std::shared_ptr<ShaderResource> shaders);
     // removes object from its old tile and adds it to the new tile in tilePos
     void moveToTile(GameObject* object, VectorMath2 tilePos);
+    // playerPos makes sure no walls spawn near player
+    void reset(Player* player, std::shared_ptr<ShaderResource> shaders);
 
     void Draw(MatrixMath viewMat);
 
