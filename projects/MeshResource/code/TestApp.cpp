@@ -265,6 +265,13 @@ namespace Example
 				shootDelay = glfwGetTime();
 			}
 
+			// Check if player and enemy collide
+			if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->radius))
+			{
+				player.Dead();
+				shoot = false;
+			}
+			
 			for(int i = 0; i < enemyWaves.size(); i++)
 			{
 				// Remove enemy that's been hit
@@ -282,11 +289,6 @@ namespace Example
 				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
 				// Check if player and enemy collide
 				// enemyWaves[i]->PlayerColCheck(&player);
-			}
-			if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->radius))
-			{
-				player.Dead();
-				shoot = false;
 			}
 			// --------
 			
