@@ -19,6 +19,7 @@ public:
     void DrawPlayer();
 
     bool isDead = false;
+    float renderSize = 0.03;
 private:
     MatrixMath positionMatrix = Identity();
     MatrixMath rotationMatrix = Identity();
@@ -29,7 +30,7 @@ private:
     // Joystick deadzone
     float deadzone = 0.1;
 
-    float movementSpeed = 1.5;
+    float movementSpeed = 3;
     float rotAngle = 0;
     float posX = 0;
     float posY = 0;

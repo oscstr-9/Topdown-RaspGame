@@ -67,7 +67,7 @@ void Tilegrid::createGraphics(std::shared_ptr<ShaderResource> shaders)
     // groundTile = GraphicsNode(mesh, texture, shaders, transform);
 
     // -------- walls, one graphicsnode per wall --------
-    std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("cubepic.png");
+    std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("furnace.png");
     wallTexture->LoadFromFile();
     std::shared_ptr<MeshResource> wallMesh = MeshResource::LoadObj("cube");
 
@@ -105,6 +105,95 @@ void Tilegrid::moveToTile(GameObject* object, VectorMath2 tilePos)
             object->tilePos = tilePos;
             tiles[object->tilePos.y][object->tilePos.x].gameObjects.push_back(object);
         }
+    }
+}
+
+void Tilegrid::reset(Player* player, std::shared_ptr<ShaderResource> shaders)
+{
+    tiles.clear();
+    wallTiles.clear();
+
+    int random;
+    int increment = 0;
+    float posY = -((float)numOfY/2) * tileSize + tileSize / 2;
+
+    for(int y = 0; y < numOfY; y++)
+    {
+        // create new empty row for storing tiles
+        std::vector<Tile> tileRow;
+        tiles.push_back(tileRow);
+        float posX = -((float)numOfX/2) * tileSize + tileSize / 2;
+        for(int x = 0; x < numOfX; x++)
+        {
+            // create new tile to add to this row of tiles
+            Tile tile;
+            tile.size = tileSize;
+            tile.pos.x = x;
+            tile.pos.y = y;
+            tile.worldPos = VectorMath2(posX, posY);
+
+            // make the tile ground or wall
+            srand(time(0) + increment++);
+            random = rand()%10;
+            // border
+            if(x == 0 || x == numOfX - 1 || y == 0 || y == numOfY - 1)
+            {
+                tile.type = Type::WALL;
+            }
+            // player area
+            else if(VectorMath2(x, y) == VectorMath2(player->tilePos.x - 1, player->tilePos.y + 1) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x, player->tilePos.y + 1) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x + 1, player->tilePos.y + 1) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x - 1, player->tilePos.y) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x, player->tilePos.y) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x + 1, player->tilePos.y) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x - 1, player->tilePos.y - 1) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x, player->tilePos.y - 1) ||
+                    VectorMath2(x, y) == VectorMath2(player->tilePos.x + 1, player->tilePos.y - 1))
+            {
+                tile.type = Type::GROUND;
+            }
+            // higher number means higher chance of becoming wall
+            else if(random < 1) // random
+            {
+                tile.type = Type::WALL;
+            }
+            else
+            {
+                tile.type = Type::GROUND;
+            }
+
+            tiles[y].push_back(tile);
+
+            posX += tileSize;
+        }
+        posY += tileSize;
+    }
+    tiles[player->tilePos.y][player->tilePos.x].gameObjects.push_back(player);
+
+    std::shared_ptr<TextureResource> wallTexture = std::make_shared<TextureResource>("furnace.png");
+    wallTexture->LoadFromFile();
+    std::shared_ptr<MeshResource> wallMesh = MeshResource::LoadObj("cube");
+
+    float wallPosY = -((float)numOfY/2) * tiles[0][0].size + tiles[0][0].size / 2;
+    for(int y = 0; y < numOfY; y++)
+    {
+        VectorMath2 pos;
+        float wallPosX = -((float)numOfX/2) * tiles[0][0].size + tiles[0][0].size / 2;
+        for(int x = 0; x < numOfX; x++)
+        {
+            pos.y = y;
+            pos.x = x;
+            if(tiles[pos.y][pos.x].type == Type::WALL)
+            {
+                // wallPosX and wallPosY sets transform to its respective position in grid
+                MatrixMath transform = MatrixMath::TranslationMatrix(VectorMath3(wallPosX, wallPosY, zPlacement + 0.3)) * 
+                    ScalarMatrix(VectorMath3(tiles[pos.y][pos.x].size / 2, tiles[pos.y][pos.x].size / 2, 1));
+                wallTiles.push_back(GraphicsNode(wallMesh, wallTexture, shaders, transform));
+            }
+            wallPosX += tiles[pos.y][pos.x].size;
+        }
+        wallPosY += tiles[pos.y][pos.x].size;
     }
 }
 

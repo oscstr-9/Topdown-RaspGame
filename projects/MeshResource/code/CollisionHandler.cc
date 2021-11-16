@@ -214,12 +214,17 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
     // --------
 
     // -------- walk through the tiles until ray is inside a wall --------
+    //start = playerPos + VectorMath2(player->radius, player->radius);
     Tile* nextTile = nextTileInDirection(&tilegrid->tiles[playerTilePos.y][playerTilePos.x], direction, &start, tilegrid);
+    for(int i = 0; i < 4 * tilegrid->tileSize; i++)
+    {
+        nextTile = nextTileInDirection(nextTile, direction, &start, tilegrid);
+    }
     while(true)
     {
         if(nextTile->type == Type::WALL) {
             // std::cout << "Raycast hit a wall" << std::endl;
-            Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -6.5), VectorMath4(1,0.5,0,1));
+            Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -7), VectorMath4(1,0.5,0,1));
             tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
             return false;
         }
@@ -228,7 +233,7 @@ bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 dir
         {
             if(lineCircleCollision(playerPos, direction, nextTile->gameObjects[i]->pos, nextTile->gameObjects[i]->radius)) {
                 // std::cout << "Raycast hit an enemy" << std::endl;
-                Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -6.5), VectorMath4(1,0.5,0,1));
+                Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -7), VectorMath4(1,0.5,0,1));
                 hasHitEnemy = true;
                 hitEnemyID = nextTile->gameObjects[i]->ID;
                 nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i);

@@ -42,6 +42,24 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
+		if(tilegrid->tiles[tileY][tileX].type == Type::WALL)
+		{
+			bool foundGround = false;
+			for(int y = -1; y < 2; y++)
+			{
+				for(int x = -1; x < 2; x++)
+				{
+					if(tilegrid->tiles[tileY + y][tileX + x].type == Type::GROUND)
+					{
+						foundGround = true;
+						tileY += y;
+						tileX += x;
+					}
+				}
+				if(foundGround)
+					break;
+			}
+		}
 		player.pos = tileToWorldPos(VectorMath2(tileX, tileY));
 		player.tilePos = VectorMath2(tileX, tileY);
 		player.size = 0.4;
@@ -113,7 +131,8 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 		ui.SetIsDead(false);
 		player.isDead = false;
 		restart = false;
-		// tilegrid.reset(); eller nåt
+		tilegrid->reset(&player, shaders);
+		
 	}
 
 	bool ExampleApp::Open()
@@ -178,7 +197,7 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 			shaders->LoadShader("engine/render/VertShader.glsl","engine/render/FragShader.glsl");
 
 			// Find object textures
-			objTexture = std::make_shared<TextureResource>("moon.png");
+			objTexture = std::make_shared<TextureResource>("dagger.png");
 			// Load object textures
 			objTexture->LoadFromFile();
 			// Object meshes
@@ -271,12 +290,20 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 			else
 				lights[1].setLightColor(VectorMath3(0,0,0));
 
+			// Check if player and enemy collide
+			if(collisionHandler->hasCollidedWithEnemy(&player, tilegrid, enemyWaves[0]->radius))
+			{
+				player.Dead();
+				shoot = false;
+			}
+			
 			for(int i = 0; i < enemyWaves.size(); i++)
 			{
 				// Remove enemy that's been hit
 				if(collisionHandler->hasHitEnemy) {
 					if(collisionHandler->hitEnemyID == enemyWaves[i]->ID) {
 						enemyWaves.erase(enemyWaves.begin() + i);
+						ui.IncreaseScore();
 						collisionHandler->hasHitEnemy = false;
 						continue;
 					}
@@ -286,7 +313,7 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 				// Move enemies to other tiles if necessary
 				collisionHandler->updateTilePos(enemyWaves[i], tilegrid);
 				// Check if player and enemy collide
-				enemyWaves[i]->PlayerColCheck(&player);
+				// enemyWaves[i]->PlayerColCheck(&player);
 			}
 			// --------
 			

@@ -17,13 +17,13 @@ Player::~Player(){
 
 void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui){
     // Find object textures
-    std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("monkehTexture.png");
+    std::shared_ptr<TextureResource> objTexture = std::make_shared<TextureResource>("pumpkin.png");
     // Load object textures
     objTexture->LoadFromFile();
     // Object meshes
-    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
+    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("StarShip");
     // Object transform
-    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(size/2, size/2, size/2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+    positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(renderSize, renderSize, renderSize)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
     // Object graphicnodes
     playerObject = new GraphicsNode(objMesh, objTexture, shaders, positionMatrix);
 
@@ -79,20 +79,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         else{
             x = 0;
         }
-
-        // Joystick inputs
-        if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -deadzone){
-            forward = state.axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
-            if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x, pos.y - forward * movementSpeed * deltaTime), radius, tilePos)) {
-                pos.y -= forward * movementSpeed * deltaTime;
-            }
-        }
-        if (state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] > deadzone || state.axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -deadzone){
-            right = state.axes[GLFW_GAMEPAD_AXIS_LEFT_X];
-            if(!collisionHandler->hasCollidedWithWall(tilegrid, VectorMath2(pos.x + right * movementSpeed * deltaTime, pos.y), radius, tilePos)) {
-                pos.x += right * movementSpeed * deltaTime;
-            }
-        }
+        
         // If left joystick is unmoved look towards move direction
         if(x == 0 && y == 0){
             if(right != 0){
@@ -124,7 +111,7 @@ void Player::ControllerInputs(float deltaTime, CollisionHandler* collisionHandle
         }
         
         rotationMatrix = RotateMatrix(rotAngle, VectorMath3(0, 0, 1));
-        positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(size/2, size/2, size/2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
+        positionMatrix =  MatrixMath::TranslationMatrix(VectorMath3(pos, -7)) * rotationMatrix * ScalarMatrix(VectorMath3(renderSize, renderSize, renderSize)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
 
         playerObject->setTransform(positionMatrix);
     }
