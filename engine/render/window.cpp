@@ -4,11 +4,9 @@
 //------------------------------------------------------------------------------
 #include "config.h"
 #include "window.h"
-#include <imgui.h>
-#include "imgui_impl_glfw_gl3.h"
-//#include <nanovg.h>
-//#define NANOVG_GL3_IMPLEMENTATION 1
-//#include "nanovg_gl.h"
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 
 namespace Display
 {
@@ -65,10 +63,9 @@ int32 Window::WindowCount = 0;
 */
 Window::Window() :
 	window(nullptr),
-	//vg(nullptr),
-	width(1900),
-	height(1200),
-	title("Aperture Science Lab Environment")
+	width(1024),
+	height(768),
+	title("gscept Lab Environment")
 {
 	// empty
 }
@@ -88,9 +85,9 @@ void
 Window::StaticKeyPressCallback(GLFWwindow* win, int32 key, int32 scancode, int32 action, int32 mods)
 {
 	Window* window = (Window*)glfwGetWindowUserPointer(win);
-	if (ImGui::IsMouseHoveringAnyWindow())
+	if (ImGui::IsAnyItemHovered())
 	{
-		ImGui_ImplGlfwGL3_KeyCallback(win, key, scancode, action, mods);
+		ImGui_ImplGlfw_KeyCallback(win, key, scancode, action, mods);
 	}
 	else if (nullptr != window->keyPressCallback)
 	{
@@ -105,9 +102,9 @@ void
 Window::StaticMousePressCallback(GLFWwindow* win, int32 button, int32 action, int32 mods)
 {
 	Window* window = (Window*)glfwGetWindowUserPointer(win);
-	if (ImGui::IsMouseHoveringAnyWindow())
+	if (ImGui::IsAnyItemHovered())
 	{
-		ImGui_ImplGlfwGL3_MouseButtonCallback(win, button, action, mods);
+		ImGui_ImplGlfw_MouseButtonCallback(win, button, action, mods);
 	}
 	else if (nullptr != window->mousePressCallback)
 	{
@@ -119,7 +116,7 @@ Window::StaticMousePressCallback(GLFWwindow* win, int32 button, int32 action, in
 /**
 */
 void
-Window::StaticMouseMoveCallback(GLFWwindow* win, double x, double y)
+Window::StaticMouseMoveCallback(GLFWwindow* win, float64 x, float64 y)
 {
 	Window* window = (Window*)glfwGetWindowUserPointer(win);
 	if (nullptr != window->mouseMoveCallback)
@@ -145,12 +142,12 @@ Window::StaticMouseEnterLeaveCallback(GLFWwindow* win, int32 mode)
 /**
 */
 void
-Window::StaticMouseScrollCallback(GLFWwindow* win, double x, double y)
+Window::StaticMouseScrollCallback(GLFWwindow* win, float64 x, float64 y)
 {
 	Window* window = (Window*)glfwGetWindowUserPointer(win);
-	if (ImGui::IsMouseHoveringAnyWindow())
+	if (ImGui::IsAnyItemHovered())
 	{
-		ImGui_ImplGlfwGL3_ScrollCallback(win, x, y);
+		ImGui_ImplGlfw_ScrollCallback(win, x, y);
 	}
 	else if (nullptr != window->mouseScrollCallback)
 	{
@@ -207,7 +204,9 @@ Window::Open()
 	glfwWindowHint(GLFW_GREEN_BITS, 8);
 	glfwWindowHint(GLFW_BLUE_BITS, 8);
 	glfwWindowHint(GLFW_SRGB_CAPABLE, GL_TRUE);
-	glfwWindowHint(GLFW_SAMPLES, 8);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
 
 	// open window
 	this->window = glfwCreateWindow(this->width, this->height, this->title.c_str(), nullptr, nullptr);
@@ -217,13 +216,18 @@ Window::Open()
 	{
 		GLenum res = glewInit();
 		assert(res == GLEW_OK);
-		if (!(GLEW_VERSION_2_1))
+		if (!GL_EXT_separate_shader_objects)
 		{
-			printf("[WARNING]: OpenGL 4.0+ is not supported on this hardware!\n");
-			glfwDestroyWindow(this->window);
-			this->window = nullptr;
+			printf("GPU does not support GL_EXT_separate_shader_objects!\n");
 			return false;
 		}
+		// if (!(GLEW_VERSION_4_0))
+		// {
+		// 	printf("[WARNING]: OpenGL 4.0+ is not supported on this hardware!\n");
+		// 	glfwDestroyWindow(this->window);
+		// 	this->window = nullptr;
+		// 	return false;
+		// }
 
 		// setup debug callback
 		glEnable(GL_DEBUG_OUTPUT);
@@ -233,12 +237,7 @@ Window::Open()
 		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
 
 		// setup stuff
-		//glEnable(GL_FRAMEBUFFER_SRGB);
-		glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_POLYGON_SMOOTH);
-		glEnable(GL_MULTISAMPLE);
-		glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-		glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+		glEnable(GL_FRAMEBUFFER_SRGB);
 
 		// setup viewport
 		glViewport(0, 0, this->width, this->height);
@@ -253,11 +252,29 @@ Window::Open()
 	glfwSetScrollCallback(this->window, Window::StaticMouseScrollCallback);
 	// setup imgui implementation
     ImGui::CreateContext();
-	ImGui_ImplGlfwGL3_Init(this->window, false);
-	glfwSetCharCallback(window, ImGui_ImplGlfwGL3_CharCallback);
+	ImGuiIO& io = ImGui::GetIO();
+	io.DisplaySize = { (float)width, (float)height };
+	io.DeltaTime = 1 / 60.0f;
+	ImGui_ImplGlfw_InitForOpenGL(this->window, false);
+	ImGui_ImplOpenGL3_Init();
 
-	// setup nanovg
-	//this->vg = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+	/*
+	// load default font
+	ImFontConfig config;
+	config.OversampleH = 3;
+	config.OversampleV = 1;
+#if _WIN32
+	ImFont* font = io.Fonts->AddFontFromFileTTF("c:/windows/fonts/tahoma.ttf", 14, &config);
+#else
+	ImFont* font = io.Fonts->AddFontFromFileTTF("/usr/share/fonts/truetype/freefont/FreeSans.ttf", 18, &config);
+#endif
+
+	unsigned char* buffer;
+	int width, height, channels;
+	io.Fonts->GetTexDataAsRGBA32(&buffer, &width, &height, &channels);
+	*/
+
+	glfwSetCharCallback(window, ImGui_ImplGlfw_CharCallback);
 
 	// increase window count and return result
 	Window::WindowCount++;
@@ -278,7 +295,9 @@ Window::Close()
 	Window::WindowCount--;
 	if (Window::WindowCount == 0)
 	{
-		ImGui_ImplGlfwGL3_Shutdown();
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
 		glfwTerminate();
 	}
 }
@@ -309,22 +328,15 @@ Window::SwapBuffers()
 {
 	if (this->window)
 	{
-		//if (nullptr != this->nanoFunc)
-		//{
-		//	int32 fbWidth, fbHeight;
-		//	glClear(GL_STENCIL_BUFFER_BIT);
-		//	glfwGetWindowSize(this->window, &this->width, &this->height);
-		//	glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
-		//	nvgBeginFrame(this->vg, this->width, this->height, (float)fbWidth / (float) this->width);
-		//	this->nanoFunc(this->vg);
-		//	nvgEndFrame(this->vg);
-		//}
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
 		if (nullptr != this->uiFunc)
 		{
-			ImGui_ImplGlfwGL3_NewFrame();
 			this->uiFunc();
-			ImGui::Render();
 		}
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		glfwSwapBuffers(this->window);
 	}
 }

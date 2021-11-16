@@ -15,15 +15,18 @@ private:
 
     GraphicsNode* enemyObject;
 
-    float movementSpeed = 1;
+    float movementSpeed = 1.4;
     float rotAngle;
 
     unsigned int waveNum = 0;
+
+    float collisionDistance = 0.4;
 public:
     Enemy();
-    Enemy(std::shared_ptr<ShaderResource> shaders, VectorMath2 posIn);
+    Enemy(std::shared_ptr<ShaderResource> shaders, std::shared_ptr<TextureResource> objTexture, std::shared_ptr<MeshResource> objMesh, VectorMath2 posIn);
     ~Enemy();
-    void MoveToPoint(VectorMath2 posIn, float deltaTime);
+    void MoveToPoint(VectorMath2 posIn, float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid* tilegrid);
+    void PlayerColCheck(class Player *player);
     void DrawEnemy();
     void Destroy();
 };

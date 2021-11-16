@@ -1,325 +1,295 @@
 #include "CollisionHandler.h"
+#include "RenderDebug.h"
 
-void CollisionHandler::handleCollisions(Tilegrid* tilegrid)
+bool CollisionHandler::hasCollidedWithWall(Tilegrid* tilegrid, VectorMath2 objectPos, float objectRadius, VectorMath2 tilePos)
 {
-    if(tilesToUpdate.empty())
+    // from bottom row to top row
+    for(int neighborTileY = tilePos.y - 1; neighborTileY <= tilePos.y + 1; neighborTileY++)
     {
-        return;
-    }
-
-    Tile* tile;
-    // check each tile against walls first before checking any other collision
-    for(int i = 0; i < tilesToUpdate.size(); i++)
-    {
-        tile = tilesToUpdate[i];
-        // check testObjects
-        for(int j = 0; j < tile->gameObjects.size(); j++)
+        // from left column to right column
+        for(int neighborTileX = tilePos.x - 1; neighborTileX <= tilePos.x + 1; neighborTileX++)
         {
-            // check against walls
-            for(int k = 0; k < tile->neighborWalls.size(); k++)
+            if(VectorMath2(neighborTileX, neighborTileY) == tilePos)
+                continue; // skips collision check for the middle (tilePos)
+            if(tilegrid->tiles[neighborTileY][neighborTileX].type == Type::WALL)
             {
-                // check aabb
-                if(AABBCollision(tile->gameObjects[j]->pos, tile->gameObjects[j]->size, tile->neighborWalls[k].worldPos, tile->neighborWalls[k].size))
-                {
-                    //std::cout << "TestObject is colliding with wall, moving to previous pos" << std::endl;
-                    tile->gameObjects[j]->pos = tile->gameObjects[j]->previousPos;
-                }
+                if(circleSquareIntersection(objectPos, objectRadius, tilegrid->tiles[neighborTileY][neighborTileX].worldPos, tilegrid->tiles[neighborTileY][neighborTileX].size))
+                    return true;
             }
         }
     }
-    // move object to new ground tile corresponding to its pos if necessary
-    for(int i = 0; i < tilesToUpdate.size(); i++)
-    {
-        moveObjectsToNeighborOfTile(tilesToUpdate[i], tilegrid);
-    }
-    
-    // -------- enemy vs player --------
-    // find player inside tile and remove it from gameObject list
-    GameObject* player;
-    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
-    {
-        if(tilegrid->playerTile->gameObjects[i]->objectType == ObjectType::PLAYER)
-        {
-            player = tilegrid->playerTile->gameObjects[i];
-            tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
-        }
-    }
-
-    // check inside its own tile
-    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
-    {
-        if(AABBCollision(player->pos, player->size, tilegrid->playerTile->gameObjects[i]->pos, tilegrid->playerTile->gameObjects[i]->size))
-        {
-            //std::cout << "Player has collided with an enemy" << std::endl;
-        }
-    }
-
-    // check against neighbor ground
-    for(int i = 0; i < tilegrid->playerTile->neighborGround.size(); i++)
-    {
-        // check against enemies
-        tile = &tilegrid->tileInPos.at(tilegrid->playerTile->neighborGround[i].pos);
-        for(int j = 0; j < tile->gameObjects.size(); j++)
-        {
-            if(AABBCollision(player->pos, player->size, tile->gameObjects[j]->pos, tile->gameObjects[j]->size))
-            {
-                //std::cout << "Player has collided with an enemy" << std::endl;
-            }
-        }
-        
-    }
-    // put back player into gameObject list
-    tilegrid->playerTile->gameObjects.push_back(player);
-    // --------
+    return false;
 }
-bool CollisionHandler::AABBCollision(VectorMath2 pos1, float size1, VectorMath2 pos2, float size2)
+
+bool CollisionHandler::circleSquareIntersection(VectorMath2 circlePos, float radius, VectorMath2 squarePos, float squareSize)
 {
-    size1 = size1 * 1.9;
-    size2 = size2 * 1.9;
-    if(pos1.x + size1 > pos2.x && pos2.x + size2 > pos1.x &&
-       pos1.y + size1 > pos2.y && pos2.y + size2 > pos1.y)
-    {
+    float edgeX = circlePos.x;
+    float edgeY = circlePos.y;
+    // change squarePos to lower left corner of the square
+    squarePos.x -= squareSize/2;
+    squarePos.y -= squareSize/2;
+
+    // check where circle point is compared to the edges of the square
+    if(circlePos.x < squarePos.x) // left
+        edgeX = squarePos.x;
+    
+    else if(circlePos.x > squarePos.x + squareSize) // right
+        edgeX = squarePos.x + squareSize;
+
+    if(circlePos.y < squarePos.y) // bottom
+        edgeY = squarePos.y;
+
+    else if(circlePos.y > squarePos.y + squareSize) // top
+        edgeY = squarePos.y + squareSize;
+
+    // calculate distance
+    float distX = circlePos.x - edgeX;
+    float distY = circlePos.y - edgeY;
+    float distance = sqrt(distX*distX + distY*distY);
+
+    if(distance <= radius)
         return true;
-    }
 
     return false;
 }
+
+void CollisionHandler::updateTilePos(GameObject* object, Tilegrid* tilegrid)
+{
+    // if not inside tile anymore, move object to the new tile
+    if(!pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y][object->tilePos.x].worldPos, tilegrid->tileSize))
+    {
+        VectorMath2 direction = object->pos - tilegrid->tiles[object->tilePos.y][object->tilePos.x].worldPos;
+        // check which tile to move to
+        if(direction.y > 0)
+        {
+            // 5 left to check
+            if(direction.x > 0)
+            {
+                // 3 to check (up right)
+                if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y][object->tilePos.x + 1].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x + 1, object->tilePos.y));
+                }
+                else if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y + 1][object->tilePos.x].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y + 1));
+                }
+                else { // it's inside upper right
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x + 1, object->tilePos.y + 1));
+                }
+            }
+            else if(direction.x < 0)
+            {
+                // 3 to check (up left)
+                if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y][object->tilePos.x - 1].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y));
+                }
+                else if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y + 1][object->tilePos.x].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y + 1));
+                }
+                else { // it's inside upper left
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y + 1));
+                }
+            }
+            else { // move up
+                tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y + 1));
+            }
+        }
+        else if(direction.y < 0)
+        {
+            // 5 left to check
+            if(direction.x > 0)
+            {
+                // 3 to check (down right)
+                if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y - 1][object->tilePos.x].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y - 1));
+                }
+                else if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y][object->tilePos.x + 1].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x + 1, object->tilePos.y));
+                }
+                else { // it's inside lower right
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x + 1, object->tilePos.y - 1));
+                }
+            }
+            else if(direction.x < 0)
+            {
+                // 3 to check (down left)
+                if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y][object->tilePos.x - 1].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y));
+                }
+                else if(pointInsideTile(object->pos, tilegrid->tiles[object->tilePos.y - 1][object->tilePos.x].worldPos, tilegrid->tileSize)) {
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y - 1));
+                }
+                else { // it's inside lower left
+                    tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y - 1));
+                }
+            }
+            else {
+                // move down
+                tilegrid->moveToTile(object, VectorMath2(object->tilePos.x, object->tilePos.y - 1));
+            }
+        }
+        else
+        {
+            // 2 left to check
+            if(direction.x > 0) {
+                // move right
+                tilegrid->moveToTile(object, VectorMath2(object->tilePos.x + 1, object->tilePos.y));
+            }
+            else if(direction.x < 0) {
+                // move left
+                tilegrid->moveToTile(object, VectorMath2(object->tilePos.x - 1, object->tilePos.y));
+            }
+        }
+    }
+}
+
 bool CollisionHandler::pointInsideTile(VectorMath2 pointPos, VectorMath2 tilePos, float tileSize)
 {
     // add all points necessary before doing the math/comparisons
-    // tilePos.x = tilePos.x * tileSize;
-    // tilePos.y = tilePos.y * tileSize;
-
     float bottomLeftX, bottomLeftY, topRightX, topRightY;
-    bottomLeftX = tilePos.x - tileSize;
-    bottomLeftY = tilePos.y - tileSize;
-    topRightX = tilePos.x + tileSize;
-    topRightY = tilePos.y + tileSize;
+    bottomLeftX = tilePos.x - tileSize/2;
+    bottomLeftY = tilePos.y - tileSize/2;
+    topRightX = tilePos.x + tileSize/2;
+    topRightY = tilePos.y + tileSize/2;
 
-    VectorMath2 tilePosMinus = tilePos - VectorMath2(tileSize,tileSize);
-    VectorMath2 tilePosPlus = tilePos + VectorMath2(tileSize,tileSize);
-
-    if(pointPos.x >= tilePosMinus.x && pointPos.y >= tilePosMinus.y && pointPos.x <= tilePosPlus.x  && pointPos.x <= tilePosPlus.x){
+    if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
+       pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
+    {
         return true;
     }
-    // if(pointPos.x >= bottomLeftX && pointPos.x <= topRightX && 
-    //     pointPos.y >= bottomLeftY && pointPos.y <= topRightY)
-    // {
-    //     // point is inside tile
-    //     return true;
-    // }
 
     return false;
 }
 
-// returns true if the tile was added to list
-bool CollisionHandler::updateListOfTiles(Tile* tile, Tilegrid* tilegrid)
+bool CollisionHandler::hasCollidedWithEnemy(GameObject* player, Tilegrid* tilegrid, float enemyRadius)
 {
-    for(int j = 0; j < tilesToUpdate.size(); j++)
+    // Remove player from its tile to avoid collision with itself
+    for(int i = 0; i < tilegrid->tiles[player->tilePos.y][player->tilePos.x].gameObjects.size(); i++)
     {
-        if(tilesToUpdate[j]->pos == tilegrid->tileInPos.at(tile->pos).pos)
+        if(tilegrid->tiles[player->tilePos.y][player->tilePos.x].gameObjects[i]->objectType == ObjectType::PLAYER)
         {
-            return false;
-        }
-        if(tilesToUpdate[j]->gameObjects.empty())
-        {	
-            tilesToUpdate.erase(tilesToUpdate.begin() + j);
-            j--;
+            tilegrid->tiles[player->tilePos.y][player->tilePos.x].gameObjects.erase(
+                tilegrid->tiles[player->tilePos.y][player->tilePos.x].gameObjects.begin() + i);
+            break;
         }
     }
 
-    // add tile to list if tile.pos was not found in tilesToUpdate[j].pos
-    tilesToUpdate.push_back(&tilegrid->tileInPos.at(tile->pos));
-    return true;
-}
-
-// makes sure all objects from this tile is always inside its corresponding tile
-void CollisionHandler::moveObjectsToNeighborOfTile(Tile* tile, Tilegrid* tilegrid)
-{
-    for(int k = 0; k < tile->gameObjects.size(); k++)
+    // Check all 8 neighbors and its own tile
+    float distance = player->radius + enemyRadius;
+    for(int neighborTileY = player->tilePos.y - 1; neighborTileY <= player->tilePos.y + 1; neighborTileY++)
     {
-        GameObject* object = tile->gameObjects[k];
-
-        if(pointInsideTile(object->pos, tile->worldPos, tile->size))
+        for(int neighborTileX = player->tilePos.x - 1; neighborTileX <= player->tilePos.x + 1; neighborTileX++)
         {
-            // If inside, do nothing.
-        }
-
-        else // if outside, move object to new corresponding ground tile
-        {
-            for(int i = 0; i < tile->neighborGround.size(); i++)
+            for(int i = 0; i < tilegrid->tiles[neighborTileY][neighborTileX].gameObjects.size(); i++)
             {
-                Tile* groundTile = &tile->neighborGround[i];
-
-                // find corresponding ground tile
-                if(pointInsideTile(object->pos, groundTile->worldPos, groundTile->size))
+                if((tilegrid->tiles[neighborTileY][neighborTileX].gameObjects[i]->pos - player->pos).Length() < distance)
                 {
-                    // remove old object
-                    for(int j = 0; j < tile->gameObjects.size(); j++)
-                    {
-                        if(object->ID = tile->gameObjects[j]->ID)
-                        {
-                            tile->gameObjects.erase(tile->gameObjects.begin() + j);
-                            k--;
-                        }
-                    }
-
-                    // add new object
-                    tilegrid->tileInPos.at(groundTile->pos).gameObjects.push_back(object);
-                    if(object->objectType == ObjectType::PLAYER)
-                    {
-                        tilegrid->playerTile = &tilegrid->tileInPos.at(groundTile->pos);
-                    }
-                    //std::cout << "TestObject has moved to another ground tile" << std::endl;
-                    
-                    // -------- update the tilesToUpdate list --------
-                    if(updateListOfTiles(&tilegrid->tileInPos.at(groundTile->pos), tilegrid))
-                    {
-                        //std::cout << "Tile has been added to tilesToUpdate" << std::endl;
-                    }
-
-                    break;
+                    tilegrid->tiles[player->tilePos.y][player->tilePos.x].gameObjects.push_back(player);
+                    return true;
                 }
             }
         }
     }
+
+    tilegrid->tiles[player->tilePos.y][player->tilePos.x].gameObjects.push_back(player);
+    return false;
 }
 
-void CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 direction, Tilegrid* tilegrid)
+bool CollisionHandler::checkRayAgainstEnemies(VectorMath2 start, VectorMath2 direction, Tilegrid* tilegrid, VectorMath2 playerTilePos)
 {
     direction.Normalize();
+    VectorMath2 playerPos = VectorMath2(start.x, start.y);
 
-    // -------- check inside player tile first --------
+    // -------- make it so player doesn't collide with itself --------
+    // add player back to its tile before returning out of function
     GameObject* player;
-    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
+    for(int i = 0; i < tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.size(); i++)
     {
-        if(tilegrid->playerTile->gameObjects[i]->objectType == ObjectType::PLAYER)
+        if(tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i]->objectType == ObjectType::PLAYER)
         {
-            player = tilegrid->playerTile->gameObjects[i];
-            tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
-        }
-    }
-    for(int i = 0; i < tilegrid->playerTile->gameObjects.size(); i++)
-    {
-        VectorMath2 pointInTile = start;
-        pointInTile = pointInTile - direction * tilegrid->playerTile->size;
-        while(pointInsideTile(pointInTile, tilegrid->playerTile->worldPos, tilegrid->playerTile->size))
-        {
-            if(pointInsideTile(pointInTile, tilegrid->playerTile->gameObjects[i]->pos, tilegrid->playerTile->gameObjects[i]->size))
-            {
-                std::cout << "Raycast hit an enemy" << std::endl;
-                tilegrid->playerTile->gameObjects.erase(tilegrid->playerTile->gameObjects.begin() + i);
-                i--;
-                if(tilegrid->playerTile->gameObjects.empty())
-                {
-                    break;
-                }
-            }
-            pointInTile = pointInTile + direction * (tilegrid->playerTile->gameObjects[i]->size / 3);
+            player = tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects[i];
+            tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.erase(tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.begin() + i);
+            break;
         }
     }
     // --------
 
     // -------- walk through the tiles until ray is inside a wall --------
-    Tile* nextTile = nextTileInDirection(tilegrid->playerTile, direction, &start, tilegrid);
-    // move outside of player tile
-    while(nextTile->pos == tilegrid->playerTile->pos)
+    //start = playerPos + VectorMath2(player->radius, player->radius);
+    Tile* nextTile = nextTileInDirection(&tilegrid->tiles[playerTilePos.y][playerTilePos.x], direction, &start, tilegrid);
+    for(int i = 0; i < 4 * tilegrid->tileSize; i++)
     {
-        nextTile = nextTileInDirection(tilegrid->playerTile, direction, &start, tilegrid);
+        nextTile = nextTileInDirection(nextTile, direction, &start, tilegrid);
     }
-    // check the rest of the tiles in ray direction
     while(true)
     {
-        if(nextTile->type == Type::WALL)
-        {
-            std::cout << "Raycast hit a wall" << std::endl;
-            break;
+        if(nextTile->type == Type::WALL) {
+            // std::cout << "Raycast hit a wall" << std::endl;
+            Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -7), VectorMath4(1,0.5,0,1));
+            tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
+            return false;
         }
-        // if enemy is inside, check if ray is inside the enemy
+        // if enemy is inside tile, check if ray is inside the enemy
         for(int i = 0; i < nextTile->gameObjects.size(); i++)
         {
-            // have points be more frequent inside tile to see if ray hit enemy
-            VectorMath2 pointInTile = nextTile->worldPos;
-            pointInTile = pointInTile - direction * nextTile->size;
-            while(pointInsideTile(pointInTile, nextTile->worldPos, nextTile->size))
-            {
-                if(pointInsideTile(pointInTile, nextTile->gameObjects[i]->pos, nextTile->gameObjects[i]->size))
-                {
-                    std::cout << "Raycast hit an enemy" << std::endl;
-                    nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i);
-                    i--;
-                    if(nextTile->gameObjects.empty())
-                    {
-                        for(int j = 0; j < tilesToUpdate.size(); j++)
-                        {
-                            if(tilesToUpdate[j]->pos == nextTile->pos)
-                            {
-                                tilesToUpdate.erase(tilesToUpdate.begin() + j);
-                                j--;
-                            }
-                        }
-                        break;
-                    }
-                }
-                pointInTile = pointInTile + direction * (nextTile->gameObjects[i]->size / 3);
+            if(lineCircleCollision(playerPos, direction, nextTile->gameObjects[i]->pos, nextTile->gameObjects[i]->radius)) {
+                // std::cout << "Raycast hit an enemy" << std::endl;
+                Debug::DrawLine(VectorMath3(player->pos, -7), VectorMath3(start, -7), VectorMath4(1,0.5,0,1));
+                hasHitEnemy = true;
+                hitEnemyID = nextTile->gameObjects[i]->ID;
+                nextTile->gameObjects.erase(nextTile->gameObjects.begin() + i);
+                tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
+                return true;
             }
-            
         }
         nextTile = nextTileInDirection(nextTile, direction, &start, tilegrid);
     }
     // --------
-    tilegrid->playerTile->gameObjects.push_back(player);
+
+    tilegrid->tiles[playerTilePos.y][playerTilePos.x].gameObjects.push_back(player);
+    return false;
 }
+
 Tile* CollisionHandler::nextTileInDirection(Tile* currentTile, VectorMath2 direction, VectorMath2* rayStart, Tilegrid* tilegrid)
 {
-    Tile* nextTile;
-
-    VectorMath2 nextPoint;
     VectorMath2 nextTilePos = currentTile->pos;
-    float tileSize = currentTile->size * 2;
-    nextPoint = *rayStart;
+    float stepSize = currentTile->size / 10;
 
-    if(direction.x > 0)
-    {
-        // +=
-        nextPoint.x += direction.x * tileSize;
-        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x + 1, nextTilePos.y)).worldPos, currentTile->size))
-        {
+    // if inside new tile after stepping in direction, update nextTilePos
+    if(direction.x > 0) { // +=
+        rayStart->x += direction.x * stepSize;
+        if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y][nextTilePos.x + 1].worldPos, currentTile->size))
             nextTilePos.x++;
-        }
     }
-    else
-    {
-        // -=
-        nextPoint.x += direction.x * tileSize;
-        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x - 1, nextTilePos.y)).worldPos, currentTile->size))
-        {
+    else { // -=
+        rayStart->x += direction.x * stepSize;
+        if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y][nextTilePos.x - 1].worldPos, currentTile->size))
             nextTilePos.x--;
-        }
     }
-    if(direction.y > 0)
-    {
-        // +=
-        nextPoint.y += direction.y * tileSize;
-        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x, nextTilePos.y + 1)).worldPos, currentTile->size))
-        {
+    if(direction.y > 0) { // +=
+        rayStart->y += direction.y * stepSize;
+        if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y + 1][nextTilePos.x].worldPos, currentTile->size))
             nextTilePos.y++;
-        }
     }
-    else
-    {
-        // -=
-        nextPoint.y += direction.y * tileSize;
-        if(pointInsideTile(nextPoint, tilegrid->tileInPos.at(VectorMath2(nextTilePos.x, nextTilePos.y - 1)).worldPos, currentTile->size))
-        {
+    else { // -=
+        rayStart->y += direction.y * stepSize;
+        if(pointInsideTile(*rayStart, tilegrid->tiles[nextTilePos.y - 1][nextTilePos.x].worldPos, currentTile->size))
             nextTilePos.y--;
-        }
     }
+    return &tilegrid->tiles[nextTilePos.y][nextTilePos.x];
+}
 
-    rayStart->x = nextPoint.x;
-    rayStart->y = nextPoint.y;
+bool CollisionHandler::lineCircleCollision(VectorMath2 lineStart, VectorMath2 direction, VectorMath2 circleCenter, float radius)
+{
+    VectorMath2 circleLineVector = circleCenter - lineStart;
+    direction.Normalize();
+    circleLineVector.Normalize();
+    float v = acos(direction.DotProduct(circleLineVector));
 
-    nextTile = &tilegrid->tileInPos.at(nextTilePos);
+    circleLineVector = circleCenter - lineStart;
+    float distance = sin(v) * circleLineVector.Length();
+    
+    if(distance < radius)
+        return true;
 
-    return nextTile;
+    return false;
 }

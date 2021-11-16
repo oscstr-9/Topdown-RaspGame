@@ -3,31 +3,34 @@
 #include "core/MatrixMath.h"
 #include "render/GraphicsNode.h"
 #include "GameObject.h"
+#include "UI.h"
 #include <memory>
-
-#include "GameObject.h"
-
 
 class Player : public GameObject
 {
 public:
     Player();
     ~Player();
-    void setupPlayer(std::shared_ptr<ShaderResource> shaders);
-    void ControllerInputs(float deltaTime, class CollisionHandler collisionHandler, class Tilegrid *tilegrid);
+    void setupPlayer(std::shared_ptr<ShaderResource> shaders, UI *ui);
+    void ControllerInputs(float deltaTime, class CollisionHandler* collisionHandler, class Tilegrid *tilegrid, bool *restart, bool *quit, bool *shoot);
     VectorMath2 GetPos();
     VectorMath2 GetDirection();
+    void Dead();
     void DrawPlayer();
+
+    bool isDead = false;
+    float renderSize = 0.03;
 private:
     MatrixMath positionMatrix = Identity();
     MatrixMath rotationMatrix = Identity();
 
     GraphicsNode* playerObject;
+    UI *ui;
 
     // Joystick deadzone
     float deadzone = 0.1;
 
-    float movementSpeed = 1;
+    float movementSpeed = 3;
     float rotAngle = 0;
     float posX = 0;
     float posY = 0;
@@ -41,6 +44,6 @@ private:
 	float right = 0;
 	float forward = 0;
 	float backward = 0;
-    bool quit = false;
-    bool debug = false;
+
+    float counter = 0;
 };
