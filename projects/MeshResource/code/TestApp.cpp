@@ -242,9 +242,9 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 
 		// Create light source
 		std::vector<Lighting> lights;
-		Lighting light(VectorMath3(0, 0, 0), VectorMath3(1, 1, 1), 1);
+		Lighting light(VectorMath3(0, 0, 5), VectorMath3(1, 1, 1), 5);
 		// Light source for shooting
-		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 1);
+		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 2);
 		lights.push_back(light);
 		lights.push_back(shootingLight);
 
