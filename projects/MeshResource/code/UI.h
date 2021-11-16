@@ -14,7 +14,7 @@ public:
     UI();
     ~UI();
     void RenderUI();
-    void SetIsDead(bool isDadIn);
+    void SetIsDead(bool isDeadIn);
     void IncreaseScore();
     void SaveScore();
     void LoadScore();

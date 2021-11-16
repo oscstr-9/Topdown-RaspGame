@@ -25,6 +25,4 @@ void main()
 
 	fragPos = (posMatrix*vec4(pos,1)).xyz;
 	normalOut = mat3(transpose(inverse(posMatrix))) * normalIn;  
-
-
 };

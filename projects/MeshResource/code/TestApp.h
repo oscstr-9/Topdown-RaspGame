@@ -11,6 +11,7 @@
 // #include "render/GraphicsNode.h"
 #include "render/ShaderResource.h"
 #include "render/window.h"
+#include "render/Lighting.h"
 #include "UI.h"
 #include <memory>
 
@@ -30,6 +31,7 @@ public:
 	~ExampleApp();
 	/// open app
 	bool Open();
+	void bindLights(std::vector<Lighting> lights);
 	void spawnPlayerObject(int id, int tileX, int tileY);
 	void spawnEnemyObject(int id, int tileX, int tileY);
 	VectorMath2 tileToWorldPos(VectorMath2 tilePos);

@@ -117,3 +117,13 @@ void ShaderResource::setMat4(MatrixMath mat4, std::string uniform) {
     glUseProgram(program);
     glUniformMatrix4fv(glGetUniformLocation(program, uniform.c_str()), 1, GL_FALSE, (float*)&(mat4));
 }
+
+void ShaderResource::setLights(VectorMath3 lightColor[16], VectorMath3 lightPos[16], float intensity[16], int amountOfLights){
+    glUseProgram(program);
+
+    glUniform3fv(glGetUniformLocation(program, "lightColor"), amountOfLights, (float*)lightColor);
+    glUniform3fv(glGetUniformLocation(program, "lightPos"), amountOfLights, (float*)lightPos);
+    glUniform1fv(glGetUniformLocation(program, "intensity"), amountOfLights, (float*)intensity);
+    glUniform1f(glGetUniformLocation(program, "amountOfLights"), amountOfLights);
+    
+}

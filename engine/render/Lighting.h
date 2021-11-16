@@ -14,6 +14,10 @@ public:
 	~Lighting();
 	void setIntensity(float intensityIn);
 	void setPos(VectorMath3 posIn);
-	void setIntensity(VectorMath3 colorIn);
+	void setLightColor(VectorMath3 colorIn);
 	void bindLight(std::shared_ptr<ShaderResource> shader, VectorMath3 cameraPos);
+
+	VectorMath3 getColor();
+	VectorMath3 getPos();
+	float getIntensity();
 };

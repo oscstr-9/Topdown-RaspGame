@@ -1,6 +1,7 @@
 #include "config.h"
 #include "Lighting.h"
 #include "ShaderResource.h"
+#include <vector>
 
 Lighting::Lighting(VectorMath3 posIn, VectorMath3 colorIn, float intensityIn)
 {
@@ -21,10 +22,9 @@ void Lighting::setPos(VectorMath3 posIn) {
 	pos = posIn;
 }
 
-void Lighting::setIntensity(VectorMath3 colorIn) {
+void Lighting::setLightColor(VectorMath3 colorIn) {
 	color = colorIn;
 }
-
 // Sets all values required for lighting to work in the shader
 void Lighting::bindLight(std::shared_ptr<ShaderResource> shader, VectorMath3 cameraPos) {
 
@@ -34,4 +34,13 @@ void Lighting::bindLight(std::shared_ptr<ShaderResource> shader, VectorMath3 cam
 
 	shader->setVec3(cameraPos, "viewPos");
 	shader->setFloat(1, "specIntensity");
+}
+VectorMath3 Lighting::getColor(){
+	return color;
+}
+VectorMath3 Lighting::getPos(){
+	return pos;
+}
+float Lighting::getIntensity(){
+	return intensity;
 }

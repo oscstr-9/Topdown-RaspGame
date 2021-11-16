@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------------
 //#include <stb_image.h>
 #include <cstring>
+#include <vector>
 #include "config.h"
 #include "TestApp.h"
 #include "render/MESHRESOURCE.h"
@@ -11,7 +12,6 @@
 #include "render/ShaderResource.h"
 #include "core/MatrixMath.h"
 #include "render/Camera.h"
-#include "render/Lighting.h"
 #include "RenderDebug.h"
 
 using namespace Display;
@@ -21,6 +21,24 @@ namespace Example
 	{/*cool*/}
 	ExampleApp::~ExampleApp()
 	{/*so cool*/}
+
+
+void ExampleApp::bindLights(std::vector<Lighting> lights){
+
+	VectorMath3 lightColor[16];
+	VectorMath3 lightPos[16];
+	float intensity[16];
+	for (int i = 0; i < lights.size(); i++)
+	{
+		lightColor[i] = lights[i].getColor();
+		lightPos[i] = lights[i].getPos();
+		intensity[i] = lights[i].getIntensity();
+		lightPos[i].PrintVector();
+	}
+
+	shaders->setLights(lightColor, lightPos, intensity, lights.size());
+}
+
 
 	void ExampleApp::spawnPlayerObject(int id, int tileX, int tileY)
 	{
@@ -120,9 +138,11 @@ namespace Example
 			// 	backward = action;
 			// 	break;
 			// case GLFW_KEY_D:
-			// case GLFW_KEY_RIGHT:
-			// 	right = action;
-			// 	break;
+			case GLFW_KEY_RIGHT:
+				if (action == GLFW_PRESS){
+					shoot = !shoot;
+				}
+				break;
 			case GLFW_KEY_SPACE:
 			if(action == GLFW_PRESS){
 					if(collisionHandler->checkRayAgainstEnemies(player.GetPos(), player.GetDirection(), tilegrid, player.tilePos)) {
@@ -130,11 +150,10 @@ namespace Example
 					}
 				}
 				break;
-			case GLFW_KEY_F1:{
+			case GLFW_KEY_F1:
 				if(action == GLFW_PRESS){
 					debug = !debug;
 				}
-			}
 				break;
 			case GLFW_KEY_ESCAPE:
 				this->window->Close();
@@ -203,9 +222,12 @@ namespace Example
 		debugCamera.SetPosition(debugCameraPos);
 
 		// Create light source
+		std::vector<Lighting> lights;
 		Lighting light(VectorMath3(0, 0, 0), VectorMath3(1, 1, 1), 1);
 		// Light source for shooting
-		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 99);
+		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 1);
+		lights.push_back(light);
+		lights.push_back(shootingLight);
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
@@ -239,12 +261,15 @@ namespace Example
 				RestartGame();
 			if(quit)
 				this->window->Close();
-			if(shoot && glfwGetTime() - shootDelay >= 0.1){
+			if(shoot && glfwGetTime() - shootDelay >= 0.4){
 				collisionHandler->checkRayAgainstEnemies(player.GetPos(), player.GetDirection(), tilegrid, player.tilePos);
 				// Light is WIP
-				//shootingLight.bindLight(shaders, camera.GetPosition());
+				lights[1].setPos(VectorMath3(player.pos, -6));
+				lights[1].setLightColor(VectorMath3(1,0,0));
 				shootDelay = glfwGetTime();
 			}
+			else
+				lights[1].setLightColor(VectorMath3(0,0,0));
 
 			for(int i = 0; i < enemyWaves.size(); i++)
 			{
@@ -281,7 +306,9 @@ namespace Example
 			}
 
 			// Bind light
-			light.bindLight(shaders, camera.GetPosition());
+			//shootingLight.bindLight(shaders, camera.GetPosition());
+			//light.bindLight(shaders, camera.GetPosition());
+			bindLights(lights);
 			// Set projection-view-matrix
 
 			// Draw to screen
