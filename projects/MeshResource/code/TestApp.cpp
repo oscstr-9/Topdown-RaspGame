@@ -129,7 +129,7 @@ namespace Example
 			window->GetSize(width, height);
 
 			// set clear color (Background color)
-			glClearColor(0.25f, 0.0f, 0.5f, 1.0f);
+			//glClearColor(0.25f, 0.0f, 0.5f, 1.0f);
 
 			// Find and load shaders
 			shaders = std::make_shared<ShaderResource>();

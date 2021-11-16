@@ -19,7 +19,7 @@ void Player::setupPlayer(std::shared_ptr<ShaderResource> shaders){
     // Load object textures
     objTexture->LoadFromFile();
     // Object meshes
-    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("smoothMonkeh");
+    std::shared_ptr<MeshResource> objMesh = MeshResource::LoadObj("cube");
     // Object transform
     positionMatrix = MatrixMath::TranslationMatrix(VectorMath3(pos,-7)) * ScalarMatrix(VectorMath3(0.2, 0.2, 0.2)) * RotateMatrix(M_PI/2, VectorMath3(1,0,0));
     // Object graphicnodes
