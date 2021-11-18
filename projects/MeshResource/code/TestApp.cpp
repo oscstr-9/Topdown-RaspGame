@@ -33,7 +33,6 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 		lightColor[i] = lights[i].getColor();
 		lightPos[i] = lights[i].getPos();
 		intensity[i] = lights[i].getIntensity();
-		lightPos[i].PrintVector();
 	}
 
 	shaders->setLights(lightColor, lightPos, intensity, lights.size());
@@ -242,9 +241,9 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 
 		// Create light source
 		std::vector<Lighting> lights;
-		Lighting light(VectorMath3(0, 0, 5), VectorMath3(1, 1, 1), 5);
+		Lighting light(VectorMath3(0, 0, 5), VectorMath3(1, 1, 1), 1);
 		// Light source for shooting
-		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 2);
+		Lighting shootingLight(VectorMath3(player.pos, -6), VectorMath3(1, 0, 0), 1);
 		lights.push_back(light);
 		lights.push_back(shootingLight);
 
@@ -256,6 +255,8 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 		float startTime = glfwGetTime();
 		float spawntimer = glfwGetTime();
 		float shootDelay = glfwGetTime();
+		double lastTime = glfwGetTime();
+		int nbFrames = 0;
 	
 		while (this->window->IsOpen())
 		{
@@ -271,6 +272,13 @@ void ExampleApp::bindLights(std::vector<Lighting> lights){
 				CreateSpawnWave(camera.GetProjViewMatrix());
 			}
 
+			double currentTime= glfwGetTime();
+			nbFrames++;
+			if (currentTime - lastTime >= 1.0){
+				//printf("%f ms/frame\n", 1000.0/double(nbFrames));
+				nbFrames = 0;
+				lastTime += 1.0;
+			}
 			// -------- Movement and collision --------
 			// Controll character, includes wall collision detection
 			player.ControllerInputs(deltaTime, collisionHandler, tilegrid, &restart, &quit, &shoot);

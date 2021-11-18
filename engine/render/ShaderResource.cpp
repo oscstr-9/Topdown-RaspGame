@@ -124,6 +124,6 @@ void ShaderResource::setLights(VectorMath3 lightColor[16], VectorMath3 lightPos[
     glUniform3fv(glGetUniformLocation(program, "lightColor"), amountOfLights, (float*)lightColor);
     glUniform3fv(glGetUniformLocation(program, "lightPos"), amountOfLights, (float*)lightPos);
     glUniform1fv(glGetUniformLocation(program, "intensity"), amountOfLights, (float*)intensity);
-    glUniform1f(glGetUniformLocation(program, "amountOfLights"), amountOfLights);
+    glUniform1i(glGetUniformLocation(program, "amountOfLights"), amountOfLights);
     
 }

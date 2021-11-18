@@ -13,14 +13,14 @@ uniform vec3 lightPos[16];
 uniform float intensity[16];
 uniform vec3 viewPos;
 uniform float specIntensity;
-uniform float amountOfLights;
+uniform int amountOfLights;
 
 out vec4 Color;
 
 void main()
 {	
-	vec4 lightSources;
-	for(int i = 0; i < int(amountOfLights); i++){
+	vec4 lightSources = vec4(0);
+	for(int i = 0; i < amountOfLights; i++){
 		vec3 viewDir = normalize(fragPos - viewPos);
 		vec3 lightDir = normalize(lightPos[i] - fragPos);
 		vec3 halfwayDir = normalize(lightDir + viewDir);
